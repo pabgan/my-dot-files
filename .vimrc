@@ -4,6 +4,7 @@ set number relativenumber
 nmap <C-N><C-N> :set invnumber invrelativenumber<CR>
 
 set showcmd
+set background=dark
 
 " Buscar lo que hay debajo del cursor pulsando / dos veces
 vnoremap // y/<C-R>"<CR>
