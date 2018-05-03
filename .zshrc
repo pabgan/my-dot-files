@@ -102,6 +102,9 @@ mkcd () {
   cd "$1"
 }
 
+# Tmux
+alias m="tmux"
+
 # When you however forget that you already are in a ranger shell and start ranger again you end up with ranger running a shell running ranger.
 # To prevent this:
 ranger() {
