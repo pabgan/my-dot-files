@@ -87,10 +87,11 @@ alias zshconfig="vim ~/.zshrc"
 
 # todo.txt related configuration
 export PATH=$PATH:$HOME/.todo-txt
-alias t="todo.sh"
 export TODOTXT_DEFAULT_ACTION=ls
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
+alias t="todo.sh"
+alias tr="vim $HOME/.todo-txt/recur.txt"
 
 # JRNL
 alias j="jrnl"
