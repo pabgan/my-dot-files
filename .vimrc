@@ -18,10 +18,12 @@ set number relativenumber
 " Toggle showing line numbers
 nmap <C-N><C-N> :set invnumber invrelativenumber<CR>
 
+" Toggle showing metacharacters
+nmap <C-H><C-H> :set list!<CR>
+
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 set background=dark
 
-" Buscar lo que hay debajo del cursor pulsando / dos veces
+" Buscar lo que hay seleccionado pulsando / dos veces
 vnoremap // y/<C-R>"<CR>
-
