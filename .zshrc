@@ -118,6 +118,7 @@ ranger() {
 
 # Others
 alias diff='diff --color=auto'
+alias ddg='w3m duckduckgo.com'
 
 #########################################################
 # ASSIA
