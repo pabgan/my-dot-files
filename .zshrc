@@ -1,8 +1,8 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$PATH:$HOME/Scripts
 
 # Path to your oh-my-zsh installation.
-#  export ZSH=/home/pablo/.oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
@@ -43,7 +43,7 @@ COMPLETION_WAITING_DOTS="true"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="dd/mm/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -52,7 +52,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man-pages debian history pass sudo systemd zsh-navigation-tools extract)
+plugins=(git colored-man-pages debian history pass sudo systemd zsh-navigation-tools extract svn-fast-info mvn history jira)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -87,10 +87,50 @@ alias zshconfig="vim ~/.zshrc"
 
 # todo.txt related configuration
 export PATH=$PATH:$HOME/.todo-txt
-alias t="todo.sh"
 export TODOTXT_DEFAULT_ACTION=ls
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
+alias t="todo.sh"
+alias tr="vim $HOME/.todo-txt/recur.txt"
+
+# JRNL
+alias j="jrnl"
+alias jj="vim ~/Trabajo/journal.txt"
+
+# Useful functions
+mkcd () {
+  mkdir -p "$1"
+  cd "$1"
+}
+
+# Tmux
+alias m="tmux"
+
+# When you however forget that you already are in a ranger shell and start ranger again you end up with ranger running a shell running ranger.
+# To prevent this:
+ranger() {
+    if [ -z "$RANGER_LEVEL" ]; then
+        /usr/bin/ranger "$@"
+    else
+        exit
+    fi
+}
 
 # Others
 alias diff='diff --color=auto'
+
+#########################################################
+# ASSIA
+export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
+export JAVA_HOME="/usr/java/jdk1.8.0_73/"
+
+# CVS configuration
+export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
+alias cvs-update='cvs update -PAd'
+alias cvs-discard_changes='cvs_update -C'
+alias cvs-checkout='cvs co -r'
+
+# Corporate mounts
+alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a/home/pganuza /mnt/home"
+alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a/corp /mnt/corp"
+
