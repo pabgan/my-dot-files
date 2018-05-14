@@ -87,7 +87,7 @@ alias zshconfig="vim ~/.zshrc"
 
 # todo.txt related configuration
 export PATH=$PATH:$HOME/.todo-txt
-export TODOTXT_DEFAULT_ACTION=ls
+export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 alias t="todo.sh"
