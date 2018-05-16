@@ -1,0 +1,25 @@
+# .bashrc
+PS1='\[\033[1;36m\]\u\[\033[1;31m\]@\[\033[1;32m\]\h:\[\033[1;35m\]\w\[\033[1;31m\]\$\[\033[0m\] '
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+export PATH=$PATH:/home/oracle/pganuza/utils
+export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
+
+# User specific aliases and functions
+alias cvs_update='cvs update -PAd'
+alias cvs_checkout='cvs co -r HEAD'
+alias cvs_discard_changes='cvs_update -C'
+
+mkcd () {
+  mkdir -p "$1"
+  cd "$1"
+}
+
+# VIM config
+alias vim='vim -u $SSHHOME/.sshrc.d/.vimrc'
+
+# Common aliases
+alias la='ls -a'
