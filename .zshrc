@@ -95,8 +95,9 @@ alias tr="vim $HOME/.todo-txt/recur.txt"
 
 # JRNL
 alias j="jrnl"
-alias jt="vim ~/.todo-txt/journal-trabajo.txt"
-alias jp="vim ~/.todo-txt/journal-personal.txt"
+alias jjt="vim ~/.todo-txt/journal-trabajo.txt"
+alias jp="jrnl personal"
+alias jjp="vim ~/.todo-txt/journal-personal.txt"
 
 # Useful functions
 mkcd () {
