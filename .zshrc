@@ -85,6 +85,9 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+#########################################################
+# VARIOUS CONFIGURATIONS
+#
 # todo.txt related configuration
 export PATH=$PATH:$HOME/.todo-txt
 export TODOTXT_DEFAULT_ACTION=lsp
@@ -99,14 +102,25 @@ alias jjt="vim ~/.todo-txt/journal-trabajo.txt"
 alias jp="jrnl personal"
 alias jjp="vim ~/.todo-txt/journal-personal.txt"
 
-# Useful functions
+# Tmux
+alias m="tmux"
+
+# less [1]
+export LESS='-C -M -I -j 10 -# 4'
+#export PAGER=less
+
+# Others
+alias diff='diff --color=auto'
+alias ddg='w3m duckduckgo.com'
+
+#########################################################
+# USEFUL FUNCTIONS
+#
+# Create a directory and cd into it
 mkcd () {
   mkdir -p "$1"
   cd "$1"
 }
-
-# Tmux
-alias m="tmux"
 
 # When you however forget that you already are in a ranger shell and start ranger again you end up with ranger running a shell running ranger.
 # To prevent this:
@@ -117,10 +131,6 @@ ranger() {
         exit
     fi
 }
-
-# Others
-alias diff='diff --color=auto'
-alias ddg='w3m duckduckgo.com'
 
 #########################################################
 # ASSIA
@@ -137,3 +147,6 @@ alias cvs-checkout='cvs co -r'
 alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a/home/pganuza /mnt/home"
 alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a/corp /mnt/corp"
 
+#########################################################
+# SOURCES
+# 1. https://opensource.com/article/18/5/advanced-use-less-text-file-viewer

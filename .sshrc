@@ -5,21 +5,40 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+#########################################################
+# VARIOUS CONFIGURATIONS
+# 
+# Common aliases
+alias la='ls -a'
+
+# Add paths where I store scripts
 export PATH=$PATH:/home/oracle/pganuza/utils
+
+# CVS configuration
 export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
+alias cvs-update='cvs update -PAd'
+alias cvs-discard_changes='cvs_update -C'
+alias cvs-checkout='cvs co -r'
 
-# User specific aliases and functions
-alias cvs_update='cvs update -PAd'
-alias cvs_checkout='cvs co -r HEAD'
-alias cvs_discard_changes='cvs_update -C'
+# VIM config
+alias vim='vim -u $SSHHOME/.sshrc.d/.vimrc'
 
+# less [1]
+export LESS='-C -M -I -j 10 -# 4'
+#export PAGER=less
+
+# Others
+alias diff='diff --color=auto'
+
+#########################################################
+# USEFUL FUNCTIONS
+#
+# Create a directory and cd into it
 mkcd () {
   mkdir -p "$1"
   cd "$1"
 }
 
-# VIM config
-alias vim='vim -u $SSHHOME/.sshrc.d/.vimrc'
-
-# Common aliases
-alias la='ls -a'
+#########################################################
+# SOURCES
+# 1. https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
