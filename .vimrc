@@ -27,3 +27,9 @@ set background=dark
 
 " Buscar lo que hay seleccionado pulsando / dos veces
 vnoremap // y/<C-R>"<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OTHER SETTINGS
+"
+" Highlight all search matches
+set hlsearch
