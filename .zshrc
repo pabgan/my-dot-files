@@ -30,7 +30,7 @@ ZSH_THEME="bira"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -112,6 +112,8 @@ export LESS='-C -M -I -j 10 -# 4'
 # Others
 alias diff='diff --color=auto'
 alias ddg='w3m duckduckgo.com'
+# Do not share history between opened zsh instances
+setopt nosharehistory
 
 #########################################################
 # USEFUL FUNCTIONS
