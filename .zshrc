@@ -94,6 +94,7 @@ export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 alias t="todo.sh"
+alias tt="todo.sh -d .todo-txt/trabajo-todo.cfg"
 alias tr="vim $HOME/.todo-txt/recur.txt"
 
 # JRNL
