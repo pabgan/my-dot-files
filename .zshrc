@@ -107,7 +107,7 @@ alias jjp="vim ~/.todo-txt/journal-personal.txt"
 alias m="tmux"
 
 # less [1]
-export LESS='-C -M -I -j 10 -# 4'
+export LESS='-R -C -M -I -j 10 -# 4'
 #export PAGER=less
 
 # Others
