@@ -52,7 +52,7 @@ HIST_STAMPS="dd/mm/yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man-pages debian history pass sudo systemd zsh-navigation-tools extract svn-fast-info mvn history jira)
+plugins=(git debian history pass sudo systemd zsh-navigation-tools extract svn-fast-info mvn history jira)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -93,8 +93,8 @@ export PATH=$PATH:$HOME/.todo-txt
 export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
-alias t="todo.sh"
-alias tt="todo.sh -d .todo-txt/trabajo-todo.cfg"
+alias t="todo.sh -a -d .todo-txt/personal-todo.cfg"
+alias tt="todo.sh -a -d .todo-txt/trabajo-todo.cfg"
 alias tr="vim $HOME/.todo-txt/recur.txt"
 
 # JRNL
