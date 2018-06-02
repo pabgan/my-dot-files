@@ -65,7 +65,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
@@ -89,13 +89,27 @@ alias zshconfig="vim ~/.zshrc"
 # VARIOUS CONFIGURATIONS
 #
 # todo.txt related configuration
-export PATH=$PATH:$HOME/.todo-txt
+export TODO_TXT=$HOME/.todo-txt
+export PATH=$PATH:$TODO_TXT
 export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
-alias t="todo.sh -a -d .todo-txt/personal-todo.cfg"
-alias tt="todo.sh -a -d .todo-txt/trabajo-todo.cfg"
-alias tr="vim $HOME/.todo-txt/recur.txt"
+
+alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
+_t()
+{
+    local _todo_sh='todo.sh -d "$TODO_TXT/personal-todo.cfg"'
+    _todo "$@"
+}
+
+alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
+_tt()
+{
+    local _todo_sh='todo.sh -d "$TODO_TXT/trabajo-todo.cfg"'
+    _todo "$@"
+}
+
+alias tr="vim $TODO_TXT/recur.txt"
 
 # JRNL
 alias j="jrnl"
