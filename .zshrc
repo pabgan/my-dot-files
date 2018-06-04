@@ -113,9 +113,9 @@ alias tr="vim $TODO_TXT/recur.txt"
 
 # JRNL
 alias j="jrnl"
-alias jjt="vim ~/.todo-txt/journal-trabajo.txt"
+alias jjt="vim ~/.todo-txt/trabajo-journal.txt"
 alias jp="jrnl personal"
-alias jjp="vim ~/.todo-txt/journal-personal.txt"
+alias jjp="vim ~/.todo-txt/personal-journal.txt"
 
 # Tmux
 alias m="tmux"

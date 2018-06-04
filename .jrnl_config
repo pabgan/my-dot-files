@@ -7,9 +7,9 @@
   "default_minute": 0, 
   "highlight": true, 
   "journals": {
-    "default": "~/.todo-txt/journal-trabajo.txt",
-    "trabajo": "~/.todo-txt/journal-trabajo.txt",
-    "personal": "~/.todo-txt/journal-personal.txt"
+    "default": "~/.todo-txt/trabajo-journal.txt",
+    "trabajo": "~/.todo-txt/trabajo-journal.txt",
+    "personal": "~/.todo-txt/personal-journal.txt"
   }, 
   "tagsymbols": "@"
 }
