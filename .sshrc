@@ -10,6 +10,8 @@ fi
 # 
 # Common aliases
 alias la='ls -a'
+alias ll='ls -la'
+alias ..='cd ..'
 
 # Add paths where I store scripts
 export PATH=$PATH:/home/oracle/pganuza/utils
@@ -21,14 +23,14 @@ alias cvs-discard_changes='cvs_update -C'
 alias cvs-checkout='cvs co -r'
 
 # VIM config
-alias vim='vim -u $SSHHOME/.sshrc.d/.vimrc'
+#alias vim='vim -u $SSHHOME/.sshrc.d/.vimrc'
 
 # less [1]
-export LESS='-C -M -I -j 10 -# 4'
-#export PAGER=less
+export LESS='-R -C -M -I -j 10 -# 4'
+export PAGER=less
 
 # Others
-alias diff='diff --color=auto'
+#alias diff='diff --color=auto'
 
 #########################################################
 # USEFUL FUNCTIONS
