@@ -23,7 +23,7 @@ alias cvs-discard_changes='cvs_update -C'
 alias cvs-checkout='cvs co -r'
 
 # VIM config
-#alias vim='vim -u $SSHHOME/.sshrc.d/.vimrc'
+alias vim='vim -u $SSHHOME/.sshrc.d/.vimrc'
 
 # less [1]
 export LESS='-R -C -M -I -j 10 -# 4'
