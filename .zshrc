@@ -109,6 +109,10 @@ alias jjp="vim ~/.todo-txt/personal-journal.txt"
 # Tmux
 alias m="tmux"
 
+# sshrc
+# Make sshrc autocomplete hosts like ssh does
+compdef sshrc=ssh
+
 # less [1]
 export LESS='-R -C -M -I -j 10 -# 4'
 #export PAGER=less
