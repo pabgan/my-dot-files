@@ -110,7 +110,7 @@ alias jjp="vim ~/.todo-txt/personal-journal.txt"
 alias m="tmux"
 
 # sshrc
-# Make sshrc autocomplete hosts like ssh does
+# Make sshrc autocomplete hosts like ssh does [2]
 compdef sshrc=ssh
 
 # less [1]
@@ -160,3 +160,4 @@ alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=
 #########################################################
 # SOURCES
 # 1. https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
+# 2. https://unix.stackexchange.com/questions/410456/zsh-completion-make-sshrc-behave-like-ssh
