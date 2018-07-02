@@ -8,7 +8,10 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="bira"
+#ZSH_THEME="robbyrussell"
+#ZSH_THEME="bira"
+ZSH_THEME="blinks"
+#ZSH_THEME="candy"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -110,7 +113,7 @@ alias jjp="vim ~/.todo-txt/personal-journal.txt"
 alias m="tmux"
 
 # sshrc
-# Make sshrc autocomplete hosts like ssh does
+# Make sshrc autocomplete hosts like ssh does [2]
 compdef sshrc=ssh
 
 # less [1]
@@ -160,3 +163,4 @@ alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=
 #########################################################
 # SOURCES
 # 1. https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
+# 2. https://unix.stackexchange.com/questions/410456/zsh-completion-make-sshrc-behave-like-ssh
