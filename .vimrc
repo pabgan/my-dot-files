@@ -11,6 +11,7 @@ set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set incsearch		" Incremental search
+set hlsearch		" Highlight all search matches
 "set autowrite		" Automatically save before commands like :next and :make
 "set hidden		" Hide buffers when they are abandoned
 "set mouse=a		" Enable mouse usage (all modes)
@@ -34,8 +35,22 @@ vnoremap // y/<C-R>"<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OTHER SETTINGS
 "
-" Highlight all search matches
-set hlsearch
-
 " Enable plugins
 filetype plugin on
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BUILT IN FUZZY SEARCH
+" 
+" Search down into subfolders recursively
+" Provides tab-completion for all file-related tasks
+set path+=**
+
+" Display all matching files when we tab complete
+set wildmenu
+
+" NOW WECAN:
+" - Hit tab to :find by partial match
+" - Use * to make it fuzzy
+"
+" THINGS TO CONSIDER:
+" - :b lets you autocomplete any open buffer
