@@ -36,3 +36,6 @@ vnoremap // y/<C-R>"<CR>
 "
 " Highlight all search matches
 set hlsearch
+
+" Enable plugins
+filetype plugin on
