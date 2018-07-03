@@ -37,6 +37,7 @@ vnoremap // y/<C-R>"<CR>
 "
 " Enable plugins
 filetype plugin on
+set cursorline
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUILT IN FUZZY SEARCH
