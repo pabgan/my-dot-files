@@ -38,6 +38,7 @@ vnoremap // y/<C-R>"<CR>
 " Enable plugins
 filetype plugin on
 set cursorline
+hi CursorLine cterm=NONE ctermbg=DarkGrey 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUILT IN FUZZY SEARCH
