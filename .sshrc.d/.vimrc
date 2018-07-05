@@ -4,6 +4,7 @@ set nocompatible
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 syntax on
+filetype indent plugin on
 
 " Recommended settings
 set showcmd		" Show (partial) command in status line.
