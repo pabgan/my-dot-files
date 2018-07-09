@@ -145,6 +145,9 @@ ranger() {
     fi
 }
 
+# Get the wheather report
+alias weather='curl wttr.in'
+
 #########################################################
 # ASSIA
 export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
