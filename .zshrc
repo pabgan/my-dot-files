@@ -104,7 +104,7 @@ alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
 alias tr="vim $TODO_TXT/recur.txt"
 
 # JRNL
-alias j="jrnl"
+alias j="jrnl trabajo"
 alias jjt="vim ~/.todo-txt/trabajo-journal.txt"
 alias jp="jrnl personal"
 alias jjp="vim ~/.todo-txt/personal-journal.txt"
@@ -145,7 +145,7 @@ ranger() {
     fi
 }
 
-# Get the wheather report
+# Get the weather report
 alias weather='curl wttr.in'
 
 #########################################################
