@@ -40,7 +40,7 @@ vnoremap // y/<C-R>"<CR>
 filetype plugin on
 " Highlight current line
 set cursorline
-hi CursorLine cterm=NONE ctermbg=236 
+hi CursorLine cterm=NONE ctermbg=black 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUILT IN FUZZY SEARCH
