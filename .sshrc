@@ -42,6 +42,11 @@ mkcd () {
   cd "$1"
 }
 
+# Connect to a database
+function connect_to_db {
+	sqlcl $1/assia@db-ref.assia-inc.com:1521:dslo2
+}
+
 #########################################################
 # SOURCES
 # 1. https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
