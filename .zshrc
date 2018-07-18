@@ -149,6 +149,13 @@ ranger() {
 scrum_report() {
 	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep $(date --iso-8601) 
 	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep $(date --iso-8601 --date=yesterday) 
+	$day_of_week=date +%u > /dev/null
+	if [ "$day_of_week" -eq 4 ];
+	then
+		j -from tuesday
+	else
+		j -from yesterday
+	fi
 }
 
 # Get the weather report
