@@ -147,8 +147,11 @@ ranger() {
 
 # Show 
 scrum_report() {
-	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep $(date --iso-8601) 
-	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep $(date --iso-8601 --date=yesterday) 
+	echo "================= COMPLETED  TASKS ===================="
+	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep $(date --iso-8601) | sed 's/.*:x//g'
+	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep $(date --iso-8601 --date=yesterday) | sed 's/.*:x//g'
+	
+	echo "\n================= OTHER TASKS DONE ===================="
 	$day_of_week=date +%u > /dev/null
 	if [ "$day_of_week" -eq 4 ];
 	then
