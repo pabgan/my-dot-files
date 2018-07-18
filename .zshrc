@@ -130,7 +130,7 @@ setopt nosharehistory
 # USEFUL FUNCTIONS
 #
 # Create a directory and cd into it
-mkcd () {
+mkcd() {
   mkdir -p "$1"
   cd "$1"
 }
@@ -143,6 +143,12 @@ ranger() {
     else
         exit
     fi
+}
+
+# Show 
+scrum_report() {
+	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep $(date --iso-8601) 
+	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep $(date --iso-8601 --date=yesterday) 
 }
 
 # Get the weather report
