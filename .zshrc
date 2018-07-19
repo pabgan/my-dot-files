@@ -147,14 +147,17 @@ ranger() {
 
 # Show 
 scrum_report() {
+	day_of_week=$(date +%u) # Because on Wednesdays there is no scrum meeting, so on thursdays there is one day extra to report
+
 	echo "================= COMPLETED  TASKS ===================="
-	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep $(date --iso-8601) | sed 's/.*:x//g'
-	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep $(date --iso-8601 --date=yesterday) | sed 's/.*:x//g'
+	if [ $day_of_week -eq 4 ]; then
+		grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date="2 days ago") | sed 's/.*:x //g'
+	fi
+	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date=yesterday) | sed 's/.*:x //g'
+	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601) | sed 's/.*:x //g'
 	
-	echo "\n================= OTHER TASKS DONE ===================="
-	$day_of_week=date +%u > /dev/null
-	if [ "$day_of_week" -eq 4 ];
-	then
+	echo "\n================= OTHER THINGS DONE ===================="
+	if [ $day_of_week -eq 4 ]; then
 		j -from tuesday
 	else
 		j -from yesterday
