@@ -92,6 +92,9 @@ alias zshconfig="vim ~/.zshrc"
 #########################################################
 # VARIOUS CONFIGURATIONS
 #
+# Do not share history between opened zsh instances
+setopt nosharehistory
+
 # todo.txt related configuration
 export TODO_TXT=$HOME/.todo-txt
 export PATH=$PATH:$TODO_TXT
@@ -123,9 +126,8 @@ export LESS='-R -C -M -I -j 10 -# 4'
 
 # Others
 alias diff='diff --color=auto'
-alias ddg='w3m duckduckgo.com'
-# Do not share history between opened zsh instances
-setopt nosharehistory
+# Get the weather report
+alias weather='curl wttr.in'
 
 #########################################################
 # USEFUL FUNCTIONS
@@ -146,7 +148,7 @@ ranger() {
     fi
 }
 
-# Show 
+# Show what I have done since last report
 scrum_report() {
 	day_of_week=$(date +%u) # Because on Wednesdays there is no scrum meeting, so on thursdays there is one day extra to report
 
@@ -165,8 +167,10 @@ scrum_report() {
 	fi
 }
 
-# Get the weather report
-alias weather='curl wttr.in'
+# Search in Duckduckgo.com
+ddg() {
+	w3m http://duckduckgo.com/html\?q\="$1"
+}
 
 #########################################################
 # ASSIA
