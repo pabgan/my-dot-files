@@ -153,15 +153,22 @@ scrum_report() {
 	day_of_week=$(date +%u) # Because on Wednesdays there is no scrum meeting, so on thursdays there is one day extra to report
 
 	echo "================= COMPLETED  TASKS ===================="
-	if [ $day_of_week -eq 4 ]; then
-		grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date="2 days ago") | sed 's/.*:x //g'
+	if [ $day_of_week!=1 ]; then
+		if [ $day_of_week==4 ]; then
+			grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date="2 days ago") | sed 's/.*:x //g'
+		fi
+		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date=yesterday) | sed 's/.*:x //g'
+		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601) | sed 's/.*:x //g'
+	else
+		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date="last thursday") | sed 's/.*:x //g'
+		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date="last friday") | sed 's/.*:x //g'
 	fi
-	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date=yesterday) | sed 's/.*:x //g'
-	grep -E "^x" .todo-txt/trabajo-done.txt .todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601) | sed 's/.*:x //g'
 	
 	echo "\n================= OTHER THINGS DONE ===================="
-	if [ $day_of_week -eq 4 ]; then
+	if [ $day_of_week==4 ]; then
 		j -from tuesday
+	elif [ $day_of_week==1 ]; then
+		j -from thursday
 	else
 		j -from yesterday
 	fi
