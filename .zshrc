@@ -192,8 +192,8 @@ alias cvs-discard_changes='cvs_update -C'
 alias cvs-checkout='cvs co -r'
 
 # Corporate mounts
-alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a/home/pganuza /mnt/home"
-alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a/corp /mnt/corp"
+alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/home"
+alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/corp /mnt/corp"
 
 #########################################################
 # SOURCES
