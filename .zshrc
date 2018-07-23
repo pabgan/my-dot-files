@@ -162,6 +162,7 @@ scrum_report() {
 	else
 		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date="last thursday") | sed 's/.*:x //g'
 		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date="last friday") | sed 's/.*:x //g'
+		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601) | sed 's/.*:x //g'
 	fi
 	
 	echo "\n================= OTHER THINGS DONE ===================="
