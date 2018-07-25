@@ -61,6 +61,8 @@ plugins=(git debian history pass sudo systemd zsh-navigation-tools extract svn-f
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+# Do not share history between opened zsh instances
+setopt nosharehistory
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -90,23 +92,33 @@ alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #########################################################
-# VARIOUS CONFIGURATIONS
+# TODO.TXT CONFIGURATION
 #
-# Do not share history between opened zsh instances
-setopt nosharehistory
-
-# todo.txt related configuration
 export TODO_TXT=$HOME/.todo-txt
 export PATH=$PATH:$TODO_TXT
 export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
+source $TODO_TXT/todo_completion
 
 alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
+#  If you use aliases to use different configuration(s), you need to add and use
+# a wrapper completion function for each configuration if you want to complete
+# from the actual configured task locations:
+_t()
+{
+    local _todo_sh='todo.sh -d "$TODO_TXT/personal-todo.cfg"'
+    _todo "$@"
+}
+compdef _t t
+
 alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
 
 alias tr="vim $TODO_TXT/recur.txt"
 
+#########################################################
+# VARIOUS CONFIGURATIONS
+#
 # JRNL
 alias j="jrnl trabajo"
 alias jjt="vim ~/.todo-txt/trabajo-journal.txt"
@@ -152,9 +164,10 @@ ranger() {
 scrum_report() {
 	day_of_week=$(date +%u) # Because on Wednesdays there is no scrum meeting, so on thursdays there is one day extra to report
 
-	echo "================= COMPLETED  TASKS ===================="
-	if [ $day_of_week!=1 ]; then
-		if [ $day_of_week==4 ]; then
+	echo "Scrum report for day: $(date)"
+	echo "\n================= COMPLETED  TASKS ===================="
+	if [[ $day_of_week -ne 1 ]]; then
+		if [[ $day_of_week -eq 4 ]]; then
 			grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date="2 days ago") | sed 's/.*:x //g'
 		fi
 		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date=yesterday) | sed 's/.*:x //g'
@@ -166,9 +179,9 @@ scrum_report() {
 	fi
 	
 	echo "\n================= OTHER THINGS DONE ===================="
-	if [ $day_of_week==4 ]; then
+	if [[ $day_of_week -eq 4 ]]; then
 		j -from tuesday
-	elif [ $day_of_week==1 ]; then
+	elif [[ $day_of_week -eq 1 ]]; then
 		j -from thursday
 	else
 		j -from yesterday
