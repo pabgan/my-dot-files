@@ -15,7 +15,7 @@ alias ..='cd ..'
 alias grep='grep --color=always'
 
 # Add paths where I store scripts
-export PATH=$PATH:/home/oracle/pganuza/utils
+export PATH=$PATH:$HOME/.sqlcl/bin
 
 # CVS configuration
 export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
