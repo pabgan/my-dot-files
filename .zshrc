@@ -1,7 +1,7 @@
 # testing pganuza-dev yadm installation
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:$HOME/.scripts:$HOME/.local/bin/
+export PATH=$PATH:$HOME/.scripts:$HOME/.local/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -165,7 +165,7 @@ scrum_report() {
 	day_of_week=$(date +%u) # Because on Wednesdays there is no scrum meeting, so on thursdays there is one day extra to report
 
 	echo "Scrum report for day: $(date)"
-	echo "\n================= COMPLETED  TASKS ===================="
+	echo "\n================== COMPLETED TASKS =================="
 	if [[ $day_of_week -ne 1 ]]; then
 		if [[ $day_of_week -eq 4 ]]; then
 			grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date="2 days ago") | sed 's/.*:x //g'
@@ -178,7 +178,7 @@ scrum_report() {
 		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601) | sed 's/.*:x //g'
 	fi
 	
-	echo "\n================= OTHER THINGS DONE ===================="
+	echo "\n================= OTHER THINGS DONE ================="
 	if [[ $day_of_week -eq 4 ]]; then
 		j -from tuesday
 	elif [[ $day_of_week -eq 1 ]]; then
