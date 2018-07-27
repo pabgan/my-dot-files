@@ -144,12 +144,6 @@ alias weather='curl wttr.in'
 #########################################################
 # USEFUL FUNCTIONS
 #
-# Create a directory and cd into it
-mkcd() {
-  mkdir -p "$1"
-  cd "$1"
-}
-
 # When you however forget that you already are in a ranger shell and start ranger again you end up with ranger running a shell running ranger.
 # To prevent this:
 ranger() {
