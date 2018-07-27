@@ -131,6 +131,8 @@ alias m="tmux"
 # sshrc
 # Make sshrc autocomplete hosts like ssh does [2]
 compdef sshrc=ssh
+# Make yadm autocomplete like git does
+compdef yadm=git
 
 # less [1]
 export LESS='-R -C -M -I -j 10 -# 4'
