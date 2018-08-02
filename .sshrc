@@ -36,8 +36,8 @@ export PAGER=less
 #########################################################
 # USEFUL FUNCTIONS
 #
-# Create a directory and cd into it
-mkcd () {
+# Create a directory and cd into it. Name is taken from ZSH analogue function.
+take () {
   mkdir -p "$1"
   cd "$1"
 }
