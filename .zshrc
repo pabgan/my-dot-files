@@ -1,7 +1,7 @@
 # testing pganuza-dev yadm installation
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:$HOME/.scripts:$HOME/.local/bin/
+export PATH=$PATH:$HOME/.scripts:$HOME/.local/bin
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -56,7 +56,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git debian history pass sudo systemd zsh-navigation-tools extract svn-fast-info mvn history jira)
+plugins=(history pass sudo systemd zsh-navigation-tools extract svn-fast-info jira)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,10 +101,10 @@ export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 #source $TODO_TXT/todo_completion
 
-alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
 #  If you use aliases to use different configuration(s), you need to add and use
 # a wrapper completion function for each configuration if you want to complete
 # from the actual configured task locations:
+alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
 _t()
 {
     local _todo_sh='todo.sh -d "$TODO_TXT/personal-todo.cfg"'
@@ -113,6 +113,12 @@ _t()
 compdef _t t
 
 alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
+_tt()
+{
+    local _todo_sh='todo.sh -d "$TODO_TXT/trabajo-todo.cfg"'
+    _todo "$@"
+}
+compdef _tt tt
 
 alias tr="vim $TODO_TXT/recur.txt"
 
@@ -131,6 +137,8 @@ alias m="tmux"
 # sshrc
 # Make sshrc autocomplete hosts like ssh does [2]
 compdef sshrc=ssh
+# Make yadm autocomplete like git does
+compdef yadm=git
 
 # less [1]
 export LESS='-R -C -M -I -j 10 -# 4'
@@ -144,12 +152,6 @@ alias weather='curl wttr.in'
 #########################################################
 # USEFUL FUNCTIONS
 #
-# Create a directory and cd into it
-mkcd() {
-  mkdir -p "$1"
-  cd "$1"
-}
-
 # When you however forget that you already are in a ranger shell and start ranger again you end up with ranger running a shell running ranger.
 # To prevent this:
 ranger() {
@@ -165,20 +167,24 @@ scrum_report() {
 	day_of_week=$(date +%u) # Because on Wednesdays there is no scrum meeting, so on thursdays there is one day extra to report
 
 	echo "Scrum report for day: $(date)"
-	echo "\n================= COMPLETED  TASKS ===================="
+	echo "\n================== COMPLETED TASKS =================="
 	if [[ $day_of_week -ne 1 ]]; then
 		if [[ $day_of_week -eq 4 ]]; then
-			grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date="2 days ago") | sed 's/.*:x //g'
+		# Because on wednesdays we do not have the scrum meeting, print tasks that were done on tuesday | that were not "say something in scrum meeting" | and pretify output
+			grep -E "^x $(date --iso-8601 --date='2 days ago')" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
 		fi
-		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date=yesterday) | sed 's/.*:x //g'
-		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601) | sed 's/.*:x //g'
+		# Print tasks that were done yesterday | that were not "say something in scrum meeting" | and pretify output
+		grep -E "^x $(date --iso-8601 --date=yesterday)" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
+		# Print tasks that have been done today | that are not "say something in scrum meeting" | and pretify output
+		grep -E "^x $(date --iso-8601)" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
 	else
-		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date="last thursday") | sed 's/.*:x //g'
-		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601 --date="last friday") | sed 's/.*:x //g'
-		grep -E "^x" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | grep $(date --iso-8601) | sed 's/.*:x //g'
+		# Because on fridays we do not have the scrum meeting, print tasks that were done since thursday | that were not "say something in scrum meeting" | and pretify output
+		grep -E "^x $(date --iso-8601 --date='last thursday')" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
+		grep -E "^x $(date --iso-8601 --date='last friday')" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
+		grep -E "^x $(date --iso-8601)" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
 	fi
 	
-	echo "\n================= OTHER THINGS DONE ===================="
+	echo "\n================= OTHER THINGS DONE ================="
 	if [[ $day_of_week -eq 4 ]]; then
 		j -from tuesday
 	elif [[ $day_of_week -eq 1 ]]; then
