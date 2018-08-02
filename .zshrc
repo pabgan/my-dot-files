@@ -92,7 +92,7 @@ alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 #########################################################
-# TODO.TXT CONFIGURATION
+# TODO.TXT-CLI CONFIGURATION
 #
 export TODO_TXT=$HOME/.todo-txt
 export PATH=$PATH:$TODO_TXT
@@ -104,23 +104,29 @@ export TODOTXT_DATE_ON_ADD=1
 #  If you use aliases to use different configuration(s), you need to add and use
 # a wrapper completion function for each configuration if you want to complete
 # from the actual configured task locations:
-alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
-_t()
-{
-    local _todo_sh='todo.sh -d "$TODO_TXT/personal-todo.cfg"'
-    _todo "$@"
-}
-compdef _t t
+#alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
+#_t()
+#{
+#    local _todo_sh="todo.sh -d $TODO_TXT/personal-todo.cfg"
+#    _todo "$@"
+#}
+#compdef _t t
+#
+#alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
+#_tt()
+#{
+#    local _todo_sh="todo.sh -d $TODO_TXT/trabajo-todo.cfg"
+#    _todo "$@"
+#}
+#compdef _tt tt
+#
+#alias tr="vim $TODO_TXT/recur.txt"
 
-alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
-_tt()
-{
-    local _todo_sh='todo.sh -d "$TODO_TXT/trabajo-todo.cfg"'
-    _todo "$@"
-}
-compdef _tt tt
-
-alias tr="vim $TODO_TXT/recur.txt"
+#########################################################
+# TODO.TXT-CLI CONFIGURATION
+#
+alias t="topydo -c $TODO_TXT/personal-topydo.cfg"
+alias tt="topydo -c $TODO_TXT/trabajo-topydo.cfg"
 
 #########################################################
 # VARIOUS CONFIGURATIONS
@@ -192,6 +198,9 @@ scrum_report() {
 	else
 		j -from yesterday
 	fi
+
+	echo "\n================== THINGS TO TELL ==================="
+	tt ls @scrum
 }
 
 # Search in Duckduckgo.com
