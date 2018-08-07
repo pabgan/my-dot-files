@@ -123,7 +123,7 @@ export TODOTXT_DATE_ON_ADD=1
 #alias tr="vim $TODO_TXT/recur.txt"
 
 #########################################################
-# TODO.TXT-CLI CONFIGURATION
+# TOPYDO CONFIGURATION
 #
 alias t="topydo -c $TODO_TXT/personal-topydo.cfg"
 alias tt="topydo -c $TODO_TXT/trabajo-topydo.cfg"
@@ -170,34 +170,20 @@ ranger() {
 
 # Show what I have done since last report
 scrum_report() {
-	day_of_week=$(date +%u) # Because on Wednesdays there is no scrum meeting, so on thursdays there is one day extra to report
-
-	echo "Scrum report for day: $(date)"
-	echo "\n================== COMPLETED TASKS =================="
-	if [[ $day_of_week -ne 1 ]]; then
-		if [[ $day_of_week -eq 4 ]]; then
-		# Because on wednesdays we do not have the scrum meeting, print tasks that were done on tuesday | that were not "say something in scrum meeting" | and pretify output
-			grep -E "^x $(date --iso-8601 --date='2 days ago')" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
-		fi
-		# Print tasks that were done yesterday | that were not "say something in scrum meeting" | and pretify output
-		grep -E "^x $(date --iso-8601 --date=yesterday)" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
-		# Print tasks that have been done today | that are not "say something in scrum meeting" | and pretify output
-		grep -E "^x $(date --iso-8601)" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
-	else
-		# Because on fridays we do not have the scrum meeting, print tasks that were done since thursday | that were not "say something in scrum meeting" | and pretify output
-		grep -E "^x $(date --iso-8601 --date='last thursday')" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
-		grep -E "^x $(date --iso-8601 --date='last friday')" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
-		grep -E "^x $(date --iso-8601)" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
+	if [ "$#" -ne 2 ]; then
+		days_to_report=1
+	else 
+		days_to_report=$1
 	fi
+	echo "Scrum report since day: $(date --date="$1 days ago")"
+
+	echo "\n================== COMPLETED TASKS =================="
+	for d ({$days_to_report..1}) do
+		grep -E "^x $(date --iso-8601 --date="$d days ago")" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
+	done
 	
 	echo "\n================= OTHER THINGS DONE ================="
-	if [[ $day_of_week -eq 4 ]]; then
-		j -from tuesday
-	elif [[ $day_of_week -eq 1 ]]; then
-		j -from thursday
-	else
-		j -from yesterday
-	fi
+	j -from "\"$days_to_report days ago\""
 
 	echo "\n================== THINGS TO TELL ==================="
 	tt ls @scrum
