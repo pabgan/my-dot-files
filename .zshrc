@@ -189,6 +189,20 @@ scrum_report() {
 	tt ls @scrum
 }
 
+# Add an event to work calendar
+# https://github.com/tobixen/calendar-cli
+addics() {
+	if [ "$#" -ne 2 ]; then
+		echo 1>&2 "*** Usage: $0 [password] [event.ics]"
+		return 2
+	else 
+		password=$1
+		ics_file=$2
+	fi
+
+	cat $ics_file | python $HOME/.scripts/calendar-cli.py --caldav-url="https://guaranuzas.com/nextcloud/remote.php/" --calendar-url="dav/calendars/pablo/trabajo/" --caldav-user=pablo --caldav-pass="$1" calendar addics
+}
+
 # Search in Duckduckgo.com
 ddg() {
 	w3m http://duckduckgo.com/html\?q\="$1"
