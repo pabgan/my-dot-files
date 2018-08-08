@@ -189,8 +189,7 @@ scrum_report() {
 	tt ls @scrum
 }
 
-# Add an event to work calendar
-# https://github.com/tobixen/calendar-cli
+# Add an event to work calendar [3]
 addics() {
 	if [ "$#" -ne 2 ]; then
 		echo 1>&2 "*** Usage: $0 [password] [event.ics]"
@@ -206,6 +205,15 @@ addics() {
 # Search in Duckduckgo.com
 ddg() {
 	w3m http://duckduckgo.com/html\?q\="$1"
+}
+
+# Get the PID of a process [4]
+pid2 () {
+	local i
+	for i in /proc/<->/stat
+	do
+		[[ "$(< $i)" = *\((${(j:|:)~@})\)* ]] && echo $i:h:t
+	done
 }
 
 #########################################################
@@ -227,3 +235,5 @@ alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=
 # SOURCES
 # 1. https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
 # 2. https://unix.stackexchange.com/questions/410456/zsh-completion-make-sshrc-behave-like-ssh
+# 3. https://github.com/tobixen/calendar-cli
+# 4. http://grml.org/zsh/zsh-lovers.html
