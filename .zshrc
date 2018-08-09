@@ -178,7 +178,7 @@ scrum_report() {
 	echo "Scrum report since day: $(date --date="$1 days ago")"
 
 	echo "\n================== COMPLETED TASKS =================="
-	for d ({$days_to_report..1}) do
+	for d ({$days_to_report..0}) do
 		grep -E "^x $(date --iso-8601 --date="$d days ago")" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
 	done
 	
