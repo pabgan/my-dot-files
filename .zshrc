@@ -125,8 +125,8 @@ export TODOTXT_DATE_ON_ADD=1
 #########################################################
 # TOPYDO CONFIGURATION
 #
-alias t="topydo -c $TODO_TXT/personal-topydo.cfg"
-alias tt="topydo -c $TODO_TXT/trabajo-topydo.cfg"
+alias t="topydo -a -c $TODO_TXT/personal-topydo.cfg"
+alias tt="topydo -a -c $TODO_TXT/trabajo-topydo.cfg"
 
 #########################################################
 # VARIOUS CONFIGURATIONS
