@@ -38,7 +38,7 @@ vnoremap // y/<C-R>"<CR>
 "
 " Enable plugins
 filetype plugin on
-" Highlight current line
+" Underline current line
 set cursorline
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
