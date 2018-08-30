@@ -99,34 +99,34 @@ export PATH=$PATH:$TODO_TXT
 export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
-#source $TODO_TXT/todo_completion
+source $TODO_TXT/todo_completion
 
 #  If you use aliases to use different configuration(s), you need to add and use
 # a wrapper completion function for each configuration if you want to complete
 # from the actual configured task locations:
-#alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
-#_t()
-#{
-#    local _todo_sh="todo.sh -d $TODO_TXT/personal-todo.cfg"
-#    _todo "$@"
-#}
-#compdef _t t
-#
-#alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
-#_tt()
-#{
-#    local _todo_sh="todo.sh -d $TODO_TXT/trabajo-todo.cfg"
-#    _todo "$@"
-#}
-#compdef _tt tt
-#
-#alias tr="vim $TODO_TXT/recur.txt"
+alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
+_t()
+{
+    local _todo_sh="todo.sh -d $TODO_TXT/personal-todo.cfg"
+    _todo "$@"
+}
+compdef _t t
+
+alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
+_tt()
+{
+    local _todo_sh="todo.sh -d $TODO_TXT/trabajo-todo.cfg"
+    _todo "$@"
+}
+compdef _tt tt
+
+alias tr="vim $TODO_TXT/recur.txt"
 
 #########################################################
 # TOPYDO CONFIGURATION
 #
-alias t="topydo -c $TODO_TXT/personal-topydo.cfg"
-alias tt="topydo -c $TODO_TXT/trabajo-topydo.cfg"
+#alias t="topydo -c $TODO_TXT/personal-topydo.cfg"
+#alias tt="topydo -c $TODO_TXT/trabajo-topydo.cfg"
 
 #########################################################
 # VARIOUS CONFIGURATIONS
@@ -230,6 +230,9 @@ alias cvs-checkout='cvs co -r'
 # Corporate mounts
 alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/home"
 alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/corp /mnt/corp"
+
+# Backup important work info into external HDD
+alias backup="rsync -avh --delete-after ~/.* ~/Plantillas ~/Software ~/Trabajo ~/Workspace/system-level_test_plan ~/Workspace/drafts  /run/media/pganuza/pganuza-backups/"
 
 #########################################################
 # SOURCES
