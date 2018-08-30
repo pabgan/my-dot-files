@@ -44,7 +44,7 @@ take () {
 
 # Connect to a database
 function connect_to_db {
-	sqlcl $1/assia@db-ref.assia-inc.com:1521:dslo2
+	sqlcl $1/assia@db-ref.assia-inc.com:1521:dslo2 @$2
 }
 
 #########################################################
