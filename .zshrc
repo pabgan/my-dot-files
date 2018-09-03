@@ -99,7 +99,7 @@ export PATH=$PATH:$TODO_TXT
 export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
-source $TODO_TXT/todo_completion
+#source $TODO_TXT/todo_completion
 
 #  If you use aliases to use different configuration(s), you need to add and use
 # a wrapper completion function for each configuration if you want to complete
