@@ -202,7 +202,7 @@ addics() {
 	stty $stty_orig     # restore terminal setting.
 	ics_file=$1
 
-	cat $ics_file | python $HOME/.scripts/calendar-cli.py --caldav-url="https://guaranuzas.com/nextcloud/remote.php/" --calendar-url="dav/calendars/pablo/trabajo/" --caldav-user=pablo --caldav-pass="$passwd" calendar addics
+	sed '/METHOD/d' $ics_file | python $HOME/.scripts/calendar-cli.py --caldav-url="https://guaranuzas.com/nextcloud/remote.php/" --calendar-url="dav/calendars/pablo/trabajo/" --caldav-user=pablo --caldav-pass="$passwd" calendar addics
 }
 
 # Search in Duckduckgo.com
