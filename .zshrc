@@ -191,15 +191,18 @@ scrum_report() {
 
 # Add an event to work calendar [3]
 addics() {
-	if [ "$#" -ne 2 ]; then
-		echo 1>&2 "*** Usage: $0 [password] [event.ics]"
+	if [ "$#" -ne 1 ]; then
+		echo 1>&2 "*** Usage: $0 [event.ics]"
 		return 2
-	else 
-		password=$1
-		ics_file=$2
-	fi
+	fi 
+	echo -n "Please provide password: "
+	stty_orig=`stty -g` # save original terminal setting.
+	stty -echo          # turn-off echoing.
+	read passwd         # read the password
+	stty $stty_orig     # restore terminal setting.
+	ics_file=$1
 
-	cat $ics_file | python $HOME/.scripts/calendar-cli.py --caldav-url="https://guaranuzas.com/nextcloud/remote.php/" --calendar-url="dav/calendars/pablo/trabajo/" --caldav-user=pablo --caldav-pass="$1" calendar addics
+	cat $ics_file | python $HOME/.scripts/calendar-cli.py --caldav-url="https://guaranuzas.com/nextcloud/remote.php/" --calendar-url="dav/calendars/pablo/trabajo/" --caldav-user=pablo --caldav-pass="$passwd" calendar addics
 }
 
 # Search in Duckduckgo.com
