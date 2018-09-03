@@ -29,6 +29,7 @@ nmap <C-H><C-H> :set list!<CR>
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 set background=dark
+colorscheme elflord
 
 " Buscar lo que hay seleccionado pulsando / dos veces
 vnoremap // y/<C-R>"<CR>
@@ -38,7 +39,7 @@ vnoremap // y/<C-R>"<CR>
 "
 " Enable plugins
 filetype plugin on
-" Highlight current line
+" Underline current line
 set cursorline
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
