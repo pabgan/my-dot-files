@@ -9,6 +9,7 @@ fi
 # VARIOUS CONFIGURATIONS
 # 
 # Common aliases
+alias ls='ls --color=auto'
 alias la='ls -a'
 alias ll='ls -lah'
 alias ..='cd ..'
@@ -25,6 +26,9 @@ alias cvs-checkout='cvs co -r'
 
 # VIM config
 alias vim='vim -u $SSHHOME/.sshrc.d/.vimrc'
+
+# readline config
+bind -f $SSHHOME/.sshrc.d/.inputrc
 
 # less [1]
 export LESS='-R -C -M -I -j 10 -# 4'
