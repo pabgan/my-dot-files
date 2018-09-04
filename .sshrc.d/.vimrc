@@ -1,4 +1,4 @@
-" Enter the current millenium
+" Enter the current millenium [2]
 set nocompatible
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
@@ -15,7 +15,23 @@ set incsearch		" Incremental search
 set hlsearch		" Highlight all search matches
 "set autowrite		" Automatically save before commands like :next and :make
 "set hidden		" Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes)
+set mouse=a		" Disable mouse usage (all modes)
+
+" If using a dark background within the editing area and syntax highlighting
+" turn on this option as well
+set background=dark
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" OTHER SETTINGS
+"
+" Enable plugins
+filetype plugin on
+
+" Display a permanent status bar at the bottom of the vi screen showing the filename, row number, column number, etc. [1]
+set laststatus=2
+
+" Underline current line
+set cursorline
 
 " For line number to appear in the line selected and all the other ones
 " relative to it
@@ -26,24 +42,14 @@ nmap <C-N><C-N> :set invnumber invrelativenumber<CR>
 " Toggle showing metacharacters
 nmap <C-H><C-H> :set list!<CR>
 
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-set background=dark
-colorscheme elflord
-
 " Buscar lo que hay seleccionado pulsando / dos veces
 vnoremap // y/<C-R>"<CR>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OTHER SETTINGS
-"
-" Enable plugins
-filetype plugin on
-" Underline current line
-set cursorline
+" Maintain the undo history even after the file is saved [1]
+set undofile
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" BUILT IN FUZZY SEARCH
+" BUILT IN FUZZY SEARCH [2]
 " 
 " Search down into subfolders recursively
 " Provides tab-completion for all file-related tasks
@@ -58,3 +64,8 @@ set wildmenu
 "
 " THINGS TO CONSIDER:
 " - :b lets you autocomplete any open buffer
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SOURCES
+" 1. https://opensource.com/article/18/9/vi-editor-productivity-powerhouse
+" 2. https://www.youtube.com/watch?v=XA2WjJbmmoM
