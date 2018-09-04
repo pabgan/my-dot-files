@@ -34,6 +34,10 @@ bind -f $SSHHOME/.sshrc.d/.inputrc
 export LESS='-R -C -M -I -j 10 -# 4'
 export PAGER=less
 
+# tmux
+export SHELL=$SSHHOME/bashsshrc
+alias m="tmux -S /tmp/pablomuxserver"
+
 # Others
 #alias diff='diff --color=auto'
 
