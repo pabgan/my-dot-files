@@ -138,6 +138,8 @@ alias jjp="vim ~/.todo-txt/personal-journal.txt"
 
 # Tmux
 alias m="tmux"
+alias mn="tmux new -s"
+alias ma="tmux attach -t"
 
 # sshrc
 # Make sshrc autocomplete hosts like ssh does [2]
@@ -235,6 +237,9 @@ alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=
 
 # Backup important work info into external HDD
 alias backup="rsync -avh --delete-after ~/.* ~/Plantillas ~/Software ~/Trabajo ~/Workspace/system-level_test_plan ~/Workspace/drafts  /run/media/pganuza/pganuza-backups/"
+
+# DB querying
+alias q="python $HOME/Workspace/sqlturbo/sqlturbo.py $DBENV "
 
 #########################################################
 # SOURCES
