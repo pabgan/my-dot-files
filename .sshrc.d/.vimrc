@@ -49,6 +49,14 @@ vnoremap // y/<C-R>"<CR>
 set undofile
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Custom movements keys for a spanish keyboard
+"
+nnoremap j h
+nnoremap k j
+nnoremap l k
+nnoremap ñ l
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUILT IN FUZZY SEARCH [2]
 " 
 " Search down into subfolders recursively
