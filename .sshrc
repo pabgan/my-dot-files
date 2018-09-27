@@ -55,6 +55,17 @@ function connect_to_db {
 	sqlcl $1/assia@db-ref.assia-inc.com:1521:dslo2 @$2
 }
 
+# Toggle showing history timestamps
+function toggle_history_timestamps () {
+	if [ -z "$HISTTIMEFORMAT" ];
+	then
+		export HISTTIMEFORMAT="%d/%m/%y %T "
+	else
+		unset HISTTIMEFORMAT
+	fi
+}
+alias th='toggle_history_timestamps'
+
 #########################################################
 # SOURCES
 # 1. https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
