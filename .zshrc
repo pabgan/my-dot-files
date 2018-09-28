@@ -151,10 +151,15 @@ compdef yadm=git
 export LESS='-R -C -M -I -j 10 -# 4'
 #export PAGER=less
 
-# Others
+# diff
 alias diff='diff --color=auto'
+
 # Get the weather report
 alias weather='curl wttr.in'
+
+# Get ip address
+alias ipexternal='curl ipinfo.io/ip'
+alias ipinternal='ipconfig getifaddr en0'
 
 #########################################################
 # USEFUL FUNCTIONS
