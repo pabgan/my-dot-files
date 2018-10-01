@@ -31,7 +31,9 @@ filetype plugin on
 set laststatus=2
 
 " Underline current line
-set cursorline
+"set cursorline
+" Highlight current line
+hi CursorLine cterm=NONE ctermbg=black
 
 " For line number to appear in the line selected and all the other ones
 " relative to it
