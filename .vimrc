@@ -31,7 +31,7 @@ filetype plugin on
 set laststatus=2
 
 " Underline current line
-"set cursorline
+set cursorline
 " Highlight current line
 hi CursorLine cterm=NONE ctermbg=black
 
