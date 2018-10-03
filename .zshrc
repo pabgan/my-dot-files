@@ -244,7 +244,9 @@ alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=
 alias backup="rsync -avh --delete-after ~/.* ~/Plantillas ~/Software ~/Trabajo ~/Workspace/system-level_test_plan ~/Workspace/drafts  /run/media/pganuza/pganuza-backups/"
 
 # DB querying
-alias q="python $HOME/Workspace/sqlturbo/sqlturbo.py $DBENV "
+q () {
+	python $HOME/Workspace/sqlturbo/sqlturbo.py $DBENV $1
+}
 
 #########################################################
 # SOURCES
