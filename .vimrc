@@ -67,7 +67,20 @@ set wildmenu
 " THINGS TO CONSIDER:
 " - :b lets you autocomplete any open buffer
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SNIPPETS [2]
+"
+" Insert a {code:}{code} block
+nnoremap \jc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>f:a
+" Surround text selected with a code block
+vnoremap \jac d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pkf:a
+" Insert a {noformat}{noformat} block
+nnoremap \jan :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
+" Surround text selected with a noformat block
+vnoremap \jan d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES
 " 1. https://opensource.com/article/18/9/vi-editor-productivity-powerhouse
-" 2. https://www.youtube.com/watch?v=XA2WjJbmmoM
+" 2. https://www.youtube.com/watch?v=XA2WjJbmmoM / https://github.com/changemewtf/no_plugins/
