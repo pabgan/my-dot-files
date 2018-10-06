@@ -1,3 +1,4 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! URxvt
 
 ! General settings
@@ -36,7 +37,6 @@ URxvt.boldFont: xft:Inconsolata-9
 URxvt.letterSpace: -1
 
 ! Tango theme
-
 URxvt.background: #1C1C1C
 URxvt.foreground: #DEDEDE
 
@@ -65,6 +65,25 @@ URxvt.color14 : #34E2E2
 URxvt.color7  : #D3D7CF
 URxvt.color15 : #EEEEEC
 
+URxvt.transparent:   true
+URxvt.shading:       15
+urxvt*depth: 		 32
+urxvt*background:    rgba:0020/0200/0200/c800
+
+URxvt.inputMethod: ibus
+URxvt.preeditType: OverTheSpot
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+URxvt.keysym.C-Up:     font-size:increase
+URxvt.keysym.C-Down:   font-size:decrease
+URxvt.keysym.C-S-Up:   font-size:incglobal
+URxvt.keysym.C-S-Down: font-size:decglobal
+URxvt.keysym.C-equal:  font-size:reset
+URxvt.keysym.C-slash:  font-size:show
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! XTerm
 
 ! General settings
@@ -131,20 +150,3 @@ XTerm*color14 : #34E2E2
 XTerm*color7  : #D3D7CF
 XTerm*color15 : #EEEEEC
 
-URxvt.transparent:   true
-URxvt.shading:       15
-urxvt*depth: 		 32
-urxvt*background:    rgba:0020/0200/0200/c800
-
-URxvt.inputMethod: ibus
-URxvt.preeditType: OverTheSpot
-
-URxvt.iso14755: false
-URxvt.iso14755_52: false
-
-URxvt.keysym.C-Up:     font-size:increase
-URxvt.keysym.C-Down:   font-size:decrease
-URxvt.keysym.C-S-Up:   font-size:incglobal
-URxvt.keysym.C-S-Down: font-size:decglobal
-URxvt.keysym.C-equal:  font-size:reset
-URxvt.keysym.C-slash:  font-size:show
