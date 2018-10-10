@@ -51,9 +51,17 @@ take () {
 }
 
 # Connect to a database
-function connect_to_db {
-	sqlcl $1/assia@db-ref.assia-inc.com:1521:dslo2 @$2
+function sqlcl() {
+	$HOME/.sqlcl/bin/sqlcl $1/assia@db-ref.assia-inc.com:1521:dslo2 @$2
 }
+#function sql() {
+#	if [ -z "$2" ]
+#	then
+#		/usr/bin/sql $1/assia@db-ref.assia-inc.com:1521:dslo2
+#	else
+#		/usr/bin/sql $1/assia@db-ref.assia-inc.com:1521:dslo2 @$2
+#	fi
+#}
 
 # Toggle showing history timestamps
 function toggle_history_timestamps () {
