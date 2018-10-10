@@ -101,31 +101,10 @@ export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 #source $TODO_TXT/todo_completion
 
-#  If you use aliases to use different configuration(s), you need to add and use
-# a wrapper completion function for each configuration if you want to complete
-# from the actual configured task locations:
-alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
-_t()
-{
-    local _todo_sh="todo.sh -d $TODO_TXT/personal-todo.cfg"
-    _todo "$@"
-}
-compdef _t t
-
-alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
-_tt()
-{
-    local _todo_sh="todo.sh -d $TODO_TXT/trabajo-todo.cfg"
-    _todo "$@"
-}
-compdef _tt tt
+alias t="todo.sh -d $TODO_TXT/personal-todo.cfg"
+alias tt="todo.sh -d $TODO_TXT/trabajo-todo.cfg"
 
 alias tr="vim $TODO_TXT/recur.txt"
-
-#########################################################
-# TOPYDO CONFIGURATION
-#alias t="topydo -c $TODO_TXT/personal-topydo.cfg"
-#alias tt="topydo -c $TODO_TXT/trabajo-topydo.cfg"
 
 #########################################################
 # VARIOUS CONFIGURATIONS
@@ -160,6 +139,9 @@ alias weather='curl wttr.in'
 # Get ip address
 alias ipexternal='curl ipinfo.io/ip'
 alias ipinternal='ipconfig getifaddr en0'
+
+# Vim with system clipboard support
+#alias vim="gvim -v"
 
 #########################################################
 # USEFUL FUNCTIONS
@@ -217,7 +199,7 @@ ddg() {
 }
 
 # Get the PID of a process [4]
-pid2 () {
+pid2() {
 	local i
 	for i in /proc/<->/stat
 	do
@@ -242,11 +224,6 @@ alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=
 
 # Backup important work info into external HDD
 alias backup="rsync -avh --delete-after ~/.* ~/Plantillas ~/Software ~/Trabajo ~/Workspace/system-level_test_plan ~/Workspace/drafts  /run/media/pganuza/pganuza-backups/"
-
-# DB querying
-q () {
-	python $HOME/Workspace/sqlturbo/sqlturbo.py $DBENV $1
-}
 
 #########################################################
 # SOURCES
