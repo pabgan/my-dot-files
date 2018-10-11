@@ -214,10 +214,10 @@ export JAVA_HOME="/usr/java/jdk1.8.0_73/"
 
 # Alias for very frequent SSH connections
 alias p='ssh pganuza@pganuza-dev.assia-inc.com'
-alias lex='ssh pganuza@lexus.assia-inc.com'
-alias a='ssh user@demo-a.assia-inc.com'
-alias b='ssh user@demo-b.assia-inc.com'
-alias c='ssh user@demo-c.assia-inc.com'
+alias l='sshrc pganuza@lexus.assia-inc.com'
+alias a='sshrc user@demo-a.assia-inc.com'
+alias b='sshrc user@demo-b.assia-inc.com'
+alias c='sshrc user@demo-c.assia-inc.com'
 
 # CVS configuration
 export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
