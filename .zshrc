@@ -166,15 +166,16 @@ scrum_report() {
 	echo "Scrum report since day: $(date --date="$1 days ago")"
 
 	echo "\n================== COMPLETED TASKS =================="
+	ommited_tags='@scrum|@qa-meeting'
 	for d ({$days_to_report..0}) do
-		grep -E "^x $(date --iso-8601 --date="$d days ago")" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
+		grep -E "^x $(date --iso-8601 --date="$d days ago")" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -Ev $ommited_tags | sed 's/.*:x //g'
 	done
 	
 	echo "\n================= OTHER THINGS DONE ================="
 	j -from "\"$days_to_report days ago\""
 
 	echo "\n================== THINGS TO TELL ==================="
-	tt ls @scrum
+	tt ls @scrum | head -n -2
 }
 
 # Add an event to work calendar [3]
