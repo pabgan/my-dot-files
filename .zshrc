@@ -101,8 +101,8 @@ export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 #source $TODO_TXT/todo_completion
 
-alias t="todo.sh -d $TODO_TXT/personal-todo.cfg"
-alias tt="todo.sh -d $TODO_TXT/trabajo-todo.cfg"
+alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
+alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
 
 alias tr="vim $TODO_TXT/recur.txt"
 
