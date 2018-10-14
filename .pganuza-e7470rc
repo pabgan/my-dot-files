@@ -1,0 +1,32 @@
+#!/bin/zsh
+#########################################################
+# PGANUZA-E7470
+export JAVA_HOME="/usr/java/jdk1.8.0_73/"
+
+# Corporate mounts
+alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/home"
+alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/corp /mnt/corp"
+
+# Backup important work info into external HDD
+alias backup="rsync -avh --delete-after ~/.* ~/Plantillas ~/Software ~/Trabajo ~/Workspace/system-level_test_plan ~/Workspace/drafts  /run/media/pganuza/pganuza-backups/"
+
+# Show what I have done since last report
+scrum_report() {
+	if [ "$#" -ne 2 ]; then
+		days_to_report=1
+	else 
+		days_to_report=$1
+	fi
+	echo "Scrum report since day: $(date --date="$1 days ago")"
+
+	echo "\n================== COMPLETED TASKS =================="
+	for d ({$days_to_report..0}) do
+		grep -E "^x $(date --iso-8601 --date="$d days ago")" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -v "@scrum" | sed 's/.*:x //g'
+	done
+	
+	echo "\n================= OTHER THINGS DONE ================="
+	j -from "\"$days_to_report days ago\""
+
+	echo "\n================== THINGS TO TELL ==================="
+	tt ls @scrum
+}
