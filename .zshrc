@@ -1,4 +1,3 @@
-# testing pganuza-dev yadm installation
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:$HOME/.scripts:$HOME/.local/bin
@@ -177,7 +176,7 @@ if [ "$hostname" = "PGANUZA-E7470" ]; then
 	echo "sourcing files for PGANUZA-E7470"
 	source $HOME/.assiarc
 	source $HOME/.pganuza-e7470rc
-elif [ "$hostname" = "pganuza-dev" ]; then 
+elif [ "$hostname" = "pganuza-dev.assia-inc.com" ]; then 
 	echo "sourcing files for pganuza-dev"
 	source $HOME/.assiarc
 elif [ "$hostname" = "maFalda" ]; then 
