@@ -101,8 +101,8 @@ export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 #source $TODO_TXT/todo_completion
 
-alias t="todo.sh -d $TODO_TXT/personal-todo.cfg"
-alias tt="todo.sh -d $TODO_TXT/trabajo-todo.cfg"
+alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
+alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
 
 alias tr="vim $TODO_TXT/recur.txt"
 
@@ -146,52 +146,14 @@ alias ipinternal='ipconfig getifaddr en0'
 #########################################################
 # USEFUL FUNCTIONS
 #
-# When you however forget that you already are in a ranger shell and start ranger again you end up with ranger running a shell running ranger.
-# To prevent this:
+# When you however forget that you already are in a ranger shell and start ranger again you end up 
+# with ranger running a shell running ranger. To prevent this:
 ranger() {
     if [ -z "$RANGER_LEVEL" ]; then
         /usr/bin/ranger "$@"
     else
         exit
     fi
-}
-
-# Show what I have done since last report
-scrum_report() {
-	if [ "$#" -ne 2 ]; then
-		days_to_report=1
-	else 
-		days_to_report=$1
-	fi
-	echo "Scrum report since day: $(date --date="$1 days ago")"
-
-	echo "\n================== COMPLETED TASKS =================="
-	ommited_tags='@scrum|@qa-meeting'
-	for d ({$days_to_report..0}) do
-		grep -E "^x $(date --iso-8601 --date="$d days ago")" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -Ev $ommited_tags | sed 's/.*:x //g'
-	done
-	
-	echo "\n================= OTHER THINGS DONE ================="
-	j -from "\"$days_to_report days ago\""
-
-	echo "\n================== THINGS TO TELL ==================="
-	tt ls @scrum | head -n -2
-}
-
-# Add an event to work calendar [3]
-addics() {
-	if [ "$#" -ne 1 ]; then
-		echo 1>&2 "*** Usage: $0 [event.ics]"
-		return 2
-	fi 
-	echo -n "Please provide password: "
-	stty_orig=`stty -g` # save original terminal setting.
-	stty -echo          # turn-off echoing.
-	read passwd         # read the password
-	stty $stty_orig     # restore terminal setting.
-	ics_file=$1
-
-	sed '/METHOD/d' $ics_file | python $HOME/.scripts/calendar-cli.py --caldav-url="https://guaranuzas.com/nextcloud/remote.php/" --calendar-url="dav/calendars/pablo/trabajo/" --caldav-user=pablo --caldav-pass="$passwd" calendar addics
 }
 
 # Search in Duckduckgo.com
@@ -209,29 +171,22 @@ pid2() {
 }
 
 #########################################################
-# ASSIA
-export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
-export JAVA_HOME="/usr/java/jdk1.8.0_73/"
-
-# Alias for very frequent SSH connections
-alias p='ssh pganuza@pganuza-dev.assia-inc.com'
-alias l='sshrc pganuza@lexus.assia-inc.com'
-alias a='sshrc user@demo-a.assia-inc.com'
-alias b='sshrc user@demo-b.assia-inc.com'
-alias c='sshrc user@demo-c.assia-inc.com'
-
-# CVS configuration
-export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
-alias cvs-update='cvs update -PAd'
-alias cvs-discard_changes='cvs_update -C'
-alias cvs-checkout='cvs co -r'
-
-# Corporate mounts
-alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/home"
-alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/corp /mnt/corp"
-
-# Backup important work info into external HDD
-alias backup="rsync -avh --delete-after ~/.* ~/Plantillas ~/Software ~/Trabajo ~/Workspace/system-level_test_plan ~/Workspace/drafts  /run/media/pganuza/pganuza-backups/"
+# Source specific files depending on host
+hostname=$(hostname)
+if [ "$hostname" = "PGANUZA-E7470" ]; then
+	echo "sourcing files for PGANUZA-E7470"
+	source $HOME/.assiarc
+	source $HOME/.pganuza-e7470rc
+elif [ "$hostname" = "pganuza-dev" ]; then 
+	echo "sourcing files for pganuza-dev"
+	source $HOME/.assiarc
+elif [ "$hostname" = "maFalda" ]; then 
+	echo "sourcing files for maFalda"
+elif [ "$hostname" = "bagHeera" ]; then 
+	echo "sourcing files for bagHeera"
+elif [ "$hostname" = "baloO" ]; then 
+	echo "sourcing files for baloO"
+fi
 
 #########################################################
 # SOURCES

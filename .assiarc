@@ -1,0 +1,18 @@
+#!/bin/zsh
+#########################################################
+# ASSIA
+export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
+
+# Alias for very frequent SSH connections
+alias p='ssh pganuza@pganuza-dev.assia-inc.com'
+alias l='sshrc pganuza@lexus.assia-inc.com'
+alias a='sshrc user@demo-a.assia-inc.com'
+alias b='sshrc user@demo-b.assia-inc.com'
+alias c='sshrc user@demo-c.assia-inc.com'
+
+# CVS configuration
+export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
+alias cvs-update='cvs update -PAd'
+alias cvs-discard_changes='cvs_update -C'
+alias cvs-checkout='cvs co -r'
+

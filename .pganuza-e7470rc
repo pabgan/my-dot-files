@@ -1,0 +1,49 @@
+#!/bin/zsh
+#########################################################
+# PGANUZA-E7470
+export JAVA_HOME="/usr/java/jdk1.8.0_73/"
+
+# Corporate mounts
+alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/home"
+alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/corp /mnt/corp"
+
+# Backup important work info into external HDD
+alias backup="rsync -avh --delete-after ~/.* ~/Plantillas ~/Software ~/Trabajo ~/Workspace/system-level_test_plan ~/Workspace/drafts  /run/media/pganuza/pganuza-backups/"
+
+# Show what I have done since last report
+scrum_report() {
+	if [ "$#" -ne 2 ]; then
+		days_to_report=1
+	else 
+		days_to_report=$1
+	fi
+	echo "Scrum report since day: $(date --date="$1 days ago")"
+
+	echo "\n================== COMPLETED TASKS =================="
+	ommited_tags='@scrum|@qa-meeting'
+	for d ({$days_to_report..0}) do
+		grep -E "^x $(date --iso-8601 --date="$d days ago")" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -Ev $ommited_tags | sed 's/.*:x //g'
+	done
+	
+	echo "\n================= OTHER THINGS DONE ================="
+	j -from "\"$days_to_report days ago\""
+
+	echo "\n================== THINGS TO TELL ==================="
+	tt ls @scrum | head -n -2
+}
+
+# Add an event to work calendar [3]
+addics() {
+	if [ "$#" -ne 1 ]; then
+		echo 1>&2 "*** Usage: $0 [event.ics]"
+		return 2
+	fi 
+	echo -n "Please provide password: "
+	stty_orig=`stty -g` # save original terminal setting.
+	stty -echo          # turn-off echoing.
+	read passwd         # read the password
+	stty $stty_orig     # restore terminal setting.
+	ics_file=$1
+
+	sed '/METHOD/d' $ics_file | python $HOME/.scripts/calendar-cli.py --caldav-url="https://guaranuzas.com/nextcloud/remote.php/" --calendar-url="dav/calendars/pablo/trabajo/" --caldav-user=pablo --caldav-pass="$passwd" calendar addics
+}
