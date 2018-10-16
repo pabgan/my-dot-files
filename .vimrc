@@ -77,7 +77,7 @@ nnoremap \jc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>f:a
 " Surround text selected with a code block
 vnoremap \jac d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pkf:a
 " Insert a {noformat}{noformat} block
-nnoremap \jan :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
+nnoremap \jn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
 " Surround text selected with a noformat block
 vnoremap \jan d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
 
