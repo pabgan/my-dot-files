@@ -48,7 +48,7 @@ nmap <C-H><C-H> :set list!<CR>
 vnoremap // y/<C-R>"<CR>
 
 " Maintain the undo history even after the file is saved [1]
-set undofile
+"set undofile
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUILT IN FUZZY SEARCH [2]
