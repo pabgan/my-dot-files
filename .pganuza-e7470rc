@@ -1,14 +1,14 @@
 #!/bin/zsh
 #########################################################
 # PGANUZA-E7470
-export JAVA_HOME="/usr/java/jdk1.8.0_73/"
+#export JAVA_HOME="/usr/java/jdk1.8.0_73/"
 
 # Corporate mounts
 alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/home"
 alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/corp /mnt/corp"
 
 # Backup important work info into external HDD
-alias backup="rsync -avh --delete-after ~/.* ~/Plantillas ~/Software ~/Trabajo ~/Workspace/system-level_test_plan ~/Workspace/drafts  /run/media/pganuza/pganuza-backups/"
+alias backup-pganuza-e7470="rsync -avh --delete-after ~/.* ~/Plantillas ~/Software ~/Trabajo ~/Workspace/system-level_test_plan ~/Workspace/drafts  /run/media/pganuza/pganuza-backups/"
 
 # Show what I have done since last report
 scrum_report() {
