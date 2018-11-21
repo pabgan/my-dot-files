@@ -34,6 +34,9 @@ bind -f $SSHHOME/.sshrc.d/.inputrc
 export LESS='-R -C -M -I -j 10 -# 4'
 export PAGER=less
 
+# "enable" syntax highlight in view
+alias view='vim -R'
+
 # tmux
 export SHELL=$SSHHOME/bashsshrc
 alias m="tmux -S /tmp/pablomuxserver"
