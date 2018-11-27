@@ -20,12 +20,19 @@ set mouse=		" Disable mouse usage (all modes)
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 set background=dark
+colorscheme ron
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" STYLE SETTINGS
+set softtabstop=8
+set shiftwidth=8
+set tabstop=8
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OTHER SETTINGS
 "
 " Enable plugins
-filetype plugin on
+"filetype plugin on
 
 " Display a permanent status bar at the bottom of the vi screen showing the filename, row number, column number, etc. [1]
 set laststatus=2
@@ -48,7 +55,7 @@ nmap <C-H><C-H> :set list!<CR>
 vnoremap // y/<C-R>"<CR>
 
 " Maintain the undo history even after the file is saved [1]
-"set undofile
+set undofile
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUILT IN FUZZY SEARCH [2]
@@ -67,7 +74,20 @@ set wildmenu
 " THINGS TO CONSIDER:
 " - :b lets you autocomplete any open buffer
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SNIPPETS [2]
+"
+" Insert a {code:}{code} block
+nnoremap \jc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>f:a
+" Surround text selected with a code block
+vnoremap \jac d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pkf:a
+" Insert a {noformat}{noformat} block
+nnoremap \jn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
+" Surround text selected with a noformat block
+vnoremap \jan d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES
 " 1. https://opensource.com/article/18/9/vi-editor-productivity-powerhouse
-" 2. https://www.youtube.com/watch?v=XA2WjJbmmoM
+" 2. https://www.youtube.com/watch?v=XA2WjJbmmoM / https://github.com/changemewtf/no_plugins/
