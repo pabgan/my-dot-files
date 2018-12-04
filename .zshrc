@@ -171,14 +171,23 @@ pid2() {
 
 #########################################################
 # Source specific files depending on host
+source_assiarc() {
+	echo "+ sourcing .assiarc"
+	source $HOME/.assiarc
+}
+source_pganuza-e7470rc() {
+	echo "+ sourcing .pganuza-e7470rc"
+	source $HOME/.pganuza-e7470rc
+}
+
 hostname=$(hostname)
 if [ "$hostname" = "PGANUZA-E7470" ]; then
 	echo "sourcing files for PGANUZA-E7470"
-	source $HOME/.assiarc
-	source $HOME/.pganuza-e7470rc
+	source_assiarc
+	source_pganuza-e7470rc
 elif [ "$hostname" = "pganuza-dev.assia-inc.com" ]; then 
 	echo "sourcing files for pganuza-dev"
-	source $HOME/.assiarc
+	source_assiarc
 elif [ "$hostname" = "maFalda" ]; then 
 	echo "sourcing files for maFalda"
 elif [ "$hostname" = "bagHeera" ]; then 
