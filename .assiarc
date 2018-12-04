@@ -4,7 +4,7 @@
 export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
 
 # Alias for very frequent SSH connections
-alias p='ssh pganuza@pganuza-dev.assia-inc.com'
+alias p='ssh pganuza-dev -t "tmux a -t default || tmux new -s default"'
 alias l='sshrc pganuza@lexus.assia-inc.com'
 alias a='sshrc user@demo-a.assia-inc.com'
 alias b='sshrc user@demo-b.assia-inc.com'
