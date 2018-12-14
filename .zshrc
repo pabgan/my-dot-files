@@ -98,6 +98,7 @@ export PATH=$PATH:$TODO_TXT
 export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
+export TODO_ACTIONS_DIR=$HOME/.todo.actions.d
 
 alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
 alias th="t listpri h"

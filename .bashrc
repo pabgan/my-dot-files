@@ -120,9 +120,11 @@ export PATH=$PATH:$TODO_TXT
 export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
+export TODO_ACTIONS_DIR=$HOME/.todo.actions.d
 source $TODO_TXT/todo_completion
 
 alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
+alias th="t listpri h"
 #  If you use aliases to use different configuration(s), you need to add and use
 # a wrapper completion function for each configuration if you want to complete
 # from the actual configured task locations:
@@ -136,6 +138,7 @@ complete -F _t t
 
 
 alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
+alias tth="tt listpri h"
 #  If you use aliases to use different configuration(s), you need to add and use
 # a wrapper completion function for each configuration if you want to complete
 # from the actual configured task locations:
@@ -206,7 +209,6 @@ function toggle_history_timestamps () {
 		unset HISTTIMEFORMAT
 	fi
 }
-alias th='toggle_history_timestamps'
 
 #########################################################
 # SOURCES
