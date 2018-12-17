@@ -93,19 +93,18 @@ alias zshconfig="vim ~/.zshrc"
 #########################################################
 # TODO.TXT-CLI CONFIGURATION
 #
-export TODO_TXT=$HOME/.todo-txt
-export PATH=$PATH:$TODO_TXT
+export TODO_TXT_CFG=$HOME/.config/todo-txt
 export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 export TODO_ACTIONS_DIR=$HOME/.todo.actions.d
 
-alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
+alias t="todo -a -d $TODO_TXT_CFG/personal-todo.cfg"
 alias th="t listpri h"
-alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
+alias tt="todo -a -d $TODO_TXT_CFG/trabajo-todo.cfg"
 alias tth="tt listpri h"
 
-alias tr="vim $TODO_TXT/recur.txt"
+alias tr="vim $HOME/.todo-txt/recur.txt"
 
 #########################################################
 # VARIOUS CONFIGURATIONS
