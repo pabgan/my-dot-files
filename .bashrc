@@ -115,33 +115,34 @@ fi
 #########################################################
 # TODO.TXT CONFIGURATION
 #
-export TODO_TXT=$HOME/.todo-txt
-export PATH=$PATH:$TODO_TXT
+source $HOME/.local/bin/todo_completion
+export TODO_TXT_CFG=$HOME/.config/todo-txt
 export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
-source $TODO_TXT/todo_completion
+export TODO_ACTIONS_DIR=$HOME/.todo.actions.d
 
-alias t="todo.sh -a -d $TODO_TXT/personal-todo.cfg"
+alias t="todo -a -d $TODO_TXT_CFG/personal-todo.cfg"
+alias th="t listpri h"
 #  If you use aliases to use different configuration(s), you need to add and use
 # a wrapper completion function for each configuration if you want to complete
 # from the actual configured task locations:
 _t()
 {
-    local _todo_sh='todo.sh -d "$TODO_TXT/personal-todo.cfg"'
-#    local _todo_sh='todo.sh -d "/home/pganuza/.todo-txt/personal-todo.cfg"'
+    local _todo_sh='todo -d "$TODO_TXT_CFG/personal-todo.cfg"'
     _todo "$@"
 }
 complete -F _t t
 
 
-alias tt="todo.sh -a -d $TODO_TXT/trabajo-todo.cfg"
+alias tt="todo -a -d $TODO_TXT_CFG/trabajo-todo.cfg"
+alias tth="tt listpri h"
 #  If you use aliases to use different configuration(s), you need to add and use
 # a wrapper completion function for each configuration if you want to complete
 # from the actual configured task locations:
 _tt()
 {
-    local _todo_sh='todo.sh -d "$TODO_TXT/trabajo-todo.cfg"'
+    local _todo_sh='todo -d "$TODO_TXT_CFG/trabajo-todo.cfg"'
     _todo "$@"
 }
 complete -F _tt tt
@@ -206,7 +207,6 @@ function toggle_history_timestamps () {
 		unset HISTTIMEFORMAT
 	fi
 }
-alias th='toggle_history_timestamps'
 
 #########################################################
 # SOURCES
