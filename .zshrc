@@ -180,6 +180,10 @@ source_pganuza-e7470rc() {
 	echo "+ sourcing .pganuza-e7470rc"
 	source $HOME/.pganuza-e7470rc
 }
+source_pganuza-dev() {
+	echo "+ sourcing .pganuza-dev"
+	source $HOME/.pganuza-dev
+}
 
 hostname=$(hostname)
 if [ "$hostname" = "PGANUZA-E7470" ]; then
@@ -189,6 +193,7 @@ if [ "$hostname" = "PGANUZA-E7470" ]; then
 elif [ "$hostname" = "pganuza-dev.assia-inc.com" ]; then 
 	echo "sourcing files for pganuza-dev"
 	source_assiarc
+	source_pganuza-dev
 elif [ "$hostname" = "maFalda" ]; then 
 	echo "sourcing files for maFalda"
 elif [ "$hostname" = "bagHeera" ]; then 
