@@ -29,7 +29,7 @@ scrum_report() {
 	j -from "\"$days_to_report days ago\""
 
 	echo "================== THINGS TO TELL ==================="
-	tt ls @scrum | head -n -2
+	t ls @scrum | head -n -2
 }
 
 # Add an event to work calendar [3]
