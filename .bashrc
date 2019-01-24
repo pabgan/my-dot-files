@@ -147,7 +147,7 @@ alias m="tmux -S /tmp/pablomuxserver"
 
 # Others
 #alias diff='diff --color=auto'
-alias date='date --iso-8601'
+#alias date='date --iso-8601'
 
 #########################################################
 # USEFUL FUNCTIONS
