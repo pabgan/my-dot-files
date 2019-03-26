@@ -2,6 +2,7 @@
 #########################################################
 # PGANUZA-E7470
 #export JAVA_HOME="/usr/java/jdk1.8.0_73/"
+export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib:$LD_LIBRARY_PATH
 
 # Corporate mounts
 alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/home"
