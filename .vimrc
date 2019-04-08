@@ -24,9 +24,9 @@ colorscheme ron
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STYLE SETTINGS
-set softtabstop=8
-set shiftwidth=8
-set tabstop=8
+set softtabstop=4
+set shiftwidth=4
+set tabstop=4
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OTHER SETTINGS
@@ -86,6 +86,8 @@ vnoremap \jac d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pkf:a
 nnoremap \jn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
 " Surround text selected with a noformat block
 vnoremap \jan d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
+" Execute SQL query
+vnoremap <c-e> yG:read !sqlturbo.py <c-r>=DB<CR> <c-r>=DBF<CR> "<c-r>""<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES
