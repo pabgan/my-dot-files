@@ -90,6 +90,12 @@ vnoremap \jan d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
 vnoremap <c-e> yG:read !sqlturbo.py <c-r>=DB<CR> <c-r>=DBF<CR> "<c-r>""<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" AUTOMATIONS
+"
+" Autogenerate PDF for Markdown files
+autocmd BufWritePost *.mkd ! pandoc -o "<afile>.pdf" "<afile>"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES
 " 1. https://opensource.com/article/18/9/vi-editor-productivity-powerhouse
 " 2. https://www.youtube.com/watch?v=XA2WjJbmmoM / https://github.com/changemewtf/no_plugins/
