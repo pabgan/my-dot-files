@@ -13,7 +13,7 @@ alias backup-pganuza-e7470="rsync -avh --delete-after ~/.* ~/Plantillas ~/Softwa
 
 # Show what I have done since last report
 scrum_report() {
-	if [ "$#" -ne 2 ]; then
+	if [ "$#" -ne 1 ]; then
 		days_to_report=1
 	else 
 		days_to_report=$1
