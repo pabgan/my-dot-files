@@ -51,7 +51,7 @@ nmap <C-N><C-N> :set invnumber invrelativenumber<CR>
 " Toggle showing metacharacters
 nmap <C-H><C-H> :set list!<CR>
 
-" Buscar lo que hay seleccionado pulsando / dos veces
+" Search for what it is selected pressing / twice
 vnoremap // y/<C-R>"<CR>
 
 " Copy the whole file into the system clipboard
