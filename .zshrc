@@ -90,6 +90,12 @@ setopt nosharehistory
 alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Enable n-cd and n-kill [5]
+zle -N znt-cd-widget
+bindkey "^G" znt-cd-widget
+zle -N znt-kill-widget
+bindkey "^Y" znt-kill-widget
+
 #########################################################
 # TODO.TXT-CLI CONFIGURATION
 #
@@ -213,3 +219,4 @@ fi
 # 2. https://unix.stackexchange.com/questions/410456/zsh-completion-make-sshrc-behave-like-ssh
 # 3. https://github.com/tobixen/calendar-cli
 # 4. http://grml.org/zsh/zsh-lovers.html
+# 5. https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/zsh-navigation-tools
