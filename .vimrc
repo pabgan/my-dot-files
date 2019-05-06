@@ -57,6 +57,13 @@ vnoremap // y/<C-R>"<CR>
 " Copy the whole file into the system clipboard
 nnoremap \ya gg"+yG''
 
+" Execute query and bring results
+vnoremap <c-s> yG:read !~/.scripts/sqlturbo.py <c-r>=DB<CR> <c-r>=DBF<CR> "<c-r>""<CR>
+let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
+
+" Execute comand
+vnoremap <c-e> y:read !<c-r>"<CR><CR>
+
 " Maintain the undo history even after the file is saved [1]
 set undofile
 
@@ -90,8 +97,6 @@ nnoremap \jn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
 " Surround text selected with a noformat block
 vnoremap \jan d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
 " Execute SQL query
-vnoremap <c-e> yG:read !~/.scripts/sqlturbo.py <c-r>=DB<CR> <c-r>=DBF<CR> "<c-r>""<CR>
-let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AUTOMATIONS
