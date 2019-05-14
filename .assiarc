@@ -19,3 +19,11 @@ alias cvs-checkout='cvs co -r'
 
 # Download SQL files from a release
 alias wget_sqls='wget -r -np -l1 -R "index.html*" --no-directories '
+
+# Add paths where I store scripts
+export PATH=$PATH:$HOME/.sqlcl/bin
+
+# Connect to a database
+function dbconn() {
+	sqlcl $1/assia@db-ref.assia-inc.com:1521:dslo2 @$2
+}
