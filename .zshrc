@@ -122,12 +122,6 @@ tdate () {
 #########################################################
 # VARIOUS CONFIGURATIONS
 #
-# JRNL
-alias j="jrnl trabajo"
-alias jjt="vim ~/.todo-txt/trabajo-journal.txt"
-alias jp="jrnl personal"
-alias jjp="vim ~/.todo-txt/personal-journal.txt"
-
 # Tmux
 alias m="tmux"
 alias mn="tmux new -s"
