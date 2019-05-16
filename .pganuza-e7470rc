@@ -27,7 +27,7 @@ scrum_report() {
 	done
 	
 	echo "\n================= OTHER THINGS DONE ================="
-	j -from "\"$days_to_report days ago\""
+	jrnl -from "\"$days_to_report days ago\""
 
 	echo "================== THINGS TO TELL ==================="
 	t ls @scrum | head -n -2
