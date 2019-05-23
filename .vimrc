@@ -4,7 +4,7 @@ set nocompatible
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 syntax on
-filetype indent plugin on
+"filetype indent plugin on
 
 " Recommended settings
 set showcmd		" Show (partial) command in status line.
@@ -24,15 +24,13 @@ colorscheme ron
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STYLE SETTINGS
-set softtabstop=4
-set shiftwidth=4
-set tabstop=4
+set noexpandtab
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OTHER SETTINGS
 "
 " Enable plugins
-filetype plugin on
+"filetype plugin on
 
 " Display a permanent status bar at the bottom of the vi screen showing the filename, row number, column number, etc. [1]
 set laststatus=2
@@ -47,6 +45,9 @@ hi CursorLine cterm=NONE ctermbg=black
 set number relativenumber
 " Toggle showing line numbers
 nmap <C-N><C-N> :set invnumber invrelativenumber<CR>
+
+" Toggle showing a line to know where to wrap the text [3]
+nnoremap <C-C><C-C> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 
 " Toggle showing metacharacters
 nmap <C-H><C-H> :set list!<CR>
@@ -108,3 +109,4 @@ autocmd BufWritePost *.mkd ! pandoc -o "<afile>.pdf" "<afile>"
 " SOURCES
 " 1. https://opensource.com/article/18/9/vi-editor-productivity-powerhouse
 " 2. https://www.youtube.com/watch?v=XA2WjJbmmoM / https://github.com/changemewtf/no_plugins/
+" 3. https://vi.stackexchange.com/questions/17573/function-to-toggle-set-colorcolumn
