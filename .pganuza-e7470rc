@@ -50,4 +50,4 @@ addics() {
 }
 
 # Add some useful paths to the hotlist for n-cd
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" ------pganuza-e7470rc-------- ~/Trabajo/KnowHow/wiki ~/Workspace/expresse/dsloExpresse/releases )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" ------pganuza-e7470rc-------- ~/Trabajo/KnowHow/wiki ~/Workspace/expresse/dsloExpresse/releases ~/Workspace/expresse/dsloExpresseAdditional/tools/releaseTestingTools/system_level_test_plan/src/ )
