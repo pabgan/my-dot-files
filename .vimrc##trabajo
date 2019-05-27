@@ -4,7 +4,6 @@ set nocompatible
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
 syntax on
-"filetype indent plugin on
 
 " Recommended settings
 set showcmd		" Show (partial) command in status line.
@@ -25,6 +24,7 @@ colorscheme ron
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STYLE SETTINGS
 set expandtab smarttab shiftwidth=4
+filetype indent plugin on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OTHER SETTINGS
@@ -97,7 +97,8 @@ vnoremap \jc d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pkf:a
 nnoremap \jn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
 " Surround text selected with a noformat block
 vnoremap \jn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
-" Execute SQL query
+" Insert CVS header
+nnoremap \jh :-1read $HOME/Plantillas/snippets/cvs-header.txt<CR>f:a
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AUTOMATIONS
