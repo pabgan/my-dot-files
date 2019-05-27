@@ -77,6 +77,9 @@ vnoremap <c-e> y:read !<c-r>"<CR><CR>
 " CD into current file's directory
 nnoremap <C-C><C-D> :cd %:p:h<CR>
 
+" Copy just this line in vimdiff
+nnoremap <C-Y> <C-W>lyy<C-W>hPjdd
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUILT IN FUZZY SEARCH [2]
 " 
