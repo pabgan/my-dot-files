@@ -15,6 +15,8 @@ set hlsearch		" Highlight all search matches
 "set autowrite		" Automatically save before commands like :next and :make
 "set hidden		" Hide buffers when they are abandoned
 set mouse=		" Disable mouse usage (all modes)
+set undofile		" Maintain the undo history even after the file is saved [1]
+
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
@@ -23,7 +25,9 @@ colorscheme ron
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STYLE SETTINGS
-set expandtab smarttab shiftwidth=4
+autocmd FileType python setlocal expandtab smarttab shiftwidth=4
+autocmd FileType java setlocal expandtab smarttab shiftwidth=4
+autocmd FileType shell setlocal expandtab smarttab shiftwidth=4
 filetype indent plugin on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -43,6 +47,10 @@ hi CursorLine cterm=NONE ctermbg=black
 " For line number to appear in the line selected and all the other ones
 " relative to it
 set number relativenumber
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" KEYBINDINGS
+"
 " Toggle showing line numbers
 nmap <C-N><C-N> :set invnumber invrelativenumber<CR>
 
@@ -60,13 +68,14 @@ nnoremap \ya gg"+yG''
 
 " Execute query and bring results
 vnoremap <c-s> msy'so<ESC>:read !~/.scripts/sqlturbo.py <c-r>=DB<CR> <c-r>=DBF<CR> "<c-r>""<CR>
+nnoremap <c-s> msv/;<CR>hy/;<CR>:read !~/.scripts/sqlturbo.py <c-r>=DB<CR> <c-r>=DBF<CR> "<c-r>""<CR>
 let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
 
 " Execute comand
 vnoremap <c-e> y:read !<c-r>"<CR><CR>
 
-" Maintain the undo history even after the file is saved [1]
-set undofile
+" CD into current file's directory
+nnoremap <C-C><C-D> :cd %:p:h<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUILT IN FUZZY SEARCH [2]
