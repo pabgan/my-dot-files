@@ -78,7 +78,8 @@ vnoremap <c-e> y:read !<c-r>"<CR><CR>
 nnoremap <C-C><C-D> :cd %:p:h<CR>
 
 " Copy just this line in vimdiff
-nnoremap <C-Y> <C-W>lyy<C-W>hPjdd
+nnoremap <C-I><C-Y> <C-W>pyy<C-W>pPjdd
+nnoremap <C-I><C-C> vecClosed<ESC>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUILT IN FUZZY SEARCH [2]
