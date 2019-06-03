@@ -111,7 +111,7 @@ nnoremap \jn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
 " Surround text selected with a noformat block
 vnoremap \jn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
 " Insert CVS header
-nnoremap \jh :-1read $HOME/Plantillas/snippets/cvs-header.txt<CR>f:a
+nnoremap \jh :read $HOME/Plantillas/snippets/cvs-header.txt<CR>f:a
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AUTOMATIONS
