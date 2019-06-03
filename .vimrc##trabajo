@@ -68,7 +68,7 @@ nnoremap \ya gg"+yG''
 
 " Execute query and bring results
 vnoremap <C-S> msy'so<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>""<CR>
-nnoremap <C-S> msv/;<CR>y/;<CR>o<ESC>mapv/;<CR>:s/%/\\\%/g<CR>'av/;<CR>hyuu/;<CR>o<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>""<CR>
+nnoremap <C-S> msv/;<CR>y/;<CR>o<ESC>map'a0v/;<CR>:s/%/\\\%/e<CR>'av/;<CR>hy'av/;<CR>d<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>0"<CR>
 let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
 
 " Execute comand
