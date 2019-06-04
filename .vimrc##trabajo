@@ -113,7 +113,8 @@ vnoremap \jn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
 " Insert CVS header
 nnoremap \ich :read $HOME/Plantillas/snippets/cvs-header.txt<CR>
 " Insert Makefile if statement
-nnoremap \imi :read $HOME/Plantillas/snippets/makefile-if-var.sh<CR>
+nnoremap \imi :read $HOME/Plantillas/snippets/makefile-set-prop<CR>
+nnoremap \imp :read $HOME/Plantillas/snippets/makefile-print-var<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AUTOMATIONS
