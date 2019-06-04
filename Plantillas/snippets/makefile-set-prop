@@ -1,0 +1,42 @@
+.PHONY: var_status_0 var_status_1
+
+##### CONFIGURE HERE #######################
+module = dcpc
+path = ./tmp/
+file = log4j.properties
+property = log4j.logger.com.assia
+val0 = DEBUG, CONSOLE, ASSIA_FILE, QA_APPENDER
+val1 = TRACE, CONSOLE, ASSIA_FILE, QA_APPENDER
+### CONFIGURE UP HERE ######################
+
+var_status = $(shell grep -E "^$(property)[^.]" $(path)$(file) | cut -d"=" -f2)
+
+test: var_status_1
+
+var_status_0:
+	@echo ">>> Setting property to $(val0)"
+ifeq ($(var_status), $(val0))
+	@echo "... already set"
+else
+	sed 's/^$(property)[^.=]*= *.*/$(property) = $(val0)/' $(path)$(file)
+	ant -f /home/user/install/$(module)/build.xml restart
+	sleep 60
+endif
+
+var_status_1:
+	@echo ">>> Setting property to $(val1)"
+ifeq ($(var_status), $(val1))
+	@echo "... already set"
+else
+	sed 's/^$(property)[^.=]*= *.*/$(property) = $(val1)/' $(path)$(file)
+	ant -f /home/user/install/$(module)/build.xml restart
+	sleep 60
+endif
+
+backup:
+	cp $(path)$(file) $(file).original
+
+restore:
+	cp $(file).original $(path)/$(file)
+	ant -f /home/user/install/$(module)/build.xml restart
+	sleep 60
