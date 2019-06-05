@@ -52,13 +52,13 @@ set number relativenumber
 " KEYBINDINGS
 "
 " Toggle showing line numbers
-nmap <C-N><C-N> :set invnumber invrelativenumber<CR>
+nmap <C-S><C-N> :set invnumber invrelativenumber<CR>
 
 " Toggle showing a line to know where to wrap the text [3]
-nnoremap <C-C><C-C> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
+nnoremap <C-S><C-C> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 
 " Toggle showing metacharacters
-nmap <C-H><C-H> :set list!<CR>
+nmap <C-S><C-H> :set list!<CR>
 
 " Search for what it is selected pressing / twice
 vnoremap // y/<C-R>"<CR>
@@ -121,6 +121,11 @@ nnoremap \imp :read $HOME/Plantillas/snippets/makefile-print-var<CR>
 "
 " Autogenerate PDF for Markdown files
 autocmd BufWritePost *.mkd ! pandoc -o "<afile>.pdf" "<afile>"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS
+"
+"let g:slime_target = "tmux"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES
