@@ -17,6 +17,9 @@ alias ll='ls -lah'
 alias ..='cd ..'
 alias grep='grep --color=always'
 
+# Path for custom programs
+export PATH=$PATH:$HOME/.local/bin
+
 # CVS configuration
 export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
 alias cvs-update='cvs update -PAd'
