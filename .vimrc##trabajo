@@ -67,12 +67,13 @@ vnoremap // y/<C-R>"<CR>
 nnoremap \ya gg"+yG''
 
 " Execute query and bring results
-vnoremap <C-S> msy'so<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>""<CR>
-nnoremap <C-S> msv/;<CR>y/;<CR>o<ESC>map'a0v/;<CR>:s/%/\\\%/e<CR>'av/;<CR>hy'av/;<CR>d<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>0"<CR>
+vnoremap <C-X><C-Q> msy'so<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>""<CR>
+nnoremap <C-X><C-Q> msv/;<CR>y/;<CR>o<ESC>map'a0v/;<CR>:s/%/\\\%/e<CR>'av/;<CR>hy'av/;<CR>d<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>0"<CR>
 let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
 
 " Execute comand
-vnoremap <C-E> y:read !<C-R>"<CR><CR>
+vnoremap <C-X><C-S> y:read !<C-R>"<CR><CR>
+nnoremap <C-X><C-S> yip:read !<C-R>"<BS><CR>
 
 " CD into current file's directory
 nnoremap <C-C><C-D> :cd %:p:h<CR>
