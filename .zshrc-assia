@@ -1,6 +1,7 @@
 #!/bin/zsh
 #########################################################
 # ASSIA
+export CLASS='trabajo'
 export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
 
 # Alias for very frequent SSH connections
