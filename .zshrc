@@ -183,33 +183,44 @@ pid2() {
 #########################################################
 # Source specific files depending on host
 source_assiarc() {
-	echo "+ sourcing .assiarc"
-	source $HOME/.assiarc
+	echo "+ sourcing .zshrc-assia"
+	source $HOME/.zshrc-assia
 }
 source_pganuza-e7470rc() {
-	echo "+ sourcing .pganuza-e7470rc"
-	source $HOME/.pganuza-e7470rc
+	echo "+ sourcing .zshrc-pganuza-e7470"
+	source $HOME/.zshrc-pganuza-e7470
 }
 source_pganuza-dev() {
-	echo "+ sourcing .pganuza-dev"
-	source $HOME/.pganuza-dev
+	echo "+ sourcing .zshrc-pganuza-dev"
+	source $HOME/.zshrc-pganuza-dev
+}
+
+source_personal() {
+	echo "+ sourcing .zshrc-personal"
+	source $HOME/.zshrc-personal
 }
 
 hostname=$(hostname)
 if [ "$hostname" = "PGANUZA-E7470" ]; then
-	echo "sourcing files for PGANUZA-E7470"
+	echo "sourcing configuration for PGANUZA-E7470"
 	source_assiarc
 	source_pganuza-e7470rc
 elif [ "$hostname" = "pganuza-dev.assia-inc.com" ]; then 
-	echo "sourcing files for pganuza-dev"
+	echo "sourcing configuration for pganuza-dev"
 	source_assiarc
 	source_pganuza-dev
 elif [ "$hostname" = "maFalda" ]; then 
-	echo "sourcing files for maFalda"
+	echo "sourcing configuration for maFalda"
+	source_personal
 elif [ "$hostname" = "bagHeera" ]; then 
-	echo "sourcing files for bagHeera"
+	echo "sourcing configuration for bagHeera"
+	source_personal
 elif [ "$hostname" = "baloO" ]; then 
-	echo "sourcing files for baloO"
+	echo "sourcing configuration for baloO"
+	source_personal
+elif [ "$hostname" = "dumBo" ]; then 
+	echo "sourcing configuration for dumBo"
+	source_personal
 fi
 
 #########################################################
