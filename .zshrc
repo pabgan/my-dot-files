@@ -1,5 +1,6 @@
 # Turn off screen freezing [6]
 stty ixoff -ixon
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:$HOME/.scripts:$HOME/.local/bin
