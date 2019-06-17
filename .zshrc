@@ -116,7 +116,6 @@ _t()
     _todo "$@"
 }
 compdef _t t
-alias tr="vim $HOME/.todo-txt/recur.txt"
 
 tdate () {
 	date --iso-8601 --date=$1
