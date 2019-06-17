@@ -85,9 +85,5 @@ export COLOR_DONE=$LIGHT_GREY
 export TODOTXT_FINAL_FILTER='grep -vE "[0-9]+ x "'
 # Hide future tasks
 export TODOTXT_FINAL_FILTER="$TODOTXT_FINAL_FILTER | $TODO_ACTIONS_DIR/futureTasks"
-# Hide (M)olaría (nice-to-have) tasks
-export TODOTXT_FINAL_FILTER="$TODOTXT_FINAL_FILTER | grep -v '(M)'"
-# Hide tasks that (O)tros (others) must do
-export TODOTXT_FINAL_FILTER="$TODOTXT_FINAL_FILTER | grep -v '(O)'"
-# Hide (L)ectura tasks
-export TODOTXT_FINAL_FILTER="$TODOTXT_FINAL_FILTER | grep -v '(L)'"
+# Hide tasks that others must do, that will have tag like @-responsible
+export TODOTXT_FINAL_FILTER="$TODOTXT_FINAL_FILTER | grep -v -E '\S@-[^ ]+ '"
