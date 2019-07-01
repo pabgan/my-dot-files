@@ -108,6 +108,8 @@ set wildmenu
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SNIPPETS [2]
 "
+" Let me decide between snippets
+nnoremap \\ :-1read $HOME/Plantillas/snippets/
 " Insert a {code:}{code} block
 nnoremap \jc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>f:a
 " Surround text selected with a code block
@@ -132,7 +134,7 @@ autocmd BufWritePost *.mkd ! pandoc -o "<afile>.pdf" "<afile>"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 "
-"let g:slime_target = "tmux"
+let g:slime_target = "tmux"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES
