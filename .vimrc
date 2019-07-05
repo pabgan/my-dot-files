@@ -1,10 +1,6 @@
 " Enter the current millenium [2]
 set nocompatible
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
-syntax on
-
 " Recommended settings
 set showcmd		" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
@@ -17,11 +13,34 @@ set hlsearch		" Highlight all search matches
 set mouse=		" Disable mouse usage (all modes)
 set undofile		" Maintain the undo history even after the file is saved [1]
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" APPEARANCE
+" Vim5 and later versions support syntax highlighting. Uncommenting the next
+" line enables syntax highlighting by default.
+syntax on
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 set background=dark
 colorscheme ron
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BUILT IN FUZZY SEARCH [2]
+" 
+" Search down into subfolders recursively
+" Provides tab-completion for all file-related tasks
+set path+=**
+
+" Display all matching files when we tab complete
+set wildmenu
+
+" NOW WECAN:
+" - Hit tab to :find by partial match
+" - Use * to make it fuzzy
+"
+" THINGS TO CONSIDER:
+" - :b lets you autocomplete any open buffer
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STYLE SETTINGS
@@ -45,7 +64,7 @@ set laststatus=2
 " Underline current line
 set cursorline
 " Highlight current line
-hi CursorLine cterm=NONE ctermbg=black
+highlight CursorLine cterm=NONE ctermbg=DarkGrey
 
 " For line number to appear in the line selected and all the other ones
 " relative to it
@@ -86,24 +105,6 @@ nnoremap <C-C><C-D> :cd %:p:h<CR>
 " Copy just this line in vimdiff
 nnoremap <C-I><C-Y> <C-W>pyy<C-W>pPjdd
 nnoremap <C-I><C-C> vecClosed<ESC>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" BUILT IN FUZZY SEARCH [2]
-" 
-" Search down into subfolders recursively
-" Provides tab-completion for all file-related tasks
-set path+=**
-
-" Display all matching files when we tab complete
-set wildmenu
-
-" NOW WECAN:
-" - Hit tab to :find by partial match
-" - Use * to make it fuzzy
-"
-" THINGS TO CONSIDER:
-" - :b lets you autocomplete any open buffer
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SNIPPETS [2]
