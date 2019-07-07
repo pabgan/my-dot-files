@@ -199,6 +199,11 @@ source_personal() {
 	source $HOME/.zshrc-personal
 }
 
+source_dumBo() {
+	echo "+ sourcing .zshrc-dumBo"
+	source $HOME/.zshrc-dumBo
+}
+
 hostname=$(hostname)
 if [ "$hostname" = "PGANUZA-E7470" ]; then
 	echo "sourcing configuration for PGANUZA-E7470"
@@ -220,6 +225,7 @@ elif [ "$hostname" = "baloO" ]; then
 elif [ "$hostname" = "dumBo" ]; then 
 	echo "sourcing configuration for dumBo"
 	source_personal
+	source_dumBo
 fi
 
 #########################################################
