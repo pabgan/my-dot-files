@@ -107,7 +107,6 @@ znt_cd_hotlist=( "${znt_cd_hotlist[@]}" ~/.scripts ~/Documentos/Manuales/Linux\ 
 export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
-source $HOME/.local/bin/todo_completion
 
 alias t="todo.sh -a -d $HOME/.todo.cfg"
 _t()
@@ -189,10 +188,6 @@ source_pganuza-e7470rc() {
 	echo "+ sourcing .zshrc-pganuza-e7470"
 	source $HOME/.zshrc-pganuza-e7470
 }
-source_pganuza-dev() {
-	echo "+ sourcing .zshrc-pganuza-dev"
-	source $HOME/.zshrc-pganuza-dev
-}
 
 source_personal() {
 	echo "+ sourcing .zshrc-personal"
@@ -212,7 +207,6 @@ if [ "$hostname" = "PGANUZA-E7470" ]; then
 elif [ "$hostname" = "pganuza-dev.assia-inc.com" ]; then 
 	echo "sourcing configuration for pganuza-dev"
 	source_assiarc
-	source_pganuza-dev
 elif [ "$hostname" = "maFalda" ]; then 
 	echo "sourcing configuration for maFalda"
 	source_personal
