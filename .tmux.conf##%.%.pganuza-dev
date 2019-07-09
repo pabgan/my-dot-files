@@ -1,0 +1,51 @@
+##################################################################################
+# Useful bindings
+#
+# enable vim like keybindings
+set-window-option -g mode-keys vi
+# reload tmux conf with <C-B>r [1]
+bind r source-file ~/.tmux.conf \; display "Configuration reloaded."
+
+##################################################################################
+# Change prefix key for remote sessions so they can be accessed right away
+set -g prefix C-a
+
+##################################################################################
+# Enable locking [2]
+set -g lock-command vlock
+# Seconds; 0 = never
+setw -g lock-after-time 300
+bind L lock-session
+
+##################################################################################
+# Enable mouse [4]
+set -g mode-mouse on
+set -g mouse-resize-pane on
+set -g mouse-select-pane on
+set -g mouse-select-window on
+
+##################################################################################
+# Appearance
+#
+# You can see the list of colors with [3]:
+#     for i in {0..255}; do
+#         printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
+#     done
+# Make current window invert colors on status bar
+set -g status-bg colour6
+set -g status-fg black 
+set -g window-status-current-bg black
+set -g window-status-current-fg colour6
+
+# Make display of messages last longer
+set-option -g display-time 3000
+
+# Disable automatic renaming of windows, it is driving me nuts
+set-window-option -g automatic-rename off
+
+##################################################################################
+# SOURCES
+# [1]: https://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/
+# [2]: https://askubuntu.com/questions/22125/lock-tmux-session-with-vlock
+# [3]: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work
+# [4]: https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
