@@ -8,7 +8,7 @@ bind r source-file ~/.tmux.conf \; display "Configuration reloaded."
 
 ##################################################################################
 # Change prefix key for remote sessions so they can be accessed right away
-if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'set -g prefix C-v'
+if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'set -g prefix C-o'
 
 ##################################################################################
 # Enable locking [2]
