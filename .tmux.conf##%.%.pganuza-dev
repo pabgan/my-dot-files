@@ -7,8 +7,8 @@ set-window-option -g mode-keys vi
 bind r source-file ~/.tmux.conf \; display "Configuration reloaded."
 
 ##################################################################################
-# Change prefix key for remote sessions so they can be accessed right away
-set -g prefix C-a
+# Change prefix key for remote sessions so they can be accessed right away [5]
+set -g prefix C-o
 
 ##################################################################################
 # Enable locking [2]
@@ -49,3 +49,4 @@ set-window-option -g automatic-rename off
 # [2]: https://askubuntu.com/questions/22125/lock-tmux-session-with-vlock
 # [3]: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work
 # [4]: https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
+# [5]: https://coderwall.com/p/sojscq/a-case-against-c-a-in-tmux
