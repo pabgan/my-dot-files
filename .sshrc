@@ -45,6 +45,7 @@ alias m="tmux -S /tmp/pablomuxserver"
 
 # Others
 #alias diff='diff --color=auto'
+export LANG="en_EN.UTF-8"
 
 #########################################################
 # USEFUL FUNCTIONS
