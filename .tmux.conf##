@@ -26,6 +26,8 @@ if-shell '[ $(echo "$(tmux -V | cut -d" " -f2) >= 2.1" | bc) -eq 1 ]' \
 ##################################################################################
 # Appearance
 #
+# Fix VIM not having colors' dark variant [5]
+set -g default-terminal "screen-256color"
 # You can see the list of colors with [3]:
 #     for i in {0..255}; do
 #         printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
@@ -48,3 +50,4 @@ set-window-option -g automatic-rename off
 # [2]: https://askubuntu.com/questions/22125/lock-tmux-session-with-vlock
 # [3]: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work
 # [4]: https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
+# [5]: https://github.com/tmux/tmux/issues/699
