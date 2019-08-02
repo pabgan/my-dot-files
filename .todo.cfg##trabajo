@@ -85,3 +85,5 @@ export COLOR_DONE=$LIGHT_GREY
 export TODOTXT_FINAL_FILTER='grep -vE "[0-9]+ x "'
 # Hide future tasks
 export TODOTXT_FINAL_FILTER="$TODOTXT_FINAL_FILTER | $TODO_ACTIONS_DIR/futureTasks"
+# Hide deprecated tasks
+export TODOTXT_FINAL_FILTER="$TODOTXT_FINAL_FILTER | grep -v '@deprecated'"
