@@ -9,7 +9,7 @@ set smartcase		" Do smart case matching
 set incsearch		" Incremental search
 set hlsearch		" Highlight all search matches
 "set autowrite		" Automatically save before commands like :next and :make
-"set hidden		" Hide buffers when they are abandoned
+set hidden		" Hide buffers when they are abandoned
 set mouse=		" Disable mouse usage (all modes)
 set undofile		" Maintain the undo history even after the file is saved [1]
 
@@ -73,6 +73,7 @@ set number relativenumber
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEYBINDINGS
 "
+" ------ CONFIG ------------------------------------------------------------
 " Toggle showing line numbers
 nmap <C-S><C-N> :set invnumber invrelativenumber<CR>
 
@@ -82,12 +83,7 @@ nnoremap <C-S><C-C> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "
 " Toggle showing metacharacters
 nmap <C-S><C-H> :set list!<CR>
 
-" Search for what it is selected pressing / twice
-vnoremap // y/<C-R>"<CR>
-
-" Copy the whole file into the system clipboard
-nnoremap \ya gg"+yG''
-
+" ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
 vnoremap <C-X><C-Q> msy'so<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>""<CR>
 nnoremap <C-X><C-Q> msv/;<CR>y/;<CR>o<ESC>map'a0v/;<CR>:s/%/\\\%/ge<CR>'av/;<CR>hy'av/;<CR>d<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>0"<CR>
@@ -98,6 +94,18 @@ endif
 " Execute comand
 vnoremap <C-X><C-S> y:read !<C-R>"<CR><CR>
 nnoremap <C-X><C-S> yip:read !<C-R>"<BS><CR>
+
+" ------ USUAL FORMAT CHANGES ---------------------------------------------
+" Flatten
+nnoremap <C-C><C-F> vap:s/\s*\n/, /g<CR>
+nnoremap <C-C><C-U> :s/,\s*/\r/g<CR>
+
+" ------ OTHERS -----------------------------------------------------------
+" Search for what it is selected pressing / twice
+vnoremap // y/<C-R>"<CR>
+
+" Copy the whole file into the system clipboard
+nnoremap \ya gg"+yG''
 
 " CD into current file's directory
 nnoremap <C-C><C-D> :cd %:p:h<CR>
