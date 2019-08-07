@@ -11,7 +11,7 @@ set hlsearch		" Highlight all search matches
 "set autowrite		" Automatically save before commands like :next and :make
 "set hidden		" Hide buffers when they are abandoned
 set mouse=		" Disable mouse usage (all modes)
-set undofile		" Maintain the undo history even after the file is saved [1]
+"set undofile		" Maintain the undo history even after the file is saved [1]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " APPEARANCE
