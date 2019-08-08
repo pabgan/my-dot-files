@@ -11,6 +11,8 @@
     "gg": { "type": "scroll.top" },
     "G": { "type": "scroll.bottom" },
     "$": { "type": "scroll.end" },
+    "m": { "type": "mark.set.prefix" },
+    "¡": { "type": "mark.jump.prefix" },
     "f": { "type": "follow.start", "newTab": false },
     "F": { "type": "follow.start", "newTab": true, "background": false },
     "<S-Esc>": { "type": "addon.toggle.enabled" }
