@@ -43,6 +43,7 @@ set-option -g display-time 3000
 
 # Disable automatic renaming of windows, it is driving me nuts
 set-window-option -g automatic-rename off
+set-option -g allow-rename off
 
 ##################################################################################
 # SOURCES
