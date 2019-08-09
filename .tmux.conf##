@@ -19,7 +19,7 @@ bind L lock-session
 
 ##################################################################################
 # Enable mouse [4]
-if-shell '[ $(echo "$(tmux -V | cut -d" " -f2) >= 2.1" | bc) -eq 1 ]' \
+if-shell '[ $(echo "$(tmux -V | cut -d" " -f2 | sed "s/[a-z]//") >= 2.1" | bc) -eq 1 ]' \
     'set -g mouse on' \
     'set -g mode-mouse on; set -g mouse-resize-pane on; set -g mouse-select-pane on; set -g mouse-select-window on' 
 
