@@ -35,4 +35,4 @@ function dbconn() {
 }
 
 # Start a tmux session and name it after the ticket number
-alias mñ='tmux new -s $(pwd | grep -E "G-[0-9]+ " -o | sed "s/ //")'
+alias mt='tmux new -s $(pwd | grep -E "G-[0-9]+ " -o | sed "s/ //")'
