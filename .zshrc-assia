@@ -33,3 +33,6 @@ function dbconn() {
 		sqlcl $DB/assia@db-ref.assia-inc.com:1521:dslo2
 	fi
 }
+
+# Start a tmux session and name it after the ticket number
+alias mñ='tmux new -s $(pwd | grep -E "G-[0-9]+ " -o | sed "s/ //")'
