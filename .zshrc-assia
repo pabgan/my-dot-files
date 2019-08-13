@@ -36,7 +36,7 @@ function dbconn() {
 
 # Start a tmux session and name it after the ticket number
 get_ticket_number_from_path(){
-	ticket=$(pwd | grep -E "G-[0-9]+ " -o | sed "s/ //")
+	ticket=$(pwd | grep -E "G-[0-9]+( |$)" -o | sed "s/ //")
 }
 mt(){
 	get_ticket_number_from_path
