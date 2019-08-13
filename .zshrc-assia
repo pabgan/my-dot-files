@@ -15,7 +15,7 @@ alias c='sshrc user@demo-c.assia-inc.com'
 # CVS configuration
 export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
 alias cvs-update='cvs update -PAd'
-alias cvs-discard_changes='cvs_update -C'
+alias cvs-discard_changes='cvs-update -C'
 alias cvs-checkout='cvs co -r'
 
 # Download SQL files from a release
@@ -35,4 +35,14 @@ function dbconn() {
 }
 
 # Start a tmux session and name it after the ticket number
-alias mt='tmux new -s $(pwd | grep -E "G-[0-9]+ " -o | sed "s/ //")'
+get_ticket_number_from_path(){
+	ticket=$(pwd | grep -E "G-[0-9]+ " -o | sed "s/ //")
+}
+mt(){
+	get_ticket_number_from_path
+	tmux new -s $ticket
+}
+vimt(){
+	get_ticket_number_from_path
+	vim $ticket.md
+}
