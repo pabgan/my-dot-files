@@ -85,12 +85,14 @@ nmap <C-S><C-H> :set list!<CR>
 " ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
 vnoremap <C-X><C-Q> msy'so<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>""<CR>
-nnoremap <C-X><C-Q> msv/;<CR>y/;<CR>o<ESC>map'a0v/;<CR>:s/%/\\\%/ge<CR>'av/;<CR>hy'av/;<CR>d<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>0"<CR>
+" nnoremap <C-X><C-Q> msv/;<CR>y/;<CR>o<ESC>map'a0v/;<CR>:s/%/\\\%/ge<CR>'av/;<CR>hy'av/;<CR>d<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>0"<CR>
+nnoremap <C-X><C-Q> vipyvip$<ESC>o<ESC>map'a0v/;<CR>:s/%/\\\%/ge<CR>'av/;<CR>hy'av/;<CR>d<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>0"<CR>
+" nnoremap <C-X><C-Q> vipyvip$:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>0"<CR>
 if $CLASS == "trabajo"
 	let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
 endif
 
-" Execute comand
+" Execute command
 vnoremap <C-X><C-S> y:read !<C-R>"<CR><CR>
 nnoremap <C-X><C-S> yip:read !<C-R>"<BS><CR>
 
@@ -126,6 +128,10 @@ vnoremap \jc d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pkf:a
 nnoremap \jn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
 " Surround text selected with a noformat block
 vnoremap \jn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
+" Surround with thumbnail
+vnoremap \jt d:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
+" Make it no format
+nnoremap \j{ wBi{{<ESC>Ea}}<ESC>
 " Insert CVS header
 nnoremap \ich :read $HOME/Plantillas/snippets/cvs-header.txt<CR>
 " Insert Makefile snippets
