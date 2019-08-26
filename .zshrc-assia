@@ -46,3 +46,7 @@ vimt(){
 	get_ticket_number_from_path
 	vim $ticket.md
 }
+
+# Currently working
+export DB='demo_b'
+export DBF='plain'

@@ -55,9 +55,7 @@ addics() {
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" ------pganuza-e7470rc-------- ~/Trabajo/KnowHow/wiki ~/Workspace/expresse/dsloExpresse/releases ~/Workspace/system_level_test_plan/src/ ~/Workspace/qa/naming_conventions_test/ ~/Trabajo/Releases/QA )
 
 # Currently working
-export DB='telkom_sa_a'
-export DBF='plain'
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" ~/Trabajo/Releases/Generic/G-5.3.2 '~/Trabajo/Releases/Telkom South Africa/TSA-5.3.2' )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" ~/Trabajo/Releases/Generic/G-5.3.2 )
 
 # Just throw a fast query 
 alias query='sqlturbo.py $DB $DBF'
