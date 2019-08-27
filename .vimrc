@@ -118,7 +118,7 @@ nnoremap <C-I><C-C> vecClosed<ESC>
 " SNIPPETS [2]
 "
 " Let me decide between snippets
-nnoremap \\ :-1read $HOME/Plantillas/snippets/
+nnoremap \\ :read $HOME/Plantillas/snippets/
 " Insert a {code:}{code} block
 nnoremap \jc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>f:a
 " Surround text selected with a code block
@@ -137,6 +137,12 @@ nnoremap \ich :read $HOME/Plantillas/snippets/cvs-header.txt<CR>
 nnoremap \iM :read $HOME/Plantillas/snippets/makefile-
 " Insert Markdown snippets
 nnoremap \im :read $HOME/Plantillas/snippets/markdown-
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" DEVELOPMENT TOOLS
+"
+" Look in the current directory for "tags", and work up the tree towards root until one is found [4]
+set tags=./.tags;/
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AUTOMATIONS
@@ -160,6 +166,7 @@ endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES
-" 1. https://opensource.com/article/18/9/vi-editor-productivity-powerhouse
-" 2. https://www.youtube.com/watch?v=XA2WjJbmmoM / https://github.com/changemewtf/no_plugins/
-" 3. https://vi.stackexchange.com/questions/17573/function-to-toggle-set-colorcolumn
+" [1] https://opensource.com/article/18/9/vi-editor-productivity-powerhouse
+" [2] https://www.youtube.com/watch?v=XA2WjJbmmoM / https://github.com/changemewtf/no_plugins/
+" [3] https://vi.stackexchange.com/questions/17573/function-to-toggle-set-colorcolumn
+" [4] https://stackoverflow.com/questions/563616/vim-and-ctags-tips-and-tricks
