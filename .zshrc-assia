@@ -48,5 +48,5 @@ vimt(){
 }
 
 # Currently working
-export DB='demo_b'
+export DB='pldt_a'
 export DBF='plain'
