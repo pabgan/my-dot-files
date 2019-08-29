@@ -99,7 +99,7 @@ bindkey "^G" znt-cd-widget
 zle -N znt-kill-widget
 bindkey "^Y" znt-kill-widget
 # Add some useful paths to the hotlist for n-cd
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" ~/.scripts ~/Documentos/Manuales/Linux\ Knowledge\ Base)
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/.scripts' '~/Documentos/Manuales/Linux\ Knowledge\ Base' )
 
 #########################################################
 # TODO.TXT-CLI CONFIGURATION
