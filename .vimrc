@@ -86,6 +86,8 @@ nmap <C-S><C-H> :set list!<CR>
 " Execute query and bring results
 vnoremap <C-X><C-Q> msy'so<ESC>map'a0v/;<CR>:s/%/\\\%/ge<CR>'av/;<CR>hy'av/;<CR>d<ESC>:read !~/.scripts/sqlturbo.py -u <C-R>=DB<CR> -f <C-R>=DBF<CR> "<C-R>""<CR>
 nnoremap <C-X><C-Q> vipyvip$<ESC>o<ESC>map'a0v/;<CR>:s/%/\\\%/ge<CR>'av/;<CR>hy'av/;<CR>d<ESC>:read !~/.scripts/sqlturbo.py -u <C-R>=DB<CR> -f <C-R>=DBF<CR> "<C-R>0"<CR>
+" desc(ribe) table or view
+nnoremap <C-X><C-D> wbidesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
 
 if $CLASS == "trabajo"
 	let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
@@ -129,6 +131,7 @@ nnoremap \jn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
 vnoremap \jn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
 " Surround with thumbnail
 vnoremap \jt d:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
+nnoremap \jt WBdW:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
 " Make it no format
 nnoremap \j{ wBi{{<ESC>Ea}}<ESC>
 " Insert CVS header
