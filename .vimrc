@@ -131,7 +131,7 @@ nnoremap \jn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
 vnoremap \jn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
 " Surround with thumbnail
 vnoremap \jt d:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
-nnoremap \jt WBdW:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
+nnoremap \jt WBdW:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>pjddk
 " Make it no format
 nnoremap \j{ wBi{{<ESC>Ea}}<ESC>
 " Insert CVS header
