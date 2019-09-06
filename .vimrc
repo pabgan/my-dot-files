@@ -72,6 +72,9 @@ set number relativenumber
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEYBINDINGS
 "
+" Make wildchar work within keybindings
+set wcm=<C-Z>
+
 " ------ CONFIG ------------------------------------------------------------
 " Toggle showing line numbers
 nmap <C-S><C-N> :set invnumber invrelativenumber<CR>
@@ -117,29 +120,32 @@ nnoremap <C-I><C-Y> <C-W>pyy<C-W>pPjdd
 nnoremap <C-I><C-C> vecClosed<ESC>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SNIPPETS [2]
+" SNIPPETS and TEMPLATES [2]
 "
-" Let me decide between snippets
-nnoremap \\ :read $HOME/Plantillas/snippets/
+" Let me decide between snippets (Insert Snippet)
+nnoremap \is<TAB> :read $HOME/Plantillas/snippets/<C-Z>
 " Insert a {code:}{code} block
-nnoremap \jc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>f:a
-" Surround text selected with a code block
-vnoremap \jc d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pkf:a
+nnoremap \isjc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>f:a
+vnoremap \isjc d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pkf:a
 " Insert a {noformat}{noformat} block
-nnoremap \jn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
-" Surround text selected with a noformat block
-vnoremap \jn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
-" Surround with thumbnail
-vnoremap \jt d:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
-nnoremap \jt WBdW:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>pjddk
+nnoremap \isjn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
+vnoremap \isjn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
 " Make it no format
-nnoremap \j{ wBi{{<ESC>Ea}}<ESC>
+nnoremap \isj{ wBi{{<ESC>Ea}}<ESC>
+" Insert thumbnail
+vnoremap \isjt d:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
+nnoremap \isjt WBdW:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>pjddk
+" Insert attachment
+vnoremap \isja d:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lp
+nnoremap \isja WBdW:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lpjddk
 " Insert CVS header
-nnoremap \ich :read $HOME/Plantillas/snippets/cvs-header.txt<CR>
+nnoremap \isch :read $HOME/Plantillas/snippets/cvs-header.txt<CR>
 " Insert Makefile snippets
-nnoremap \iM :read $HOME/Plantillas/snippets/makefile-
+nnoremap \isM<TAB> :read $HOME/Plantillas/snippets/makefile-<C-Z>
 " Insert Markdown snippets
-nnoremap \im :read $HOME/Plantillas/snippets/markdown-
+nnoremap \ism<TAB> :read $HOME/Plantillas/snippets/markdown-<C-Z>
+" Let me decide between templates (Insert Template)
+nnoremap \it<TAB> :read $HOME/Plantillas/ASSIA/<C-Z>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DEVELOPMENT TOOLS
