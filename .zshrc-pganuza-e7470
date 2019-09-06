@@ -1,7 +1,10 @@
 #!/bin/zsh
 #########################################################
 # PGANUZA-E7470
+#
+# TODO.TXT stuff
 source $HOME/.local/bin/todo_completion
+alias tp='todo.sh -d ~/.todo.cfg##personal'
 
 #export JAVA_HOME="/usr/java/jdk1.8.0_73/"
 export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib:$LD_LIBRARY_PATH
