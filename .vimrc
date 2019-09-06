@@ -122,6 +122,7 @@ nnoremap <C-I><C-C> vecClosed<ESC>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SNIPPETS and TEMPLATES [2]
 "
+"" JIRA
 " Let me decide between snippets (Insert Snippet)
 nnoremap \is<TAB> :read $HOME/Plantillas/snippets/<C-Z>
 " Insert a {code:}{code} block
@@ -138,12 +139,24 @@ nnoremap \isjt WBdW:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
 " Insert attachment
 vnoremap \isja d:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lp
 nnoremap \isja WBdW:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lpjddk
+" Insert result tag
+nnoremap \isjp :read $HOME/Plantillas/snippets/jira-pass.txt<CR>
+nnoremap \isjf :read $HOME/Plantillas/snippets/jira-fail.txt<CR>
+nnoremap \isjs :read $HOME/Plantillas/snippets/jira-skipped.txt<CR>
+
+"" CVS
 " Insert CVS header
 nnoremap \isch :read $HOME/Plantillas/snippets/cvs-header.txt<CR>
+
+"" Makefile
 " Insert Makefile snippets
 nnoremap \isM<TAB> :read $HOME/Plantillas/snippets/makefile-<C-Z>
+
+"" Markdown
 " Insert Markdown snippets
 nnoremap \ism<TAB> :read $HOME/Plantillas/snippets/markdown-<C-Z>
+
+"" Templates
 " Let me decide between templates (Insert Template)
 nnoremap \it<TAB> :read $HOME/Plantillas/ASSIA/<C-Z>
 
