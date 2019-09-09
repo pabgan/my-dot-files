@@ -30,7 +30,11 @@ scrum_report() {
 	for d ({$days_to_report..0}) do
 		grep -E "^x $(date --iso-8601 --date="$d days ago")" ~/.todo-txt/trabajo-done.txt ~/.todo-txt/trabajo-todo.txt | grep -Ev $ommited_tags | sed 's/.*:x //g'
 	done
-	
+
+	echo "\n===================== COMMITS ======================="
+	# Execute a command from another directory [1]
+	( cd ~/Workspace/expresse/dsloExpresseAdditional/tools/releaseTestingTools/system_level_test_plan ; cvs log -d \>"$days_to_report day ago" 2>/dev/null | grep "author: pganuza" -A1 | grep "QA-" | sort| uniq )
+
 	echo "\n================= OTHER THINGS DONE ================="
 	jrnl -from "\"$days_to_report days ago\""
 
@@ -65,3 +69,7 @@ znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/PLDT/PL-5.3.2' )
 
 # Just throw a fast query 
 alias query='sqlturbo.py -u $DB -f $DBF'
+
+################################################
+# SOURCES
+# [1] https://superuser.com/questions/271986/execute-a-command-from-another-directory-in-bash#271992
