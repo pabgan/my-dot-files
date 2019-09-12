@@ -156,7 +156,7 @@ nnoremap \isM<TAB> :read $HOME/Plantillas/snippets/makefile-<C-Z>
 " Underline line with =
 nnoremap \ism= yypv$r=
 " Underline line with -
-nnoremap \ism= yypv$r-
+nnoremap \ism- yypv$r-
 " Insert Markdown snippets
 nnoremap \ism<TAB> :read $HOME/Plantillas/snippets/markdown-<C-Z>
 
