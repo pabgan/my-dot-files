@@ -120,7 +120,7 @@ nnoremap <C-I><C-Y> <C-W>pyy<C-W>pPjdd
 nnoremap <C-I><C-C> vecClosed<ESC>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SNIPPETS and TEMPLATES [2]
+" SNIPPETS and TEMPLATES and FORMAT automations [2]
 "
 "" JIRA
 " Let me decide between snippets (Insert Snippet)
@@ -153,6 +153,10 @@ nnoremap \isch :read $HOME/Plantillas/snippets/cvs-header.txt<CR>
 nnoremap \isM<TAB> :read $HOME/Plantillas/snippets/makefile-<C-Z>
 
 "" Markdown
+" Underline line with =
+nnoremap \ism= yypv$r=
+" Underline line with -
+nnoremap \ism= yypv$r-
 " Insert Markdown snippets
 nnoremap \ism<TAB> :read $HOME/Plantillas/snippets/markdown-<C-Z>
 
