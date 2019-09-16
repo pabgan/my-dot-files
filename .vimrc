@@ -122,47 +122,48 @@ nnoremap <C-I><C-C> vecClosed<ESC>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SNIPPETS and TEMPLATES and FORMAT automations [2]
 "
-"" JIRA
 " Let me decide between snippets (Insert Snippet)
-nnoremap \is<TAB> :read $HOME/Plantillas/snippets/<C-Z>
+nnoremap \s<TAB> :read $HOME/Plantillas/snippets/<C-Z>
+
+"" JIRA
 " Insert a {code:}{code} block
-nnoremap \isjc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>f:a
-vnoremap \isjc d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pkf:a
+nnoremap \sc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>f:a
+vnoremap \sc d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pkf:a
 " Insert a {noformat}{noformat} block
-nnoremap \isjn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
-vnoremap \isjn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
+nnoremap \sn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
+vnoremap \sn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
 " Make it no format
-nnoremap \isj{ wBi{{<ESC>Ea}}<ESC>
+nnoremap \s{ wBi{{<ESC>Ea}}<ESC>
 " Insert thumbnail
-vnoremap \isjt d:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
-nnoremap \isjt WBdW:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>pjddk
+vnoremap \st d:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
+nnoremap \st WBdW:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>pjddk
 " Insert attachment
-vnoremap \isja d:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lp
-nnoremap \isja WBdW:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lpjddk
+vnoremap \sa d:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lp
+nnoremap \sa WBdW:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lpjddk
 " Insert result tag
-nnoremap \isjp :read $HOME/Plantillas/snippets/jira-pass.txt<CR>
-nnoremap \isjf :read $HOME/Plantillas/snippets/jira-fail.txt<CR>
-nnoremap \isjs :read $HOME/Plantillas/snippets/jira-skipped.txt<CR>
+nnoremap \sp :read $HOME/Plantillas/snippets/jira-pass.txt<CR>
+nnoremap \sf :read $HOME/Plantillas/snippets/jira-fail.txt<CR>
+nnoremap \ss :read $HOME/Plantillas/snippets/jira-skipped.txt<CR>
 
 "" CVS
 " Insert CVS header
-nnoremap \isch :read $HOME/Plantillas/snippets/cvs-header.txt<CR>
-
-"" Makefile
-" Insert Makefile snippets
-nnoremap \isM<TAB> :read $HOME/Plantillas/snippets/makefile-<C-Z>
+nnoremap \sh :read $HOME/Plantillas/snippets/cvs-header.txt<CR>
 
 "" Markdown
 " Underline line with =
-nnoremap \ism= yypv$r=
+nnoremap \s= yypv$r=
 " Underline line with -
-nnoremap \ism- yypv$r-
-" Insert Markdown snippets
-nnoremap \ism<TAB> :read $HOME/Plantillas/snippets/markdown-<C-Z>
+nnoremap \s- yypv$r-
+" Emphasize it
+nnoremap \s* wbi*<ESC>Ea*<ESC>
+vnoremap \s* A*<ESC>`<i*<ESC>`>l
+" Emphasize it more
+nnoremap \s** wbi**<ESC>Ea**<ESC>
+vnoremap \s** A**<ESC>`<i**<ESC>`>ll
 
 "" Templates
 " Let me decide between templates (Insert Template)
-nnoremap \it<TAB> :read $HOME/Plantillas/ASSIA/<C-Z>
+nnoremap \t<TAB> :read $HOME/Plantillas/ASSIA/<C-Z>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DEVELOPMENT TOOLS
