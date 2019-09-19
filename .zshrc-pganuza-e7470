@@ -36,7 +36,7 @@ scrum_report() {
 	( cd ~/Workspace/expresse/dsloExpresseAdditional/tools/releaseTestingTools/system_level_test_plan ; cvs log -d \>"$days_to_report day ago" 2>/dev/null | grep "author: pganuza" -A1 | grep "QA-" | sort| uniq )
 
 	echo "\n================= OTHER THINGS DONE ================="
-	jrnl -from "\"$days_to_report days ago\""
+	jrnl -from "\"$days_to_report days ago at 15:50\""
 
 	echo "================== THINGS TO TELL ==================="
 	t ls @scrum | head -n -2
