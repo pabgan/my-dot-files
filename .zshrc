@@ -213,6 +213,7 @@ elif [ "$hostname" = "maFalda" ]; then
 elif [ "$hostname" = "bagHeera" ]; then 
 	echo "sourcing configuration for bagHeera"
 	source_personal
+	source /usr/share/doc/fzf/examples/key-bindings.zsh
 elif [ "$hostname" = "baloO" ]; then 
 	echo "sourcing configuration for baloO"
 	source_personal
@@ -221,6 +222,9 @@ elif [ "$hostname" = "dumBo" ]; then
 	source_personal
 	source_dumBo
 fi
+
+# This needs to be the last thing in this config file
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #########################################################
 # SOURCES
