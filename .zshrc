@@ -58,7 +58,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(history pass sudo zsh-navigation-tools extract svn-fast-info jira)
+plugins=(history pass sudo zsh-navigation-tools extract svn-fast-info jira zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -222,9 +222,6 @@ elif [ "$hostname" = "dumBo" ]; then
 	source_personal
 	source_dumBo
 fi
-
-# This needs to be the last thing in this config file
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 #########################################################
 # SOURCES
