@@ -124,7 +124,7 @@ nnoremap <C-I><C-C> vecClosed<ESC>
 "
 "" Common
 " Jump to next edit point
-inoremap <Space><TAB> <ESC>/<++><Enter>"_c4l
+"inoremap <TAB><Space> <ESC>/<++><Enter>"_c4l
 
 " Let me decide between snippets (Insert Snippet)
 nnoremap \s<TAB> :read $HOME/Plantillas/snippets/<C-Z>
@@ -148,7 +148,7 @@ nnoremap \sa WBdW:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lp
 nnoremap \sp :read $HOME/Plantillas/snippets/jira-pass.txt<CR>
 nnoremap \sf :read $HOME/Plantillas/snippets/jira-fail.txt<CR>
 nnoremap \ss :read $HOME/Plantillas/snippets/jira-skipped.txt<CR>
-" Inset "verified" sentence
+" Insert "verified" sentence
 nnoremap \sv :read $HOME/Plantillas/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=ENV<ENTER><ESC>n"_c4l<C-R>=VER<ENTER><ESC>ggdd
 
 "" CVS
