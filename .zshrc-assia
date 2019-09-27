@@ -50,7 +50,7 @@ vimt(){
 # Currently working
 export JIRA_URL='https://assia-inc.atlassian.net'
 export JIRA_PREFIX='DSLE-'
-export ENV='demo-b'
+export ENV='support-pldt-a'
 export VER='5.3.2'
-export DB='demo_b'
+export DB='pldta_a'
 export DBF='plain'
