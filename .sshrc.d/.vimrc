@@ -44,12 +44,6 @@ set wildmenu
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STYLE SETTINGS
-set noexpandtab
-if $CLASS == "trabajo"
-	autocmd FileType python setlocal expandtab smarttab shiftwidth=4
-	autocmd FileType java setlocal expandtab smarttab shiftwidth=4
-	autocmd FileType shell setlocal expandtab smarttab shiftwidth=4
-endif
 filetype indent plugin on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
