@@ -7,7 +7,7 @@ fi
 
 EDITOR=vim
 if [[ $(hostname) =~ 'assia-inc.com' ]]; then
-	TERM='builtin_xterm'
+	unset TERM
 fi
 
 #########################################################
