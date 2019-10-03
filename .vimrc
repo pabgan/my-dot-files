@@ -124,26 +124,28 @@ nnoremap <C-I><C-C> vecClosed<ESC>
 "
 "" Common
 " Jump to next edit point
-"inoremap <TAB><Space> <ESC>/<++><Enter>"_c4l
+inoremap <TAB><Space> <ESC>/<++><Enter>"_c4l
 
 " Let me decide between snippets (Insert Snippet)
 nnoremap \s<TAB> :read $HOME/Plantillas/snippets/<C-Z>
 
 "" JIRA
+" Insert SCENARIO divider
+nnoremap \sS :-1read $HOME/Plantillas/snippets/jira-scenario.txt<CR>/<++><Enter>"_c4l
 " Insert a {code:}{code} block
-nnoremap \sc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>f:a
-vnoremap \sc d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pkf:a
+nnoremap \sc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>/<++><Enter>"_c4l
+vnoremap \sc d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pk/<++><Enter>"_c4l
 " Insert a {noformat}{noformat} block
 nnoremap \sn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
 vnoremap \sn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
 " Make it no format
 nnoremap \s{ wBi{{<ESC>Ea}}<ESC>
 " Insert thumbnail
-vnoremap \st d:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
 nnoremap \st WBdW:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>pjddk
+vnoremap \st d:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
 " Insert attachment
-vnoremap \sa d:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lp
 nnoremap \sa WBdW:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lpjddk
+vnoremap \sa d:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lp
 " Insert result tag
 nnoremap \sp :read $HOME/Plantillas/snippets/jira-pass.txt<CR>
 nnoremap \sf :read $HOME/Plantillas/snippets/jira-fail.txt<CR>
