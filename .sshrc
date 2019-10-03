@@ -6,6 +6,9 @@ if [ -f /etc/bashrc ]; then
 fi
 
 EDITOR=vim
+if [[ $(hostname) =~ 'assia-inc.com' ]]; then
+	TERM='builtin_xterm'
+fi
 
 #########################################################
 # VARIOUS CONFIGURATIONS
