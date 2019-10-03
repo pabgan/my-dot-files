@@ -7,7 +7,7 @@ fi
 
 EDITOR=vim
 if [[ $(hostname) =~ 'assia-inc.com' ]]; then
-	unset TERM
+	export TERM='xterm-256color'
 fi
 
 #########################################################
