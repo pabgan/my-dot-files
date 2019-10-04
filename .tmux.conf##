@@ -47,6 +47,9 @@ set-option -g status-left-length 13
 set-window-option -g automatic-rename off
 set-option -g allow-rename off
 
+# Fix slow ESC in Neovim [6]
+set -sg escape-time 0
+
 ##################################################################################
 # SOURCES
 # [1]: https://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/
@@ -54,3 +57,4 @@ set-option -g allow-rename off
 # [3]: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work
 # [4]: https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
 # [5]: https://github.com/tmux/tmux/issues/699
+# [6]: https://www.reddit.com/r/neovim/comments/35h1g1/neovim_slow_to_respond_after_esc/
