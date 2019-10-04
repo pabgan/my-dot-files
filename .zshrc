@@ -92,7 +92,7 @@ fi
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias n="neovim"
+alias n="nvim"
 
 #########################################################
 # PLUGINS CONFIGURATION
