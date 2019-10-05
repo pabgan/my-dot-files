@@ -99,8 +99,8 @@ alias n="nvim"
 # Enable n-cd and n-kill [5]
 zle -N znt-cd-widget
 bindkey "^G" znt-cd-widget
-zle -N znt-kill-widget
-bindkey "^Y" znt-kill-widget
+#zle -N znt-kill-widget
+#bindkey "^Y" znt-kill-widget
 # Add some useful paths to the hotlist for n-cd
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/.scripts' '~/Documentos/Manuales/Linux Knowledge Base/' )
 
