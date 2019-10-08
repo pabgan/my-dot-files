@@ -62,7 +62,10 @@ highlight CursorLine cterm=NONE ctermbg=DarkGrey
 
 " For line number to appear in the line selected and all the other ones
 " relative to it
-set number relativenumber
+set number 
+if v:version > 703 
+	set relativenumber
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEYBINDINGS
