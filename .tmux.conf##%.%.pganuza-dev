@@ -12,7 +12,7 @@ set -g prefix C-o
 
 ##################################################################################
 # Enable locking [2]
-set -g lock-command vlock
+set -g lock-command tlock
 # Seconds; 0 = never
 setw -g lock-after-time 300
 bind L lock-session
