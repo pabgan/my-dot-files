@@ -92,7 +92,7 @@ fi
 # Example aliases
 alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias n="nvim"
+alias e=$EDITOR
 
 #########################################################
 # PLUGINS CONFIGURATION
@@ -180,6 +180,15 @@ pid2() {
 		[[ "$(< $i)" = *\((${(j:|:)~@})\)* ]] && echo $i:h:t
 	done
 }
+
+# Search a file with fzf and then open it in an editor
+#alias sc='fzf | xargs $EDITOR'
+open-file-widget() {
+	BUFFER="$EDITOR $BUFFER"
+	zle accept-line
+}
+zle -N open-file-widget
+bindkey '^O' open-file-widget
 
 #########################################################
 # Source specific files depending on host

@@ -42,9 +42,9 @@ mt(){
 	get_ticket_number_from_path
 	tmux new -s $ticket -n Notas
 }
-vimt(){
+et(){
 	get_ticket_number_from_path
-	vim $ticket.md
+	$EDITOR $ticket.md
 }
 
 # Currently working
