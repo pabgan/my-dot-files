@@ -36,7 +36,7 @@ set -g default-terminal "xterm-256color"
 if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -g status-style bg=colour6' 'setw -g status-style bg=green'
 setw -ag status-style fg=black 
 setw -ag window-status-current-style bg=black
-if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -ag window-status-current-style fg=colour6' 'setw -ag window-status-current-style fg=green'
+if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -ag window-status-current-style fg=colour6; setw -ag pane-active-border-style fg=colour6' 'setw -ag window-status-current-style fg=green'
 
 # Make display of messages last longer
 set-option -g display-time 3000
