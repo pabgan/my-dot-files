@@ -4,6 +4,7 @@ stty ixoff -ixon
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:$HOME/.scripts:$HOME/.local/bin
+export XDG_CONFIG_HOME=$HOME/.config
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -111,10 +112,10 @@ export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 
-alias t="todo.sh -a -d $HOME/.todo.cfg"
+alias t="todo.sh -a -d $XDG_CONFIG_HOME/todo-txt/todo.cfg"
 _t()
 {
-    local _todo_sh="todo.sh -d $HOME/.todo.cfg"
+    local _todo_sh="todo.sh -d $XDG_CONFIG_HOME/todo-txt/todo.cfg"
     _todo "$@"
 }
 compdef _t t
