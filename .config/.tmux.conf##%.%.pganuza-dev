@@ -36,6 +36,7 @@ set -g status-bg colour6
 set -g status-fg black 
 set -g window-status-current-bg black
 set -g window-status-current-fg colour6
+set pane-active-border-fg colour6
 
 # Make display of messages last longer
 set-option -g display-time 3000
