@@ -70,9 +70,6 @@ znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/Deutsche Telekom/DT-
 # Just throw a fast query 
 alias query='sqlturbo.py -u $DB -f $DBF'
 
-# Activate fzf shortcuts
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 ################################################
 # SOURCES
 # [1] https://superuser.com/questions/271986/execute-a-command-from-another-directory-in-bash#271992

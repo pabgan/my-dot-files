@@ -188,8 +188,6 @@ open-file-widget() {
 	BUFFER="$EDITOR $BUFFER"
 	zle accept-line
 }
-zle -N open-file-widget
-bindkey '^O' open-file-widget
 
 #########################################################
 # Source specific files depending on host
@@ -238,6 +236,12 @@ fi
 
 # Enable VIM mode
 bindkey -v
+
+# Activate fzf shortcuts
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+zle -N open-file-widget
+bindkey '^O' open-file-widget
+
 
 #########################################################
 # SOURCES
