@@ -236,6 +236,9 @@ elif [ "$hostname" = "dumBo" ]; then
 	source_dumBo
 fi
 
+# Enable VIM mode
+bindkey -v
+
 #########################################################
 # SOURCES
 # 1. https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
