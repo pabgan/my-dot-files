@@ -128,9 +128,9 @@ tdate () {
 # VARIOUS CONFIGURATIONS
 #
 # Tmux
-alias m="tmux"
-alias mn="tmux new -s"
-alias ma="tmux attach -t"
+alias m="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
+alias mn="m new -s"
+alias ma="m attach -t"
 
 # sshrc
 # Make sshrc autocomplete hosts like ssh does [2]
