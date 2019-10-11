@@ -234,9 +234,6 @@ elif [ "$hostname" = "dumBo" ]; then
 	source_dumBo
 fi
 
-# Enable VIM mode
-bindkey -v
-
 # Activate fzf shortcuts
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 zle -N open-file-widget
