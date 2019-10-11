@@ -89,7 +89,7 @@ nmap <C-S><C-H> :set list!<CR>
 " Execute query and bring results
 nnoremap <C-X><C-Q> yap}pjvip:s/%/\\\%/ge<CR>vipd:read !~/.scripts/sqlturbo.py -u <C-R>=DB<CR> -f <C-R>=DBF<CR> "<C-R>0"<CR>
 " desc(ribe) table or view
-nnoremap <C-X><C-D> veb<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
+nnoremap <C-X><C-D> viwb<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
 
 if $CLASS == "trabajo"
 	let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
