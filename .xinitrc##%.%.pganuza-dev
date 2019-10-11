@@ -1,0 +1,4 @@
+xrandr --output DP-1-1 --auto --above eDP-1
+~/.fehbg &
+~/.scripts/set_xinput_alps-e7470.sh
+/home/pganuza/.scripts/dwm-launch.sh
