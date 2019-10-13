@@ -94,6 +94,8 @@ fi
 alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e=$EDITOR
+zle -N open-file-widget
+bindkey '^O' open-file-widget
 
 #########################################################
 # PLUGINS CONFIGURATION
@@ -210,35 +212,38 @@ source_dumBo() {
 	source $HOME/.zshrc-dumBo
 }
 
+source_todo_completion() {
+	source $HOME/.local/bin/todo_completion
+}
+
 hostname=$(hostname)
 if [ "$hostname" = "PGANUZA-E7470" ]; then
 	echo "sourcing configuration for PGANUZA-E7470"
 	source_assiarc
+	source_todo_completion
 	source_pganuza-e7470rc
 elif [ "$hostname" = "pganuza-dev.assia-inc.com" ]; then 
 	echo "sourcing configuration for pganuza-dev"
 	source_assiarc
 elif [ "$hostname" = "maFalda" ]; then 
 	echo "sourcing configuration for maFalda"
+	source_todo_completion
 	source_personal
 elif [ "$hostname" = "bagHeera" ]; then 
 	echo "sourcing configuration for bagHeera"
 	source_personal
-	source /usr/share/doc/fzf/examples/key-bindings.zsh
 elif [ "$hostname" = "baloO" ]; then 
 	echo "sourcing configuration for baloO"
 	source_personal
 elif [ "$hostname" = "dumBo" ]; then 
 	echo "sourcing configuration for dumBo"
+	source_todo_completion
 	source_personal
 	source_dumBo
 fi
 
 # Activate fzf shortcuts
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-zle -N open-file-widget
-bindkey '^O' open-file-widget
-
 
 #########################################################
 # SOURCES
