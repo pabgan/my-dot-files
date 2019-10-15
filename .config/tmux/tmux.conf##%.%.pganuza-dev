@@ -4,7 +4,7 @@
 # enable vim like keybindings
 set-window-option -g mode-keys vi
 # reload tmux conf with <C-B>r [1]
-bind r source-file ~/.tmux.conf \; display "Configuration reloaded."
+bind r source-file $XDG_CONFIG_HOME/tmux/tmux.conf \; display "Configuration reloaded."
 
 ##################################################################################
 # Change prefix key for remote sessions so they can be accessed right away [5]
