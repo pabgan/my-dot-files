@@ -94,6 +94,7 @@ setopt nosharehistory
 alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e=$EDITOR
+alias fm='ranger'
 zle -N open-file-widget
 bindkey '^O' open-file-widget
 
