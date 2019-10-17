@@ -66,6 +66,7 @@ znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/KnowHow/wiki' '~/Workspace/ex
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/Generic/G-5.3.2' )
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/Deutsche Telekom/DT-5.3.2' )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/Telefónica Colombia/TC-5.3.2' )
 
 # Just throw a fast query 
 alias query='sqlturbo.py -u $DB -f $DBF'
