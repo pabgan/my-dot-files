@@ -115,10 +115,10 @@ export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 
-alias t="todo.sh -a -d $XDG_CONFIG_HOME/todo-txt/todo.cfg"
+alias t="todo.sh -a -d $HOME/.todo.cfg"
 _t()
 {
-    local _todo_sh="todo.sh -d $XDG_CONFIG_HOME/todo-txt/todo.cfg"
+    local _todo_sh="todo.sh -d $HOME/.todo.cfg"
     _todo "$@"
 }
 compdef _t t
@@ -246,11 +246,19 @@ fi
 # Activate fzf shortcuts
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# You can see the list of colors with [7]:
+show_colors() {
+     for i in {0..255}; do
+         printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
+     done
+}
+
 #########################################################
 # SOURCES
-# 1. https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
-# 2. https://unix.stackexchange.com/questions/410456/zsh-completion-make-sshrc-behave-like-ssh
-# 3. https://github.com/tobixen/calendar-cli
-# 4. http://grml.org/zsh/zsh-lovers.html
-# 5. https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/zsh-navigation-tools
-# 6. http://xahlee.info/linux/linux_Ctrl-s_freeze_vi.html
+# [1]: https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
+# [2]: https://unix.stackexchange.com/questions/410456/zsh-completion-make-sshrc-behave-like-ssh
+# [3]: https://github.com/tobixen/calendar-cli
+# [4]: http://grml.org/zsh/zsh-lovers.html
+# [5]: https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/zsh-navigation-tools
+# [6]: http://xahlee.info/linux/linux_Ctrl-s_freeze_vi.html
+# [7]: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work
