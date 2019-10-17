@@ -12,7 +12,7 @@ if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'set -g prefix C-o'
 
 ##################################################################################
 # Enable locking [2]
-set -g lock-command vlock
+set -g lock-command tlock
 # Seconds; 0 = never
 if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -g lock-after-time 300' 'setw -g lock-after-time 0' 
 bind L lock-session
@@ -24,14 +24,17 @@ if-shell '[ $(echo "$(tmux -V | cut -d" " -f2 | sed "s/[a-z]//") >= 2.1" | bc) -
     'set -g mode-mouse on; set -g mouse-resize-pane on; set -g mouse-select-pane on; set -g mouse-select-window on' 
 
 ##################################################################################
+# Move across panes VI like
+bind-key H select-pane -L
+bind-key J select-pane -D
+bind-key K select-pane -U
+bind-key L select-pane -R
+
+##################################################################################
 # Appearance
 #
 # Fix VIM not having colors' dark variant [5]
-set -g default-terminal "tmux-256color"
-# You can see the list of colors with [3]:
-#     for i in {0..255}; do
-#         printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
-#     done
+set -g default-terminal "xterm-256color"
 # Make current window invert colors on status bar
 if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -g status-style bg=colour6' 'setw -g status-style bg=green'
 setw -ag status-style fg=black 
@@ -54,7 +57,6 @@ set -sg escape-time 0
 # SOURCES
 # [1]: https://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/
 # [2]: https://askubuntu.com/questions/22125/lock-tmux-session-with-vlock
-# [3]: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work
 # [4]: https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
 # [5]: https://github.com/tmux/tmux/issues/699
 # [6]: https://www.reddit.com/r/neovim/comments/35h1g1/neovim_slow_to_respond_after_esc/
