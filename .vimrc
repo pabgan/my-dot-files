@@ -87,7 +87,7 @@ nmap <C-S><C-H> :set list!<CR>
 
 " ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
-nnoremap <C-X><C-Q> yap}pjvip:s/%/\\\%/ge<CR>vipd:read !~/.scripts/sqlturbo.py -u <C-R>=DB<CR> -f <C-R>=DBF<CR> "<C-R>0"<CR>
+nnoremap <C-X><C-Q> yap}pvip:s/%/\\\%/ge<CR>vipd:-1read !~/.scripts/sqlturbo.py -u <C-R>=DB<CR> -f <C-R>=DBF<CR> "<C-R>0"<CR>
 " desc(ribe) table or view
 nnoremap <C-X><C-D> viw<ESC>b<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
 
@@ -103,6 +103,8 @@ nnoremap <C-X><C-S> yip:read !<C-R>"<BS><CR>
 " Flatten
 nnoremap <C-C><C-F> vipJV:s/\s\+/, /g<CR>
 nnoremap <C-C><C-U> :s/,\s*/\r/g<CR>
+" Format in columns
+vnoremap <C-C><C-L> :!column -t -s','
 
 " ------ OTHERS -----------------------------------------------------------
 " Search for what it is selected pressing / twice
