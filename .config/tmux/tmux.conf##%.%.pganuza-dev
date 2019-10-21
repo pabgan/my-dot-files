@@ -27,7 +27,7 @@ set -g mouse-select-window on
 ##################################################################################
 # Appearance
 #
-set -g default-terminal "tmux-256color"
+#set -g default-terminal "tmux-256color"
 # You can see the list of colors with [3]:
 #     for i in {0..255}; do
 #         printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
@@ -37,7 +37,7 @@ set -g status-bg colour6
 set -g status-fg black 
 set -g window-status-current-bg black
 set -g window-status-current-fg colour6
-set pane-active-border-fg colour6
+set -g pane-active-border-fg colour6
 
 # Make display of messages last longer
 set-option -g display-time 3000
