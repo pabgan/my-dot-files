@@ -50,7 +50,7 @@ et(){
 # Currently working
 export JIRA_URL='https://assia-inc.atlassian.net'
 export JIRA_PREFIX='DSLE-'
-export ENV='support-telefonica-colombia-a'
+export ENV='support-oi-a'
 export VER='5.3.2'
-export DB='telefonica_colombia_a'
+export DB='oi_a'
 export DBF='plain'
