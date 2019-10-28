@@ -87,9 +87,10 @@ nmap <C-S><C-H> :set list!<CR>
 
 " ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
-nnoremap <C-X><C-Q> yap}pjvip:s/%/\\\%/ge<CR>vipd:read !~/.scripts/sqlturbo.py -u <C-R>=DB<CR> -f <C-R>=DBF<CR> "<C-R>0"<CR>
+nnoremap <C-X><C-Q> yap}pvip:s/%/\\\%/ge<CR>vipJvipd:-1read !~/.scripts/sqlturbo.py -u <C-R>=DB<CR> -f <C-R>=DBF<CR> "<C-R>""<CR>
 " desc(ribe) table or view
-nnoremap <C-X><C-D> viwb<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
+nnoremap <C-X><C-D> viw<ESC>b<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
+nnoremap <C-X><C-V> viwyo<CR>select text from user_views where view_name='<C-R>"';<ESC>o<ESC>kvip:call slime#send_op(visualmode(), 1)<cr>u
 
 if $CLASS == "trabajo"
 	let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
@@ -97,12 +98,14 @@ endif
 
 " Execute command
 vnoremap <C-X><C-S> y:read !<C-R>"<CR><CR>
-nnoremap <C-X><C-S> yip:read !<C-R>"<BS><CR>
+nnoremap <C-X><C-S> yip:read !<C-R>"<CR><CR>
 
 " ------ USUAL FORMAT CHANGES ---------------------------------------------
 " Flatten
 nnoremap <C-C><C-F> vipJV:s/\s\+/, /g<CR>
 nnoremap <C-C><C-U> :s/,\s*/\r/g<CR>
+" Format in columns
+vnoremap <C-C><C-L> :!column -t -s','
 
 " ------ OTHERS -----------------------------------------------------------
 " Search for what it is selected pressing / twice
@@ -138,7 +141,7 @@ vnoremap \sc d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pk/<++><E
 nnoremap \sn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
 vnoremap \sn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
 " Make it no format
-nnoremap \s{ wBi{{<ESC>Ea}}<ESC>
+nnoremap \s{ viw<ESC>Bi{{<ESC>Ea}}<ESC>
 " Insert thumbnail
 nnoremap \st WBdW:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>pjddk
 vnoremap \st d:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
