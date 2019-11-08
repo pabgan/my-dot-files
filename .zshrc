@@ -95,6 +95,7 @@ alias zshconfig="vim ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e=$EDITOR
 alias fm='ranger'
+alias mv='mv -b' # create a backup if file exists
 zle -N open-file-widget
 bindkey '^O' open-file-widget
 
