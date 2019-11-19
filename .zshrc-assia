@@ -48,7 +48,7 @@ et(){
 }
 
 # Currently working
-export ENV='support-colombia-a'
-export VER='5.3.2'
-export DB='colombia_a'
+export ENV='support-tedata-a'
+export VER='5.3.2.3'
+export DB='tedata_a'
 export DBF='plain'

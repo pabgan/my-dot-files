@@ -34,7 +34,9 @@ scrum_report() {
 
 	echo "\n===================== COMMITS ======================="
 	# Execute a command from another directory [1]
+	( cd ~/Workspace/expresse/dsloExpresse/ ; cvs log -d \>"$days_to_report day ago" 2>/dev/null | grep "author: pganuza" -A1 | grep "DSLE-" | sort| uniq )
 	( cd ~/Workspace/expresse/dsloExpresseAdditional/ ; cvs log -d \>"$days_to_report day ago" 2>/dev/null | grep "author: pganuza" -A1 | grep "QA-" | sort| uniq )
+	( cd ~/Workspace/expresse/GuiWebServiceProject/ ; cvs log -d \>"$days_to_report day ago" 2>/dev/null | grep "author: pganuza" -A1 | grep "DSLE-" | sort| uniq )
 
 	echo "\n================= OTHER THINGS DONE ================="
 	jrnl -from "\"$days_to_report days ago at 15:50\""
@@ -66,12 +68,12 @@ znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/KnowHow/wiki' '~/Workspace/ex
 # Currently working
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/Generic/G-5.3.2' )
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/Deutsche Telekom/DT-5.3.2' )
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/Telefónica Colombia/TC-5.3.2' )
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/Oi/OI-5.3.2' )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/TeData/TD-5.3.2.2' )
 
 # Just throw a fast query 
 alias query='sqlturbo.py -u $DB -f $DBF'
+alias se='sshrc user@$ENV.assia-inc.com'
 
 ################################################
 # SOURCES

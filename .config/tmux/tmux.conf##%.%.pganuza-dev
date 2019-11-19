@@ -25,6 +25,13 @@ set -g mouse-select-pane on
 set -g mouse-select-window on
 
 ##################################################################################
+# Move across panes VI like
+bind-key H select-pane -L
+bind-key J select-pane -D
+bind-key K select-pane -U
+bind-key L select-pane -R
+
+##################################################################################
 # Appearance
 #
 #set -g default-terminal "tmux-256color"
