@@ -86,6 +86,9 @@ nnoremap <C-S><C-C> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "
 " Toggle showing metacharacters
 nmap <C-S><C-H> :set list!<CR>
 
+" Toggle wrapping lines
+nmap <C-S><C-W> :set wrap!<CR>
+
 " ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
 nnoremap <C-X><C-Q> yap}pvip:s/%/\\\%/ge<CR>vipd:-1read !~/.scripts/sqlturbo.py -u <C-R>=DB<CR> -f <C-R>=DBF<CR> "<C-R>""<CR>
