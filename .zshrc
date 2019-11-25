@@ -256,6 +256,25 @@ show_colors() {
      done
 }
 
+
+tmuxstart() {
+	if [ ! "$TMUX" ]; then
+		if tmux ls | grep "default" &> /dev/null ;
+		then
+			echo "default session found, attaching..."
+			ma default
+			return 0;
+		#rest of tmux script to create session named "sess"
+		else
+			echo "default session not found, opening one..."
+			mn default
+		fi
+	fi
+}
+
+# Always start or attach to default Tmux session
+tmuxstart
+		
 #########################################################
 # SOURCES
 # [1]: https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
