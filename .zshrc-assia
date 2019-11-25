@@ -41,7 +41,9 @@ get_ticket_number_from_path(){
 }
 mt(){
 	get_ticket_number_from_path
-	tmux -f /home/pganuza/.config/tmux/tmux.conf new -s $ticket -n Notas
+	#tmux -f /home/pganuza/.config/tmux/tmux.conf new -s $ticket -n Notas
+	tmux rename-session $ticket
+	tmux rename-window Notas
 }
 et(){
 	get_ticket_number_from_path
