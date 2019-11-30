@@ -1,37 +1,36 @@
 ##################################################################################
-# Useful bindings
+### BINDINGS
 #
 # enable vim like keybindings
 set-window-option -g mode-keys vi
 # reload tmux conf with <C-B>r [1]
 bind r source-file $XDG_CONFIG_HOME/tmux/tmux.conf \; display "Configuration reloaded."
-
-##################################################################################
-# Change prefix key for remote sessions so they can be accessed right away
-if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'set -g prefix C-o'
-
-##################################################################################
-# Enable locking [2]
-set -g lock-command tlock
-# Seconds; 0 = never
-if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -g lock-after-time 300' 'setw -g lock-after-time 0' 
-bind L lock-session
-
-##################################################################################
-# Enable mouse [4]
-if-shell '[ $(echo "$(tmux -V | cut -d" " -f2 | sed "s/[a-z]//") >= 2.1" | bc) -eq 1 ]' \
-    'set -g mouse on' \
-    'set -g mode-mouse on; set -g mouse-resize-pane on; set -g mouse-select-pane on; set -g mouse-select-window on' 
-
-##################################################################################
 # Move across panes VI like
 bind-key H select-pane -L
 bind-key J select-pane -D
 bind-key K select-pane -U
 bind-key L select-pane -R
+# Make current directory default for new windows and panes
+bind-key C attach-session -c "#{pane_current_path}" \; display "Changed directory"
+# Lock session
+bind L lock-session
+# Change prefix key for remote sessions so they can be accessed right away
+if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'set -g prefix C-o'
 
 ##################################################################################
-# Appearance
+### LOCK [2]
+set -g lock-command tlock
+# Seconds; 0 = never
+if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -g lock-after-time 300' 'setw -g lock-after-time 0' 
+
+##################################################################################
+### MOUSE [4]
+if-shell '[ $(echo "$(tmux -V | cut -d" " -f2 | sed "s/[a-z]//") >= 2.1" | bc) -eq 1 ]' \
+    'set -g mouse on' \
+    'set -g mode-mouse on; set -g mouse-resize-pane on; set -g mouse-select-pane on; set -g mouse-select-window on' 
+
+##################################################################################
+### APPEARANCE
 #
 # Fix VIM not having colors' dark variant [5]
 set -g default-terminal "xterm-256color"
@@ -50,6 +49,8 @@ set-option -g status-left-length 13
 set-window-option -g automatic-rename off
 set-option -g allow-rename off
 
+##################################################################################
+### OTHERS
 # Fix slow ESC in Neovim [6]
 set -sg escape-time 0
 
