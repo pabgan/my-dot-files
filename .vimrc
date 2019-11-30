@@ -84,10 +84,13 @@ nmap <C-S><C-N> :set invnumber invrelativenumber<CR>
 nnoremap <C-S><C-C> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 
 " Toggle showing metacharacters
-nmap <C-S><C-H> :set list!<CR>
+nmap <C-S><C-L> :set list!<CR>
 
 " Toggle wrapping lines
 nmap <C-S><C-W> :set wrap!<CR>
+
+" Toggle paste
+nmap <C-S><C-P> :set paste!<CR>
 
 " ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
