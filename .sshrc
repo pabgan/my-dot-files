@@ -24,11 +24,12 @@ alias e='$EDITOR'
 # Path for custom programs
 export PATH=$PATH:$HOME/.local/bin
 
-# CVS configuration
+# CVS configuration [2]
 export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
-alias cvs-update='cvs update -PAd'
+alias cvsp="cvs -d $CVSROOT"
+alias cvs-update='cvsp update -PAd'
 alias cvs-discard_changes='cvs_update -C'
-alias cvs-checkout='cvs co -r'
+alias cvs-checkout='cvsp co -r'
 
 # VIM config
 alias vim='vim -u $SSHHOME/.sshrc.d/.vimrc'
@@ -82,4 +83,5 @@ alias th='toggle_history_timestamps'
 
 #########################################################
 # SOURCES
-# 1. https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
+# [1] https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
+# [2] https://stackoverflow.com/questions/317127/cvsroot-environment
