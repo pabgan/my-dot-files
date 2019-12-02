@@ -13,7 +13,7 @@ bind-key L select-pane -R
 # Make current directory default for new windows and panes
 bind-key C attach-session -c "#{pane_current_path}" \; display "Changed directory"
 # Lock session
-bind L lock-session
+bind DC lock-session
 # Change prefix key for remote sessions so they can be accessed right away
 if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'set -g prefix C-o'
 
