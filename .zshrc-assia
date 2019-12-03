@@ -42,6 +42,7 @@ get_ticket_number_from_path(){
 mt(){
 	get_ticket_number_from_path
 	#tmux -f /home/pganuza/.config/tmux/tmux.conf new -s $ticket -n Notas
+	#tmux attach-session -t . -c $(pwd)
 	tmux rename-session $ticket
 	tmux rename-window Notas
 }
@@ -51,7 +52,7 @@ et(){
 }
 
 # Currently working
-export ENV='support-tedata-a'
-export VER='5.3.2.3'
-export DB='tedata_a'
+export ENV='demo-a'
+export VER='5.3.3.1'
+export DB='demo_a'
 export DBF='plain'
