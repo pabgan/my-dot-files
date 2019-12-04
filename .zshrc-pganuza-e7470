@@ -4,7 +4,7 @@
 #
 # TODO.TXT stuff
 source $HOME/.local/bin/todo_completion
-alias tp='todo.sh -a -d ~/.todo.cfg##personal'
+alias tp='todo.sh -a -d ~/.todo/config##class.personal'
 alias rm='trash'
 
 #export JAVA_HOME="/usr/java/jdk1.8.0_73/"
