@@ -16,6 +16,9 @@ bind-key C attach-session -c "#{pane_current_path}" \; display "Changed director
 bind DC lock-session
 # Change prefix key for remote sessions so they can be accessed right away
 if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'set -g prefix C-o'
+# Swap rename window and last pane key binds
+bind-key -T prefix ; command-prompt -I "#W" "rename-window '%%'"
+bind-key -T prefix , last-pane
 
 ##################################################################################
 ### LOCK [2]
