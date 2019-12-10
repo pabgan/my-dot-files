@@ -118,7 +118,10 @@ export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 
-alias t='todo.sh -a'
+t (){
+	todo.sh -a $@
+}
+compdef _todo.sh t
 
 tdate () {
 	date --iso-8601 --date=$1
@@ -210,22 +213,22 @@ source_dumBo() {
 	source $HOME/.zshrc-dumBo
 }
 
-source_todo_completion() {
-	source $HOME/.local/bin/todo_completion
-}
+#source_todo_completion() {
+#	source $HOME/.local/bin/todo_completion
+#}
 
 hostname=$(hostname)
 if [ "$hostname" = "PGANUZA-E7470" ]; then
 	echo "sourcing configuration for PGANUZA-E7470"
 	source_assiarc
-	source_todo_completion
+#	source_todo_completion
 	source_pganuza-e7470rc
 elif [ "$hostname" = "pganuza-dev.assia-inc.com" ]; then 
 	echo "sourcing configuration for pganuza-dev"
 	source_assiarc
 elif [ "$hostname" = "maFalda" ]; then 
 	echo "sourcing configuration for maFalda"
-	source_todo_completion
+#	source_todo_completion
 	source_personal
 elif [ "$hostname" = "bagHeera" ]; then 
 	echo "sourcing configuration for bagHeera"
@@ -235,7 +238,7 @@ elif [ "$hostname" = "baloO" ]; then
 	source_personal
 elif [ "$hostname" = "dumBo" ]; then 
 	echo "sourcing configuration for dumBo"
-	source_todo_completion
+#	source_todo_completion
 	source_personal
 	source_dumBo
 fi
