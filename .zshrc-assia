@@ -52,7 +52,9 @@ et(){
 }
 
 # Currently working
-export ENV='demo-a'
-export VER='5.3.3.1'
-export DB='demo_a'
+export ENV='support-telefonica-chile-a'
+export CUS='Telefónica Chile'
+export VER='5.3.2'
+export DB='telefonica_chile_a'
 export DBF='plain'
+export DIR='~/Trabajo/Releases/Telefónica_Chile/TCh-5.3.2'
