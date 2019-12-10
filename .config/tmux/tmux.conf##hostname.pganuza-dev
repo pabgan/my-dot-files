@@ -1,6 +1,6 @@
 ##################################################################################
 ### BINDINGS
-#
+
 # enable vim like keybindings
 set-window-option -g mode-keys vi
 # reload tmux conf with <C-B>r [1]
@@ -13,32 +13,40 @@ bind-key L select-pane -R
 # Make current directory default for new windows and panes
 bind-key C attach-session -c "#{pane_current_path}" \; display "Changed directory"
 # Lock session
-bind L lock-session
-# Change prefix key for remote sessions so they can be accessed right away
-if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'set -g prefix C-o'
+bind DC lock-session
+# Change prefix key for remote sessions so they can be accessed right away [5]
+set -g prefix C-o
+# Swap rename window and last pane key binds
+bind-key -T prefix ; command-prompt -I "#W" "rename-window '%%'"
+bind-key -T prefix , last-pane
 
 ##################################################################################
-### LOCK [2]
+# LOCK [2]
 set -g lock-command tlock
 # Seconds; 0 = never
-if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -g lock-after-time 300' 'setw -g lock-after-time 0' 
+setw -g lock-after-time 300
 
 ##################################################################################
-### MOUSE [4]
-if-shell '[ $(echo "$(tmux -V | cut -d" " -f2 | sed "s/[a-z]//") >= 2.1" | bc) -eq 1 ]' \
-    'set -g mouse on' \
-    'set -g mode-mouse on; set -g mouse-resize-pane on; set -g mouse-select-pane on; set -g mouse-select-window on' 
+# MOUSE [4]
+set -g mode-mouse on
+set -g mouse-resize-pane on
+set -g mouse-select-pane on
+set -g mouse-select-window on
 
 ##################################################################################
-### APPEARANCE
+# APPEARANCE
 #
-# Fix VIM not having colors' dark variant [5]
-set -g default-terminal "xterm-256color"
+#set -g default-terminal "tmux-256color"
+# You can see the list of colors with [3]:
+#     for i in {0..255}; do
+#         printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
+#     done
 # Make current window invert colors on status bar
-if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -g status-style bg=colour6' 'setw -g status-style bg=green'
-setw -ag status-style fg=black 
-setw -ag window-status-current-style bg=black
-if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -ag window-status-current-style fg=colour6; setw -ag pane-active-border-style fg=colour6' 'setw -ag window-status-current-style fg=green'
+set -g status-bg colour6
+set -g status-fg black 
+set -g window-status-current-bg black
+set -g window-status-current-fg colour6
+set -g pane-active-border-fg colour6
 
 # Make display of messages last longer
 set-option -g display-time 3000
@@ -47,17 +55,11 @@ set-option -g status-left-length 13
 
 # Disable automatic renaming of windows, it is driving me nuts
 set-window-option -g automatic-rename off
-set-option -g allow-rename off
-
-##################################################################################
-### OTHERS
-# Fix slow ESC in Neovim [6]
-set -sg escape-time 0
 
 ##################################################################################
 # SOURCES
 # [1]: https://www.hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/
 # [2]: https://askubuntu.com/questions/22125/lock-tmux-session-with-vlock
+# [3]: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work
 # [4]: https://stackoverflow.com/questions/35016458/how-to-write-if-statement-in-tmux-conf-to-set-different-options-for-different-t
-# [5]: https://github.com/tmux/tmux/issues/699
-# [6]: https://www.reddit.com/r/neovim/comments/35h1g1/neovim_slow_to_respond_after_esc/
+# [5]: https://coderwall.com/p/sojscq/a-case-against-c-a-in-tmux

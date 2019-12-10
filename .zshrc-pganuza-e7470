@@ -4,7 +4,7 @@
 #
 # TODO.TXT stuff
 source $HOME/.local/bin/todo_completion
-alias tp='todo.sh -a -d ~/.todo.cfg##personal'
+alias tp='todo.sh -a -d ~/.todo/config##class.personal'
 alias rm='trash'
 
 #export JAVA_HOME="/usr/java/jdk1.8.0_73/"
@@ -39,8 +39,7 @@ znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/KnowHow/wiki' '~/Workspace/ex
 
 # Currently working
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/Generic/G-5.3.2' )
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/TeData/TD-5.3.2.3' )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/Releases/Generic/G-5.3.3' )
 
 # Just throw a fast query 
 alias query='sqlturbo.py -u $DB -f $DBF'
