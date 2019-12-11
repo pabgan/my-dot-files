@@ -57,4 +57,4 @@ export CUS='Telefónica Chile'
 export VER='5.3.2'
 export DB='telefonica_chile_a'
 export DBF='plain'
-export DIR='~/Trabajo/Releases/Telefónica_Chile/TCh-5.3.2'
+export DIR="$HOME/Trabajo/Releases/Telefónica_Chile/TCh-5.3.2"
