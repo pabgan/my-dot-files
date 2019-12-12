@@ -206,12 +206,12 @@ let g:autotagTagsFile=".tags"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VARIABLES
 "
-if $CLASS == "trabajo"
+"if $CLASS == "trabajo"
 	let ENV=$ENV
 	let VER=$VER
 	let DB=$DB
 	let DBF=$DBF
-endif
+"endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES
