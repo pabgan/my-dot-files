@@ -1,2 +1,7 @@
 version="9"
 logging="no"
+name="MeQuedoUno"
+enabled="yes"
+type="17"
+action="Delete"
+condition="AND (from,is,news@mail.mequedouno.com) AND (body,doesn't contain,shield) AND (body,doesn't contain,Shield)"
