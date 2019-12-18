@@ -40,6 +40,7 @@ get_ticket_number_from_path(){
 	ticket=$(pwd | grep -E "[a-zA-Z]+-[0-9]+( |$)" -o | sed "s/ //")
 }
 mt(){
+	export DIR=$(pwd)
 	get_ticket_number_from_path
 	#tmux -f /home/pganuza/.config/tmux/tmux.conf new -s $ticket -n Notas
 	#tmux attach-session -t . -c $(pwd)
@@ -58,3 +59,4 @@ export VER='5.3.2'
 export DB='telefonica_chile_a'
 export DBF='plain'
 export DIR="$HOME/Trabajo/Releases/Telefónica_Chile/TCh-5.3.2"
+alias cdir='cd $DIR'
