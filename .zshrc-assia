@@ -53,10 +53,12 @@ et(){
 }
 
 # Currently working
-export ENV='support-telefonica-chile-a'
-export CUS='Telefónica Chile'
-export VER='5.3.2'
-export DB='telefonica_chile_a'
+export CUS_ENV='demo-a'
+export CUS_NAME='Generic'
+export CUS_NAME_N=$(echo $CUS_NAME | tr ' ' _)
+export CUS_PREFIX='G'
+export CUS_VER='5.3.3'
+export CUS_DB='demo_a'
 export DBF='plain'
-export DIR="$HOME/Trabajo/Releases/Telefónica_Chile/TCh-5.3.2"
-alias cdir='cd $DIR'
+export CUS_DIR="$HOME/Trabajo/Releases/$CUS_NAME_N/$CUS_PREFIX-$VER"
+alias cdir='cd $CUS_DIR'
