@@ -30,8 +30,8 @@ function dbconn() {
 	if [ $# -ne 0 ]; then
 		sqlcl $1/assia@db-ref.assia-inc.com:1521:dslo2 @$2
 	else
-		echo "Connecting to $DB..."
-		sqlcl $DB/assia@db-ref.assia-inc.com:1521:dslo2
+		echo "Connecting to $CUS_DB..."
+		sqlcl $CUS_DB/assia@db-ref.assia-inc.com:1521:dslo2
 	fi
 }
 
