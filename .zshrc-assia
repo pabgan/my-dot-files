@@ -37,7 +37,7 @@ function dbconn() {
 
 # Start a tmux session and name it after the ticket number
 get_ticket_number_from_path(){
-	ticket=$(pwd | grep -E "[a-zA-Z]+-[0-9]+( |$)" -o | sed "s/ //")
+	export ticket=$(pwd | grep -E "[a-zA-Z]+-[0-9]+( |$)" -o | sed "s/ //")
 }
 mt(){
 	export DIR=$(pwd)
@@ -60,5 +60,5 @@ export CUS_PREFIX='G'
 export CUS_VER='5.3.3'
 export CUS_DB='demo_a'
 export DBF='plain'
-export CUS_DIR="$HOME/Trabajo/Releases/$CUS_NAME_N/$CUS_PREFIX-$VER"
+export CUS_DIR="$HOME/Trabajo/Releases/$CUS_NAME_N/$CUS_PREFIX-$CUS_VER"
 alias cdir='cd $CUS_DIR'
