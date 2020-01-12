@@ -207,9 +207,9 @@ let g:autotagTagsFile=".tags"
 " VARIABLES
 "
 "if $CLASS == "trabajo"
-	let ENV=$ENV
-	let VER=$VER
-	let DB=$DB
+	let ENV=$CUS_ENV
+	let VER=$CUS_VER
+	let DB=$CUS_DB
 	let DBF=$DBF
 "endif
 

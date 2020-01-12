@@ -270,7 +270,7 @@ tmuxstart() {
 }
 
 # Always start or attach to default Tmux session
-tmuxstart
+#tmuxstart
 		
 #########################################################
 # SOURCES
