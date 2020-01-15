@@ -62,7 +62,7 @@ filetype indent plugin on
 set laststatus=2
 
 " Underline current line
-set cursorline
+nmap <C-S><C-H> :set cursorline!<CR>
 " Highlight current line
 highlight CursorLine cterm=NONE ctermbg=DarkGrey
 
@@ -94,7 +94,7 @@ nmap <C-S><C-P> :set paste!<CR>
 
 " ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
-nnoremap <C-X><C-Q> yap}pvip:s/%/\\\%/ge<CR>vipd:-1read !~/.scripts/sqlturbo.py -u <C-R>=DB<CR> -f <C-R>=DBF<CR> "<C-R>""<CR>
+nnoremap <C-X><C-Q> yap}pvip:s/%/\\\%/ge<CR>vipd:-1read !~/.scripts/sqlturbo.py -u <C-R>=CUS_DB<CR> -f <C-R>=DBF<CR> "<C-R>""<CR>
 " desc(ribe) table or view
 nnoremap <C-X><C-D> viw<ESC>b<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
 nnoremap <C-X><C-V> viwyo<CR>select text from user_views where view_name='<C-R>"';<ESC>o<ESC>kvip:call slime#send_op(visualmode(), 1)<cr>u
@@ -140,7 +140,9 @@ nnoremap \s<TAB> :read $HOME/Plantillas/snippets/<C-Z>
 
 "" JIRA
 " Insert SCENARIO divider
-nnoremap \sS :-1read $HOME/Plantillas/snippets/jira-scenario.txt<CR>/<++><Enter>"_c4l
+nnoremap \sS :read $HOME/Plantillas/snippets/jira-scenario.txt<CR>/<++><Enter>"_c4l
+" Insert test
+nnoremap \sT :read $HOME/Plantillas/snippets/jira-test.txt<CR>/<++><Enter>"_c4l
 " Insert a {code:}{code} block
 nnoremap \sc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>/<++><Enter>"_c4l
 vnoremap \sc d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pk/<++><Enter>"_c4l
@@ -153,14 +155,16 @@ nnoremap \s{ viw<ESC>Bi{{<ESC>Ea}}<ESC>
 nnoremap \st WBdW:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>pjddk
 vnoremap \st d:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
 " Insert attachment
-nnoremap \sa WBdW:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lpjddk
-vnoremap \sa d:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>lp
+nnoremap \sa WBdE:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>/<++><Enter>"_c4l<C-R>"<ESC>J
+" [5]
+inoremap \sa <C-R>=system('cat $HOME/Plantillas/snippets/jira-attachment-tag.txt')<CR><ESC>kJB/<++><Enter>"_c4l
+vnoremap \sa d<C-R>=system('cat $HOME/Plantillas/snippets/jira-attachment-tag.txt')<CR><ESC>kJB/<++><Enter>"_c4l
 " Insert result tag
 nnoremap \sp :read $HOME/Plantillas/snippets/jira-pass.txt<CR>
 nnoremap \sf :read $HOME/Plantillas/snippets/jira-fail.txt<CR>
 nnoremap \ss :read $HOME/Plantillas/snippets/jira-skipped.txt<CR>
 " Insert "verified" sentence
-nnoremap \sv :read $HOME/Plantillas/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=ENV<ENTER><ESC>n"_c4l<C-R>=VER<ENTER><ESC>ggdd
+nnoremap \sv :read $HOME/Plantillas/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=CUS_ENV<ENTER><ESC>n"_c4l<C-R>=CUS_VER<ENTER><ESC>ggdd
 
 "" CVS
 " Insert CVS header
@@ -207,11 +211,21 @@ let g:autotagTagsFile=".tags"
 " VARIABLES
 "
 "if $CLASS == "trabajo"
-	let ENV=$CUS_ENV
-	let VER=$CUS_VER
-	let DB=$CUS_DB
+	let CUS_ENV=$CUS_ENV
+	let CUS_VER=$CUS_VER
+	let CUS_DB=$CUS_DB
 	let DBF=$DBF
+	let TICKET=$ticket
 "endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NETRW
+" [6]
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES
@@ -219,3 +233,5 @@ let g:autotagTagsFile=".tags"
 " [2] https://www.youtube.com/watch?v=XA2WjJbmmoM / https://github.com/changemewtf/no_plugins/
 " [3] https://vi.stackexchange.com/questions/17573/function-to-toggle-set-colorcolumn
 " [4] https://stackoverflow.com/questions/563616/vim-and-ctags-tips-and-tricks
+" [5] https://unix.stackexchange.com/questions/61273/while-in-vi-how-can-i-pull-in-insert-paste-the-contents-of-another-file
+" [6] https://shapeshed.com/vim-netrw/
