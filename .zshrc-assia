@@ -40,16 +40,43 @@ get_ticket_number_from_path(){
 	export ticket=$(pwd | grep -E "[a-zA-Z]+-[0-9]+( |$)" -o | sed "s/ //")
 }
 mt(){
-	export DIR=$(pwd)
-	get_ticket_number_from_path
 	#tmux -f /home/pganuza/.config/tmux/tmux.conf new -s $ticket -n Notas
 	#tmux attach-session -t . -c $(pwd)
 	tmux rename-session $ticket
-	tmux rename-window Notas
+	show_task_info
 }
 et(){
 	get_ticket_number_from_path
 	$EDITOR $ticket.md
+}
+show_task_info(){
+	get_ticket_number_from_path
+	echo Notes
+	echo -----
+	jrnl @$ticket
+	echo Tasks
+	echo -----
+	t ls +$ticket
+}
+
+work_on_task(){
+	export DIR=$(pwd)
+	get_ticket_number_from_path
+	jrnl "Comenzando a trabajar en @$ticket."
+	if [ ! "$TMUX" ]; then
+		if tmux ls | grep "$ticket" &> /dev/null ;
+		then
+			echo "task session found, attaching..."
+			ma $ticket
+			return 0;
+		#rest of tmux script to create new session
+		else
+			echo "task session not found, opening one..."
+			mn $ticket
+		fi
+	else
+		mt
+	fi
 }
 
 # Currently working
@@ -60,5 +87,5 @@ export CUS_PREFIX='G'
 export CUS_VER='5.3.3'
 export CUS_DB='demo_a'
 export DBF='plain'
-export CUS_DIR="$HOME/Trabajo/Releases/$CUS_NAME_N/$CUS_PREFIX-$CUS_VER"
+export CUS_DIR="$HOME/Trabajo/Releases/$CUS_NAME_N/$CUS_VER"
 alias cdir='cd $CUS_DIR'
