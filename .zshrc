@@ -270,7 +270,9 @@ tmuxstart() {
 }
 
 # Always start or attach to default Tmux session
-#tmuxstart
+if [[ -n $SSH_CONNECTION ]]; then
+	tmuxstart
+fi
 		
 #########################################################
 # SOURCES
