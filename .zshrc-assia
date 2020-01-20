@@ -8,7 +8,7 @@ export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
 alias p='ssh pganuza@pganuza-dev.assia-inc.com'
 alias q='sshrc user@qa-dev.assia-inc.com'
 alias l='sshrc pganuza@lexus.assia-inc.com'
-alias se='sshrc user@$ENV.assia-inc.com'
+alias se='sshrc user@$CUS_ENV.assia-inc.com'
 alias a='sshrc user@demo-a.assia-inc.com'
 alias b='sshrc user@demo-b.assia-inc.com'
 alias c='sshrc user@demo-c.assia-inc.com'
@@ -40,6 +40,7 @@ get_ticket_number_from_path(){
 	export ticket=$(pwd | grep -E "[a-zA-Z]+-[0-9]+( |$)" -o | sed "s/ //")
 }
 mt(){
+	get_ticket_number_from_path
 	#tmux -f /home/pganuza/.config/tmux/tmux.conf new -s $ticket -n Notas
 	#tmux attach-session -t . -c $(pwd)
 	tmux rename-session $ticket
@@ -80,12 +81,12 @@ work_on_task(){
 }
 
 # Currently working
-export CUS_ENV='demo-a'
+export CUS_ENV='demo-c'
 export CUS_NAME='Generic'
 export CUS_NAME_N=$(echo $CUS_NAME | tr ' ' _)
 export CUS_PREFIX='G'
-export CUS_VER='5.3.3'
-export CUS_DB='demo_a'
+export CUS_VER='5.5.0'
+export CUS_DB='demo_c'
 export DBF='plain'
 export CUS_DIR="$HOME/Trabajo/Releases/$CUS_NAME_N/$CUS_VER"
 alias cdir='cd $CUS_DIR'
