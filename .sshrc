@@ -19,7 +19,7 @@ alias la='ls -a'
 alias ll='ls -lah'
 alias ..='cd ..'
 alias grep='grep --color=always'
-alias e='$EDITOR'
+alias e='vim'
 
 # Path for custom programs
 export PATH=$PATH:$HOME/.local/bin
