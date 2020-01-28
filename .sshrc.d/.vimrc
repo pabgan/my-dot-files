@@ -57,7 +57,7 @@ filetype indent plugin on
 set laststatus=2
 
 " Underline current line
-set cursorline
+nmap <C-S><C-H> :set cursorline!<CR>
 " Highlight current line
 highlight CursorLine cterm=NONE ctermbg=DarkGrey
 
@@ -78,7 +78,7 @@ nmap <C-S><C-N> :set invnumber invrelativenumber<CR>
 nnoremap <C-S><C-C> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 
 " Toggle showing metacharacters
-nmap <C-S><C-H> :set list!<CR>
+nmap <C-S><C-L> :set list!<CR>
 
 " Search for what it is selected pressing / twice
 vnoremap // y/<C-R>"<CR>
