@@ -81,12 +81,12 @@ work_on_task(){
 }
 
 # Currently working
-export CUS_ENV='demo-c'
-export CUS_NAME='Generic'
-export CUS_NAME_N=$(echo $CUS_NAME | tr ' ' _)
-export CUS_PREFIX='G'
-export CUS_VER='5.5.0'
-export CUS_DB='demo_c'
+customer_info_file=$HOME/Trabajo/Releases/.customers-info.csv
+export CUSTOMER='TE_Data'
+export CUSTOMER_NAME=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')
+export CUSTOMER_ENV=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')
+export CUSTOMER_DB=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')
+export CUSTOMER_VER='5.3.2.4'
 export DBF='plain'
-export CUS_DIR="$HOME/Trabajo/Releases/$CUS_NAME_N/$CUS_VER"
-alias cdir='cd $CUS_DIR'
+export CUSTOMER_DIR="$HOME/Trabajo/Releases/$CUSTOMER/$CUSTOMER_VER"
+alias cdir='cd $CUSTOMER_DIR'
