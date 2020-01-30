@@ -164,7 +164,7 @@ nnoremap \sp :read $HOME/Plantillas/snippets/jira-pass.txt<CR>
 nnoremap \sf :read $HOME/Plantillas/snippets/jira-fail.txt<CR>
 nnoremap \ss :read $HOME/Plantillas/snippets/jira-skipped.txt<CR>
 " Insert "verified" sentence
-nnoremap \sv :read $HOME/Plantillas/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=CUS_ENV<ENTER><ESC>n"_c4l<C-R>=CUS_VER<ENTER><ESC>ggdd
+nnoremap \sv :read $HOME/Plantillas/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=CUS_NAME<ENTER><ESC>n"_c4l<C-R>=CUS_VER<ENTER><ESC>ggdd
 
 "" CVS
 " Insert CVS header
@@ -211,11 +211,12 @@ let g:autotagTagsFile=".tags"
 " VARIABLES
 "
 "if $CLASS == "trabajo"
-	let CUS_ENV=$CUS_ENV
-	let CUS_VER=$CUS_VER
-	let CUS_DB=$CUS_DB
+	let CUS_ENV=$CUSTOMER_ENV
+	let CUS_VER=$CUSTOMER_VER
+	let CUS_NAME=$CUSTOMER_NAME
+	let CUS_DB=$CUSTOMER_DB
 	let DBF=$DBF
-	let TICKET=$ticket
+	let TASK=$TASK
 "endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
