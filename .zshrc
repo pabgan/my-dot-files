@@ -1,3 +1,6 @@
+#########################################################
+## SHELL CONFIGURATION
+#
 # Turn off screen freezing [6]
 stty ixoff -ixon
 
@@ -59,7 +62,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(history pass sudo zsh-navigation-tools extract zsh-syntax-highlighting)
+plugins=(history pass sudo zsh-navigation-tools extract zsh-syntax-highlighting jira)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -76,7 +79,7 @@ setopt nosharehistory
 #if [[ -n $SSH_CONNECTION ]]; then
 #	export EDITOR='vim'
 #else
-	export EDITOR='nvim'
+	export EDITOR='vim'
 #fi
 
 # Compilation flags
@@ -100,7 +103,8 @@ zle -N open-file-widget
 bindkey '^O' open-file-widget
 
 #########################################################
-# PLUGINS CONFIGURATION
+## PLUGINS CONFIGURATION
+#
 # Enable n-cd and n-kill [5]
 zle -N znt-cd-widget
 bindkey "^G" znt-cd-widget
@@ -112,7 +116,7 @@ znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/.scripts' '~/Documentos/Manuales/Linu
 bindkey '^[l' down-case-word
 
 #########################################################
-# TODO.TXT-CLI CONFIGURATION
+## TODO.TXT-CLI CONFIGURATION
 #
 export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
@@ -128,7 +132,7 @@ tdate () {
 }
 
 #########################################################
-# VARIOUS CONFIGURATIONS
+## VARIOUS CONFIGURATIONS
 #
 # Tmux
 alias m="tmux -f $XDG_CONFIG_HOME/tmux/tmux.conf"
@@ -159,10 +163,11 @@ alias ipinternal='ipconfig getifaddr en0'
 #alias vim="gvim -v"
 
 #########################################################
-# USEFUL FUNCTIONS
+## USEFUL FUNCTIONS
 #
-# When you however forget that you already are in a ranger shell and start ranger again you end up 
-# with ranger running a shell running ranger. To prevent this:
+# When you however forget that you already are in a ranger shell and start 
+# ranger again you end up with ranger running a shell running ranger [8]. To 
+# prevent this:
 ranger() {
     if [ -z "$RANGER_LEVEL" ]; then
         /usr/bin/ranger "$@"
@@ -192,8 +197,33 @@ open-file-widget() {
 	zle accept-line
 }
 
+# You can see the list of colors with [7]:
+show_colors() {
+     for i in {0..255}; do
+         printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
+     done
+}
+
+# Start tmux with 'default' as session name or attach to it if exists
+tmuxstart() {
+	if [ ! "$TMUX" ]; then
+		if tmux ls | grep "default" &> /dev/null ;
+		then
+			echo "default session found, attaching..."
+			ma default
+			return 0;
+		#rest of tmux script to create session named "sess"
+		else
+			echo "default session not found, opening one..."
+			mn default
+		fi
+	fi
+}
+
 #########################################################
-# Source specific files depending on host
+## SOURCE
+#
+# specific files depending on host
 source_assiarc() {
 	echo "+ sourcing .zshrc-assia"
 	source $HOME/.zshrc-assia
@@ -243,33 +273,53 @@ elif [ "$hostname" = "dumBo" ]; then
 	source_dumBo
 fi
 
-# Activate fzf shortcuts
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# You can see the list of colors with [7]:
-show_colors() {
-     for i in {0..255}; do
-         printf "\x1b[38;5;${i}mcolour${i}\x1b[0m\n"
-     done
+#########################################################
+## TASK MANAGEMENT
+#
+# TODO: Create one function only that starts task or resumes it
+#       depending on wether it finds a directory with that name
+get_task_name_from_path(){
+	# Extract current directory name
+	export TASK=$(basename $(pwd))
 }
-
-
-tmuxstart() {
-	if [ ! "$TMUX" ]; then
-		if tmux ls | grep "default" &> /dev/null ;
-		then
-			echo "default session found, attaching..."
-			ma default
-			return 0;
-		#rest of tmux script to create session named "sess"
-		else
-			echo "default session not found, opening one..."
-			mn default
-		fi
+show_task_info(){
+	get_task_name_from_path
+	echo Notes
+	echo -----
+	jrnl @$TASK
+	echo Tasks
+	echo -----
+	t ls +$TASK
+}
+task_start(){
+	export TASK=$1
+	jrnl "Comenzando con @$TASK."
+	jira $TASK
+	take $TASK
+	mn $TASK
+}
+task_resume(){
+	get_task_name_from_path
+	jrnl "Continuado con @$TASK."
+	jira $TASK
+	if tmux ls | grep "$TASK" &> /dev/null ;
+	then
+		echo "task session found, attaching..."
+		ma $TASK
+		return 0;
+	else
+		echo "task session not found, opening one..."
+		mn $TASK
 	fi
 }
 
-# Always start or attach to default Tmux session
+#########################################################
+## FINALLY
+#
+# Activate fzf shortcuts
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Always start or attach to default Tmux session if connected through SSH
 if [[ -n $SSH_CONNECTION ]]; then
 	tmuxstart
 fi
@@ -283,3 +333,4 @@ fi
 # [5]: https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins/zsh-navigation-tools
 # [6]: http://xahlee.info/linux/linux_Ctrl-s_freeze_vi.html
 # [7]: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work
+# [8]: https://wiki.archlinux.org/index.php/Ranger
