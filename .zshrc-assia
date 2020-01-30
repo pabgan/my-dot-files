@@ -3,12 +3,13 @@
 # ASSIA
 export CLASS='trabajo'
 export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
+export JIRA_URL='https://assia-inc.atlassian.net'
 
 # Alias for very frequent SSH connections
 alias p='ssh pganuza@pganuza-dev.assia-inc.com'
 alias q='sshrc user@qa-dev.assia-inc.com'
 alias l='sshrc pganuza@lexus.assia-inc.com'
-alias se='sshrc user@$CUS_ENV.assia-inc.com'
+alias se='sshrc user@$CUSTOMER_ENV.assia-inc.com'
 alias a='sshrc user@demo-a.assia-inc.com'
 alias b='sshrc user@demo-b.assia-inc.com'
 alias c='sshrc user@demo-c.assia-inc.com'
@@ -30,63 +31,64 @@ function dbconn() {
 	if [ $# -ne 0 ]; then
 		sqlcl $1/assia@db-ref.assia-inc.com:1521:dslo2 @$2
 	else
-		echo "Connecting to $CUS_DB..."
-		sqlcl $CUS_DB/assia@db-ref.assia-inc.com:1521:dslo2
+		echo "Connecting to $CUSTOMER_DB..."
+		sqlcl $CUSTOMER_DB/assia@db-ref.assia-inc.com:1521:dslo2
 	fi
 }
 
 # Start a tmux session and name it after the ticket number
-get_ticket_number_from_path(){
-	export ticket=$(pwd | grep -E "[a-zA-Z]+-[0-9]+( |$)" -o | sed "s/ //")
-}
-mt(){
-	get_ticket_number_from_path
-	#tmux -f /home/pganuza/.config/tmux/tmux.conf new -s $ticket -n Notas
-	#tmux attach-session -t . -c $(pwd)
-	tmux rename-session $ticket
-	show_task_info
-}
-et(){
-	get_ticket_number_from_path
-	$EDITOR $ticket.md
-}
-show_task_info(){
-	get_ticket_number_from_path
-	echo Notes
-	echo -----
-	jrnl @$ticket
-	echo Tasks
-	echo -----
-	t ls +$ticket
-}
-
-work_on_task(){
-	export DIR=$(pwd)
-	get_ticket_number_from_path
-	jrnl "Comenzando a trabajar en @$ticket."
-	if [ ! "$TMUX" ]; then
-		if tmux ls | grep "$ticket" &> /dev/null ;
-		then
-			echo "task session found, attaching..."
-			ma $ticket
-			return 0;
-		#rest of tmux script to create new session
-		else
-			echo "task session not found, opening one..."
-			mn $ticket
-		fi
-	else
-		mt
-	fi
-}
+#get_ticket_number_from_path(){
+#	export ticket=$(pwd | grep -E "[a-zA-Z]+-[0-9]+( |$)" -o | sed "s/ //")
+#}
+#mt(){
+#	get_ticket_number_from_path
+#	#tmux -f /home/pganuza/.config/tmux/tmux.conf new -s $ticket -n Notas
+#	#tmux attach-session -t . -c $(pwd)
+#	tmux rename-session $ticket
+#	show_task_info
+#}
+#et(){
+#	get_ticket_number_from_path
+#	$EDITOR $ticket.md
+#}
+#show_task_info(){
+#	get_ticket_number_from_path
+#	echo Notes
+#	echo -----
+#	jrnl @$ticket
+#	echo Tasks
+#	echo -----
+#	t ls +$ticket
+#}
+#
+#work_on_task(){
+#	export DIR=$(pwd)
+#	get_ticket_number_from_path
+#	jrnl "Comenzando a trabajar en @$ticket."
+#	if [ ! "$TMUX" ]; then
+#		if tmux ls | grep "$ticket" &> /dev/null ;
+#		then
+#			echo "task session found, attaching..."
+#			ma $ticket
+#			return 0;
+#		#rest of tmux script to create new session
+#		else
+#			echo "task session not found, opening one..."
+#			mn $ticket
+#		fi
+#	else
+#		mt
+#	fi
+#}
 
 # Currently working
 customer_info_file=$HOME/Trabajo/Releases/.customers-info.csv
-export CUSTOMER='TE_Data'
+export CUSTOMER='demo-c'
 export CUSTOMER_NAME=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')
 export CUSTOMER_ENV=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')
 export CUSTOMER_DB=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')
-export CUSTOMER_VER='5.3.2.4'
+export CUSTOMER_VER='5.5.0.2'
 export DBF='plain'
 export CUSTOMER_DIR="$HOME/Trabajo/Releases/$CUSTOMER/$CUSTOMER_VER"
+export CUSTOMER_DIR_CVS="$HOME/Workspace/expresse/dsloExpresse/releases/$CUSTOMER/"
 alias cdir='cd $CUSTOMER_DIR'

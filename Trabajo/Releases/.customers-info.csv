@@ -1,2 +1,3 @@
-customer;name;environment;db
-TE_Data;TE Data;support-tedata-a;tedata_a
+CUSTOMER;NAME;ENVIRONMENT;DB
+demo-c;demo-c;demo-c;demo_c
+tedata;TE Data;support-tedata-a;tedata_a
