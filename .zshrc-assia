@@ -83,11 +83,11 @@ function dbconn() {
 
 # Currently working
 customer_info_file=$HOME/Trabajo/Releases/.customers-info.csv
-export CUSTOMER='demo-c'
+export CUSTOMER='tedata'
 export CUSTOMER_NAME=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')
 export CUSTOMER_ENV=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')
 export CUSTOMER_DB=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')
-export CUSTOMER_VER='5.5.0.2'
+export CUSTOMER_VER='5.3.2.5'
 export DBF='plain'
 export CUSTOMER_DIR="$HOME/Trabajo/Releases/$CUSTOMER/$CUSTOMER_VER"
 export CUSTOMER_DIR_CVS="$HOME/Workspace/expresse/dsloExpresse/releases/$CUSTOMER/"
