@@ -6,7 +6,7 @@ stty ixoff -ixon
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:$HOME/.scripts:$HOME/.local/bin
+export PATH=$PATH:$HOME/.local/bin
 export XDG_CONFIG_HOME=$HOME/.config
 
 # Path to your oh-my-zsh installation.
@@ -111,7 +111,7 @@ bindkey "^G" znt-cd-widget
 #zle -N znt-kill-widget
 #bindkey "^Y" znt-kill-widget
 # Add some useful paths to the hotlist for n-cd
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/.scripts' '~/Documentos/Manuales/Linux Knowledge Base/' )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documentos/Manuales/Linux Knowledge Base/' )
 # Use ALT+L to lower-case a word and not to execute ls
 bindkey '^[l' down-case-word
 
@@ -271,12 +271,13 @@ fi
 #
 # TODO: Create one function only that starts task or resumes it
 #       depending on wether it finds a directory with that name
-get_task_name_from_path(){
+alias et='e $TASK.md'
+task_get_name_from_path(){
 	# Extract current directory name
 	export TASK=$(basename $(pwd))
 }
-show_task_info(){
-	get_task_name_from_path
+task_show_info(){
+	task_get_name_from_path
 	echo Notes
 	echo -----
 	jrnl @$TASK
@@ -284,6 +285,7 @@ show_task_info(){
 	echo -----
 	t ls +$TASK
 }
+alias tsi='task_show_info'
 task_start(){
 	export TASK=$1
 	jrnl "Comenzando con @$TASK."
@@ -292,8 +294,8 @@ task_start(){
 	mn $TASK
 }
 task_resume(){
-	get_task_name_from_path
-	jrnl "Continuado con @$TASK."
+	task_get_name_from_path
+	jrnl "Continuando con @$TASK."
 	jira $TASK
 	if tmux ls | grep "$TASK" &> /dev/null ;
 	then
@@ -316,6 +318,7 @@ task_resume(){
 if [[ -n $SSH_CONNECTION ]]; then
 	tmuxstart
 fi
+task_get_name_from_path
 		
 #########################################################
 # SOURCES

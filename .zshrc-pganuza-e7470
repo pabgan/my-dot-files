@@ -35,7 +35,7 @@ addics() {
 
 # Add some useful paths to the hotlist for n-cd
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '=====================================pganuza-e7470rc====' )
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/KnowHow/wiki' '~/Workspace/expresse/dsloExpresse/releases' '~/Workspace/system_level_test_plan/' '~/Workspace/qa/naming_conventions_test/' '~/Trabajo/Releases/qa' '~/Workspace/expresse/dsloExpresseAdditional/tools/releaseTestingTools/log_verification_tool' )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Trabajo/KnowHow/wiki' '~/Trabajo/Releases/qa' '~/Workspace/expresse/dsloExpresse/releases' '~/Workspace/system_level_test_plan/' '~/Workspace/qa/naming_conventions_test/' '~/Workspace/expresse/dsloExpresseAdditional/tools/releaseTestingTools/log_verification_tool' )
 
 # Currently working
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )

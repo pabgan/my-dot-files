@@ -25,7 +25,6 @@ syntax on
 set background=dark
 colorscheme ron
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUILT IN FUZZY SEARCH [2]
 " 
@@ -80,22 +79,33 @@ nnoremap <C-S><C-C> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "
 " Toggle showing metacharacters
 nmap <C-S><C-L> :set list!<CR>
 
+" Toggle wrapping lines
+nmap <C-S><C-W> :set wrap!<CR>
+
+" Toggle paste
+nmap <C-S><C-P> :set paste!<CR>
+
+if $CLASS == "trabajo"
+	let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
+endif
+
+" Execute command
+vnoremap <C-X><C-S> y:read !<C-R>"<CR><CR>
+nnoremap <C-X><C-S> 0y$:read !<C-R>"<CR><CR>
+
+" ------ USUAL FORMAT CHANGES ---------------------------------------------
+" Flatten
+nnoremap <C-C><C-F> vipJV:s/\s\+/, /g<CR>
+nnoremap <C-C><C-U> :s/,\s*/\r/g<CR>
+" Format in columns
+vnoremap <C-C><C-L> :!column -t -s','
+
+" ------ OTHERS -----------------------------------------------------------
 " Search for what it is selected pressing / twice
 vnoremap // y/<C-R>"<CR>
 
 " Copy the whole file into the system clipboard
 nnoremap \ya gg"+yG''
-
-" Execute query and bring results
-vnoremap <C-X><C-Q> msy'so<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>""<CR>
-nnoremap <C-X><C-Q> msv/;<CR>y/;<CR>o<ESC>map'a0v/;<CR>:s/%/\\\%/e<CR>'av/;<CR>hy'av/;<CR>d<ESC>:read !~/.scripts/sqlturbo.py <C-R>=DB<CR> <C-R>=DBF<CR> "<C-R>0"<CR>
-if $CLASS == "trabajo"
-	let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
-endif
-
-" Execute comand
-vnoremap <C-X><C-S> y:read !<C-R>"<CR><CR>
-nnoremap <C-X><C-S> yip:read !<C-R>"<BS><CR>
 
 " CD into current file's directory
 nnoremap <C-C><C-D> :cd %:p:h<CR>
@@ -105,36 +115,8 @@ nnoremap <C-I><C-Y> <C-W>pyy<C-W>pPjdd
 nnoremap <C-I><C-C> vecClosed<ESC>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SNIPPETS [2]
-"
-" Let me decide between snippets
-nnoremap \\ :-1read $HOME/Plantillas/snippets/
-" Insert a {code:}{code} block
-nnoremap \jc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>f:a
-" Surround text selected with a code block
-vnoremap \jc d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pkf:a
-" Insert a {noformat}{noformat} block
-nnoremap \jn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
-" Surround text selected with a noformat block
-vnoremap \jn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
-" Insert CVS header
-nnoremap \ich :read $HOME/Plantillas/snippets/cvs-header.txt<CR>
-" Insert Makefile snippets
-nnoremap \iM :read $HOME/Plantillas/snippets/makefile-
-" Insert Markdown snippets
-nnoremap \im :read $HOME/Plantillas/snippets/markdown-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" AUTOMATIONS
-"
-" Autogenerate PDF for Markdown files
-autocmd BufWritePost *.mkd ! pandoc -o "<afile>.pdf" "<afile>"
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
 "
-let g:slime_target = "tmux"
-let g:slime_default_config = {"socket_name": "default", "target_pane": "{down-of}"}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES
