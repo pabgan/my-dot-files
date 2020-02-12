@@ -220,6 +220,11 @@ tmuxstart() {
 	fi
 }
 
+# (C)opy (m)ail written in Markdown to clipboard as HTML
+cm(){
+	pandoc -t html $1 | xclip
+}
+
 #########################################################
 ## SOURCE
 #
@@ -283,7 +288,8 @@ task_get_name_from_path(){
 	# Extract current directory name
 	export TASK=$(basename $(pwd))
 }
-task_show_info(){
+alias tgn='task_get_name_from_path'
+task_info(){
 	task_get_name_from_path
 	echo Notes
 	echo -----
@@ -292,18 +298,17 @@ task_show_info(){
 	echo -----
 	t ls +$TASK
 }
-alias tsi='task_show_info'
+alias ti='task_info'
 task_start(){
 	export TASK=$1
 	jrnl "Comenzando con @$TASK."
-	jira $TASK
 	take $TASK
 	mn $TASK
 }
+alias ts='task_start'
 task_resume(){
 	task_get_name_from_path
 	jrnl "Continuando con @$TASK."
-	jira $TASK
 	if tmux ls | grep "$TASK" &> /dev/null ;
 	then
 		echo "task session found, attaching..."
@@ -314,6 +319,7 @@ task_resume(){
 		mn $TASK
 	fi
 }
+alias tr='task_resume'
 
 #########################################################
 ## FINALLY
