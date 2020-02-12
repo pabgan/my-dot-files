@@ -37,6 +37,7 @@ if-shell '[ $(echo "$(tmux -V | cut -d" " -f2 | sed "s/[a-z]//") >= 2.1" | bc) -
 #
 # Fix VIM not having colors' dark variant [5]
 set -g default-terminal "xterm-256color"
+
 # Make current window invert colors on status bar
 if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -g status-style bg=colour6' 'setw -g status-style bg=green'
 setw -ag status-style fg=black 
@@ -51,6 +52,10 @@ set-option -g status-left-length 13
 # Disable automatic renaming of windows, it is driving me nuts
 set-window-option -g automatic-rename off
 set-option -g allow-rename off
+
+# Enable visual hints when a window requires attention
+#set visual-activity both
+setw -ag window-status-bell-style bg=red
 
 ##################################################################################
 ### OTHERS

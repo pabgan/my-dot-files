@@ -94,7 +94,7 @@ nmap <C-S><C-P> :set paste!<CR>
 
 " ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
-nnoremap <C-X><C-Q> yap}pvip:s/%/\\\%/ge<CR>vipd:-1read !~/.scripts/sqlturbo.py -u <C-R>=CUS_DB<CR> -f <C-R>=DBF<CR> "<C-R>""<CR>
+nnoremap <C-X><C-Q> yap}pvip:s/%/\\\%/ge<CR>vipd:-1read !~/.local/bin/sqlturbo.py -u <C-R>=CUS_DB<CR> -f <C-R>=DBF<CR> "<C-R>""<CR>
 " desc(ribe) table or view
 nnoremap <C-X><C-D> viw<ESC>b<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
 nnoremap <C-X><C-V> viwyo<CR>select text from user_views where view_name='<C-R>"';<ESC>o<ESC>kvip:call slime#send_op(visualmode(), 1)<cr>u
@@ -105,7 +105,7 @@ endif
 
 " Execute command
 vnoremap <C-X><C-S> y:read !<C-R>"<CR><CR>
-nnoremap <C-X><C-S> yip:read !<C-R>"<CR><CR>
+nnoremap <C-X><C-S> 0y$:read !<C-R>"<CR><CR>
 
 " ------ USUAL FORMAT CHANGES ---------------------------------------------
 " Flatten
