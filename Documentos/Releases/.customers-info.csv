@@ -1,5 +1,5 @@
 CUSTOMER;NAME;ENVIRONMENT;DB;SHAREPOINT SITE ID
 demo-c;demo-c;demo-c;demo_c;
 tedata;TE Data;support-tedata-a;tedata_a;assiainc.sharepoint.com,61a6c0e6-7ecb-4210-835c-3cc8df999a5c,9c201020-15c5-45fd-8956-101bec4efc7f
-telefonica_argentina;support-telefonica-argentina-a;telefonica_argentina_a
-telefonica_chile;support-telefonica-chile-a;telefonica_chile_a
+telefonica_argentina;Telefónica Argetina;support-telefonica-argentina-a;telefonica_argentina_a;assiainc.sharepoint.com,59b14c75-3b68-424d-82c9-e3b29801c5ff,34fa4790-9cfb-4c3f-8d70-d73f9dc1883b
+telefonica_chile;Telefónica Chile;support-telefonica-chile-a;telefonica_chile_a;assiainc.sharepoint.com,7ed9bedc-656b-4e3d-a043-25aeacb598f2,34fa4790-9cfb-4c3f-8d70-d73f9dc1883b
