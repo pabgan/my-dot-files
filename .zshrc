@@ -300,7 +300,7 @@ task_info(){
 }
 alias ti='task_info'
 task_start(){
-	if [ -ne $1 ];
+	if [ -z $1 ];
 	then
 		echo "Usage: task_start task_name"
 		return 1;
