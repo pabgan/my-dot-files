@@ -164,7 +164,7 @@ nnoremap \sp :read $HOME/Plantillas/snippets/jira-pass.txt<CR>
 nnoremap \sf :read $HOME/Plantillas/snippets/jira-fail.txt<CR>
 nnoremap \ss :read $HOME/Plantillas/snippets/jira-skipped.txt<CR>
 " Insert "verified" sentence
-nnoremap \sv :read $HOME/Plantillas/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=CUS_NAME<ENTER><ESC>n"_c4l<C-R>=CUS_VER<ENTER><ESC>ggdd
+nnoremap \sv :-1read $HOME/Plantillas/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=CUS_NAME<ENTER><ESC>n"_c4l<C-R>=CUS_VER<ENTER><ESC>
 
 "" CVS
 " Insert CVS header
