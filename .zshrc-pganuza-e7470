@@ -40,7 +40,7 @@ znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documentos/KnowHow/wiki' '~/Documento
 
 # Currently working
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR" "$CUSTOMER_DIR_CVS" )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR_CVS" "$CUSTOMER_DIR" )
 
 # Just throw a fast query 
 alias query='sqlturbo.py -u $DB -f $DBF'
