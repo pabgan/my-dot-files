@@ -293,6 +293,11 @@ task_info(){
 }
 alias ti='task_info'
 task_start(){
+	if [ -z $1 ];
+	then
+		echo "Usage: task_start task_name"
+		return 1;
+	fi
 	export TASK=$1
 	jrnl "Comenzando con @$TASK."
 	take $TASK

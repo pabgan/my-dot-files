@@ -13,6 +13,7 @@ export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib:$LD_LIBRARY_PATH
 # Corporate mounts
 alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/assianet-home"
 alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/corp /mnt/assianet-corp"
+alias mount-onedrive='rclone mount $(basename $(pwd)): onedrive'
 
 # Backup important work info into external HDD
 alias backup-pganuza-e7470="rsync -avh --delete-after ~/.* ~/Plantillas ~/Software ~/Trabajo ~/Workspace/system-level_test_plan ~/Workspace/drafts  /run/media/pganuza/pganuza-backups/"
@@ -39,7 +40,7 @@ znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documentos/KnowHow/wiki' '~/Documento
 
 # Currently working
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR" "$CUSTOMER_DIR_CVS" )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR_CVS" "$CUSTOMER_DIR" )
 
 # Just throw a fast query 
 alias query='sqlturbo.py -u $DB -f $DBF'

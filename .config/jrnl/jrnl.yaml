@@ -1,0 +1,15 @@
+default_hour: 9
+default_minute: 0
+editor: vim
+encrypt: false
+highlight: true
+indent_character: '|'
+journals:
+  default: ~/.todo-txt/trabajo-journal.txt
+  personal: ~/.todo-txt/personal-journal.txt
+  trabajo: ~/.todo-txt/trabajo-journal.txt
+linewrap: 79
+tagsymbols: '@'
+template: false
+timeformat: '%Y-%m-%d %H:%M'
+version: v2.0.1
