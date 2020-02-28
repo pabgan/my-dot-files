@@ -46,7 +46,7 @@ alias view='vim -R'
 
 # tmux
 export SHELL=$SSHHOME/bashsshrc
-alias m="tmux -S /tmp/pablomuxserver"
+alias m="tmux -f $SSHHOME/.sshrc.d/.tmux.conf"
 
 # Others
 #alias diff='diff --color=auto'
