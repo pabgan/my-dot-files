@@ -22,7 +22,7 @@ if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'set -g prefix C-o'
 
 ##################################################################################
 ### LOCK [2]
-set -g lock-command tlock
+set -g lock-command vlock
 # Seconds; 0 = never
 if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -g lock-after-time 300' 'setw -g lock-after-time 0' 
 
