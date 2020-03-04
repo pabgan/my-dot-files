@@ -101,7 +101,7 @@ alias v=view
 alias fm='ranger'
 alias mv='mv -b' # create a backup if file exists
 zle -N open-file-widget
-bindkey '^O' open-file-widget
+bindkey '^ ' open-file-widget
 
 #########################################################
 ## PLUGINS CONFIGURATION
