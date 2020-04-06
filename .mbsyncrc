@@ -1,0 +1,19 @@
+IMAPStore pabloganuza@gmail.com@remote
+Host imap.gmail.com
+Port 993
+User pabloganuza@gmail.com
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore pabloganuza@gmail.com@local
+Path ~/Documentos/correo/pabloganuza@gmail.com/
+Inbox ~/Documentos/correo/pabloganuza@gmail.com/INBOX
+Subfolders Verbatim
+
+Channel pabloganuza@gmail.com
+Master :pabloganuza@gmail.com@remote:
+Slave :pabloganuza@gmail.com@local:
+Create Both
+Expunge Both
+Patterns *
+SyncState *
