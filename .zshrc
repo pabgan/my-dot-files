@@ -163,6 +163,9 @@ alias ipinternal='ipconfig getifaddr en0'
 # Vim with system clipboard support
 #alias vim="gvim -v"
 
+# Change default permissions for new directories and files [9]
+umask 002
+
 #########################################################
 ## USEFUL FUNCTIONS
 #
@@ -342,3 +345,4 @@ task_get_name_from_path
 # [6]: http://xahlee.info/linux/linux_Ctrl-s_freeze_vi.html
 # [7]: https://superuser.com/questions/285381/how-does-the-tmux-color-palette-work
 # [8]: https://wiki.archlinux.org/index.php/Ranger
+# [9]: https://geek-university.com/linux/set-the-default-permissions-for-newly-created-files/
