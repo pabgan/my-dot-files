@@ -38,15 +38,15 @@ function dbconn() {
 
 # Currently working
 customer_info_file=$HOME/Documentos/Releases/.customers-info.csv
-export CUSTOMER='pldt'
-export CUSTOMER_NAME=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')
+export CUSTOMER='centurylink'
+export CUSTOMER_NAME="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')"
 export CUSTOMER_ENV=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')
 export CUSTOMER_DB=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')
 export CUSTOMER_VER='5.5.0'
 export DBF='plain'
 export CUSTOMER_DIR="$HOME/Documentos/Releases/$CUSTOMER/$CUSTOMER_VER"
 export CUSTOMER_DIR_CVS="$HOME/Workspace/expresse/dsloExpresse/releases/$CUSTOMER/"
-alias cdir='cd $CUSTOMER_DIR'
+alias cdc='cd $CUSTOMER_DIR'
 
 task_ticket(){
 	task_get_name_from_path

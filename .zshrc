@@ -62,7 +62,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(history pass sudo zsh-navigation-tools extract zsh-syntax-highlighting jira)
+plugins=(history pass sudo zsh-navigation-tools extract zsh-syntax-highlighting jira fasd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -283,7 +283,7 @@ fi
 alias et='e $TASK.md'
 task_get_name_from_path(){
 	# Extract current directory name
-	export TASK=$(basename $(pwd))
+	export TASK=$(basename $(cut -d' ' -f1 <(pwd)))
 }
 alias tgn='task_get_name_from_path'
 task_info(){
