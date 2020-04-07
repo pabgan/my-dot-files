@@ -8,7 +8,7 @@ CertificateFile /etc/ssl/certs/ca-certificates.crt
 MaildirStore pabloganuza@gmail.com@local
 Path ~/Documentos/correo/pabloganuza@gmail.com/
 Inbox ~/Documentos/correo/pabloganuza@gmail.com/INBOX
-Subfolders Verbatim
+#Subfolders Verbatim
 
 Channel pabloganuza@gmail.com
 Master :pabloganuza@gmail.com@remote:
