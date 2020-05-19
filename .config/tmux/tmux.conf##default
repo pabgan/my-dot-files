@@ -36,7 +36,8 @@ if-shell '[ $(echo "$(tmux -V | cut -d" " -f2 | sed "s/[a-z]//") >= 2.1" | bc) -
 ### APPEARANCE
 #
 # Fix VIM not having colors' dark variant [5]
-set -g default-terminal "xterm-256color"
+#set -g default-terminal "xterm-256color"
+#set -g default-terminal "tmux-256color"
 
 # Make current window invert colors on status bar
 if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -g status-style bg=colour6' 'setw -g status-style bg=green'
