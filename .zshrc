@@ -79,7 +79,7 @@ setopt nosharehistory
 #if [[ -n $SSH_CONNECTION ]]; then
 #	export EDITOR='vim'
 #else
-	export EDITOR='vim'
+	export EDITOR='nvim'
 #fi
 
 # Compilation flags
@@ -124,7 +124,7 @@ export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 
 t (){
-	todo.sh -a $@
+	todo-txt -a $@
 }
 compdef _todo.sh t
 
@@ -143,8 +143,14 @@ alias ma="m attach -t"
 # sshrc
 # Make sshrc autocomplete hosts like ssh does [2]
 compdef sshrc=ssh
+
+# YADM
+alias yadm='yadm --yadm-repo $XDG_CONFIG_HOME/yadm/repo.git'
 # Make yadm autocomplete like git does
 compdef yadm=git
+
+# irssi
+alias irssi='irssi --config="$XDG_CONFIG_HOME/irssi/config"'
 
 # less [1]
 export LESS='-R -C -M -I -j 10 -# 4'
@@ -327,7 +333,7 @@ alias tr='task_resume'
 ## FINALLY
 #
 # Activate fzf shortcuts
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 # Always start or attach to default Tmux session if connected through SSH
 if [[ -n $SSH_CONNECTION ]]; then
