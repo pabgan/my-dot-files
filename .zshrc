@@ -302,7 +302,7 @@ task_start(){
 	export TASK=$1
 	jrnl "Comenzando con @$TASK."
 	take $TASK
-	mn $TASK
+	tmux rename-session $TASK
 }
 task_resume(){
 	task_get_name_from_path
@@ -314,7 +314,7 @@ task_resume(){
 		return 0;
 	else
 		echo "task session not found, opening one..."
-		mn $TASK
+		tmux rename-session $TASK
 	fi
 }
 
