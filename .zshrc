@@ -79,7 +79,7 @@ setopt nosharehistory
 #if [[ -n $SSH_CONNECTION ]]; then
 #	export EDITOR='vim'
 #else
-	export EDITOR='vim'
+	export EDITOR='nvim'
 #fi
 
 # Compilation flags
@@ -280,12 +280,10 @@ fi
 #
 # TODO: Create one function only that starts task or resumes it
 #       depending on wether it finds a directory with that name
-alias et='e $TASK.md'
 task_get_name_from_path(){
 	# Extract current directory name
 	export TASK=$(basename $(cut -d' ' -f1 <(pwd)))
 }
-alias tgn='task_get_name_from_path'
 task_info(){
 	task_get_name_from_path
 	echo Notes
@@ -295,7 +293,6 @@ task_info(){
 	echo -----
 	t ls +$TASK
 }
-alias ti='task_info'
 task_start(){
 	if [ -z $1 ];
 	then
@@ -307,7 +304,6 @@ task_start(){
 	take $TASK
 	mn $TASK
 }
-alias ts='task_start'
 task_resume(){
 	task_get_name_from_path
 	jrnl "Continuando con @$TASK."
@@ -321,7 +317,6 @@ task_resume(){
 		mn $TASK
 	fi
 }
-alias tr='task_resume'
 
 #########################################################
 ## FINALLY
