@@ -62,7 +62,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(history pass sudo zsh-navigation-tools extract zsh-syntax-highlighting jira fasd)
+plugins=(history pass sudo zsh-navigation-tools extract zsh-syntax-highlighting fasd)
 
 source $ZSH/oh-my-zsh.sh
 

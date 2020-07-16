@@ -9,6 +9,7 @@ alias rm='trash'
 
 #export JAVA_HOME="/usr/java/jdk1.8.0_73/"
 export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib:$LD_LIBRARY_PATH
+export SQLPATH=$HOME/.local/share/sqlcl/
 
 # Corporate mounts
 alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/assianet-home"
@@ -36,7 +37,12 @@ addics() {
 
 # Add some useful paths to the hotlist for n-cd
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '=====================================pganuza-e7470rc====' )
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documentos/KnowHow/wiki' '~/Documentos/Releases/qa' '~/Workspace/expresse/dsloExpresse/releases' '~/Workspace/system_level_test_plan/' '~/Workspace/qa/naming_conventions_test/' '~/Workspace/expresse/dsloExpresseAdditional/tools/releaseTestingTools/log_verification_tool' )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documentos/KnowHow/wiki/'
+                                        '~/Documentos/QA/'
+                                        '~/Repositorios/ASSIA/expresse/dsloExpresse/releases/'
+                                        '~/Repositorios/ASSIA/expresse-qa/naming_conventions_test/'
+                                        '~/Repositorios/ASSIA/expresse/dsloExpresseAdditional/tools/releaseTestingTools/'
+                                        '~/Repositorios/ASSIA/expresse/dsloExpresseAdditional/tools/releaseTestingTools/system_level_test_plan/' )
 
 # Currently working
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
