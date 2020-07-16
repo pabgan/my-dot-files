@@ -26,6 +26,13 @@ set background=dark
 colorscheme ron
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NETRW
+" [6]
+let g:netrw_winsize = 25
+let g:netrw_browse_split = 4
+"let g:netrw_altv = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUILT IN FUZZY SEARCH [2]
 " 
 " Search down into subfolders recursively
@@ -137,6 +144,7 @@ inoremap <TAB><Space> <ESC>/<++><Enter>"_c4l
 
 " Let me decide between snippets (Insert Snippet)
 nnoremap \s<TAB> :read $HOME/Plantillas/snippets/<C-Z>
+"nnoremap \s<TAB> :read $HOME/Plantillas/snippets/<C-Z>:set nopaste<C-Z>i<TAB><Space>
 
 "" JIRA
 " Insert SCENARIO divider
@@ -164,7 +172,7 @@ nnoremap \sp :read $HOME/Plantillas/snippets/jira-pass.txt<CR>
 nnoremap \sf :read $HOME/Plantillas/snippets/jira-fail.txt<CR>
 nnoremap \ss :read $HOME/Plantillas/snippets/jira-skipped.txt<CR>
 " Insert "verified" sentence
-nnoremap \sv :-1read $HOME/Plantillas/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=CUSTOMER_NAME<ENTER><ESC>n"_c4l<C-R>=CUSTOMER_VER<ENTER><ESC>
+nnoremap \sv :-1read $HOME/Plantillas/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=CUSTOMER_ENV<ENTER><ESC>n"_c4l<C-R>=CUSTOMER_VER<ENTER><ESC>
 
 "" CVS
 " Insert CVS header
@@ -216,15 +224,9 @@ if $CLASS == "trabajo"
 	let CUSTOMER_NAME=$CUSTOMER_NAME
 	let CUSTOMER_DB=$CUSTOMER_DB
 	let DBF=$DBF
-	let TASK=$TASK
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NETRW
-" [6]
-let g:netrw_winsize = 25
-let g:netrw_browse_split = 4
-"let g:netrw_altv = 1
+let TASK=$TASK
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES
