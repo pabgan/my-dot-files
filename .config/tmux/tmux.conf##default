@@ -4,7 +4,7 @@
 # enable vim like keybindings
 set-window-option -g mode-keys vi
 # reload tmux conf with <C-B>r [1]
-bind r source-file $XDG_CONFIG_HOME/tmux/tmux.conf \; display "Configuration reloaded."
+bind r source-file $HOME/.config/tmux/tmux.conf \; display "Configuration reloaded."
 # Move across panes VI like
 bind-key H select-pane -L
 bind-key J select-pane -D
@@ -36,7 +36,8 @@ if-shell '[ $(echo "$(tmux -V | cut -d" " -f2 | sed "s/[a-z]//") >= 2.1" | bc) -
 ### APPEARANCE
 #
 # Fix VIM not having colors' dark variant [5]
-set -g default-terminal "xterm-256color"
+#set -g default-terminal "xterm-256color"
+#set-option -ga terminal-overrides ",xterm-256color:Tc"
 
 # Make current window invert colors on status bar
 if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -g status-style bg=colour6' 'setw -g status-style bg=green'
@@ -47,7 +48,7 @@ if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'setw -ag window-status-c
 # Make display of messages last longer
 set-option -g display-time 3000
 # More room for session name
-set-option -g status-left-length 13
+set-option -g status-left-length 20
 
 # Disable automatic renaming of windows, it is driving me nuts
 set-window-option -g automatic-rename off
