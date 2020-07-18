@@ -124,7 +124,7 @@ export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 
 t (){
-	todo-txt -a $@
+	todo-txt -d $XDG_CONFIG_HOME/todo/config -a $@
 }
 compdef _todo.sh t
 
@@ -203,7 +203,7 @@ pid2() {
 # Search a file with fzf and then open it in an editor
 #alias sc='fzf | xargs $EDITOR'
 open-file-widget() {
-	BUFFER="$EDITOR $BUFFER"
+	BUFFER="mimeopen $BUFFER"
 	zle accept-line
 }
 
@@ -253,6 +253,11 @@ source_personal() {
 	source $HOME/.zshrc-personal
 }
 
+source_maFalda() {
+	echo "+ sourcing .zshrc-maFalda"
+	source $HOME/.zshrc-maFalda
+}
+
 source_dumBo() {
 	echo "+ sourcing .zshrc-dumBo"
 	source $HOME/.zshrc-dumBo
@@ -269,6 +274,7 @@ elif [ "$hostname" = "pganuza-dev.assia-inc.com" ]; then
 elif [ "$hostname" = "maFalda" ]; then 
 	echo "sourcing configuration for maFalda"
 	source_personal
+	source_maFalda
 elif [ "$hostname" = "bagHeera" ]; then 
 	echo "sourcing configuration for bagHeera"
 	source_personal
