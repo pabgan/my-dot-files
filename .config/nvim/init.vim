@@ -26,6 +26,13 @@ set background=dark
 colorscheme ron
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NETRW
+" [6]
+let g:netrw_winsize = 25
+let g:netrw_browse_split = 4
+"let g:netrw_altv = 1
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUILT IN FUZZY SEARCH [2]
 " 
 " Search down into subfolders recursively
@@ -94,7 +101,7 @@ nmap <C-S><C-P> :set paste!<CR>
 
 " ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
-nnoremap <C-X><C-Q> yap}pvip:s/%/\\\%/ge<CR>vipd:-1read !~/.local/bin/sqlturbo.py -u <C-R>=CUS_DB<CR> -f <C-R>=DBF<CR> "<C-R>""<CR>
+nnoremap <C-X><C-Q> yap}pvip:s/%/\\\%/ge<CR>vipd:-1read !~/.local/bin/sqlturbo.py -u <C-R>=CUSTOMER_DB<CR> -f <C-R>=DBF<CR> "<C-R>""<CR>
 " desc(ribe) table or view
 nnoremap <C-X><C-D> viw<ESC>b<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
 nnoremap <C-X><C-V> viwyo<CR>select text from user_views where view_name='<C-R>"';<ESC>o<ESC>kvip:call slime#send_op(visualmode(), 1)<cr>u
@@ -137,6 +144,7 @@ inoremap <TAB><Space> <ESC>/<++><Enter>"_c4l
 
 " Let me decide between snippets (Insert Snippet)
 nnoremap \s<TAB> :read $HOME/Plantillas/snippets/<C-Z>
+"nnoremap \s<TAB> :read $HOME/Plantillas/snippets/<C-Z>:set nopaste<C-Z>i<TAB><Space>
 
 "" JIRA
 " Insert SCENARIO divider
@@ -164,7 +172,7 @@ nnoremap \sp :read $HOME/Plantillas/snippets/jira-pass.txt<CR>
 nnoremap \sf :read $HOME/Plantillas/snippets/jira-fail.txt<CR>
 nnoremap \ss :read $HOME/Plantillas/snippets/jira-skipped.txt<CR>
 " Insert "verified" sentence
-nnoremap \sv :-1read $HOME/Plantillas/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=CUS_NAME<ENTER><ESC>n"_c4l<C-R>=CUS_VER<ENTER><ESC>
+nnoremap \sv :-1read $HOME/Plantillas/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=CUSTOMER_ENV<ENTER><ESC>n"_c4l<C-R>=CUSTOMER_VER<ENTER><ESC>
 
 "" CVS
 " Insert CVS header
@@ -210,23 +218,15 @@ let g:autotagTagsFile=".tags"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VARIABLES
 "
-"if $CLASS == "trabajo"
-	let CUS_ENV=$CUSTOMER_ENV
-	let CUS_VER=$CUSTOMER_VER
-	let CUS_NAME=$CUSTOMER_NAME
-	let CUS_DB=$CUSTOMER_DB
+if $CLASS == "trabajo"
+	let CUSTOMER_ENV=$CUSTOMER_ENV
+	let CUSTOMER_VER=$CUSTOMER_VER
+	let CUSTOMER_NAME=$CUSTOMER_NAME
+	let CUSTOMER_DB=$CUSTOMER_DB
 	let DBF=$DBF
-	let TASK=$TASK
-"endif
+endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NETRW
-" [6]
-"let g:netrw_banner = 0
-"let g:netrw_liststyle = 3
-"let g:netrw_browse_split = 4
-"let g:netrw_altv = 1
-"let g:netrw_winsize = 25
+let TASK=$TASK
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES

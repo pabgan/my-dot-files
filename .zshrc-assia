@@ -24,7 +24,7 @@ alias cvs-checkout='cvs co -r'
 alias wget_sqls='wget -r -np -l1 -R "index.html*" --no-directories '
 
 # Add paths where I store scripts
-export PATH=$PATH:$HOME/.sqlcl/bin
+export PATH=$PATH:$HOME/.local/sqlcl/bin
 
 # Connect to a database
 function dbconn() {
@@ -38,19 +38,18 @@ function dbconn() {
 
 # Currently working
 customer_info_file=$HOME/Documentos/Releases/.customers-info.csv
-export CUSTOMER='centurylink'
+export CUSTOMER='demo-b'
 export CUSTOMER_NAME="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')"
 export CUSTOMER_ENV=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')
 export CUSTOMER_DB=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')
-export CUSTOMER_VER='5.5.0'
+export CUSTOMER_VER='5.5.1'
 export DBF='plain'
-export CUSTOMER_DIR="$HOME/Documentos/Releases/$CUSTOMER/$CUSTOMER_VER"
-export CUSTOMER_DIR_CVS="$HOME/Workspace/expresse/dsloExpresse/releases/$CUSTOMER/"
+export CUSTOMER_DIR="$HOME/Documentos/Releases/$CUSTOMER_NAME/$CUSTOMER_VER"
+export CUSTOMER_DIR_CVS="$HOME/Workspace/expresse/dsloExpresse/releases/$CUSTOMER_NAME/"
 alias cdc='cd $CUSTOMER_DIR'
 
 task_ticket(){
 	task_get_name_from_path
 	jira $TASK
 }
-alias tt='task_ticket'
 

@@ -62,7 +62,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(history pass sudo zsh-navigation-tools extract zsh-syntax-highlighting jira fasd)
+plugins=(history pass sudo zsh-navigation-tools extract zsh-syntax-highlighting fasd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -286,12 +286,10 @@ fi
 #
 # TODO: Create one function only that starts task or resumes it
 #       depending on wether it finds a directory with that name
-alias et='e $TASK.md'
 task_get_name_from_path(){
 	# Extract current directory name
 	export TASK=$(basename $(cut -d' ' -f1 <(pwd)))
 }
-alias tgn='task_get_name_from_path'
 task_info(){
 	task_get_name_from_path
 	echo Notes
@@ -301,7 +299,6 @@ task_info(){
 	echo -----
 	t ls +$TASK
 }
-alias ti='task_info'
 task_start(){
 	if [ -z $1 ];
 	then
@@ -311,9 +308,8 @@ task_start(){
 	export TASK=$1
 	jrnl "Comenzando con @$TASK."
 	take $TASK
-	mn $TASK
+	tmux rename-session $TASK
 }
-alias ts='task_start'
 task_resume(){
 	task_get_name_from_path
 	jrnl "Continuando con @$TASK."
@@ -324,10 +320,9 @@ task_resume(){
 		return 0;
 	else
 		echo "task session not found, opening one..."
-		mn $TASK
+		tmux rename-session $TASK
 	fi
 }
-alias tr='task_resume'
 
 #########################################################
 ## FINALLY
