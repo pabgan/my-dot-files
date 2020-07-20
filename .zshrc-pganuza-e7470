@@ -51,6 +51,13 @@ znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR_CVS" "$CUSTOMER_DIR" )
 # Just throw a fast query 
 alias query='sqlturbo.py -u $DB -f $DBF'
 
+#########################################################
+## TASK MANAGEMENT
+#
+task_start_specifics(){
+	jira-turbo.py query --issue $TASK --summary > .title
+}
+
 ################################################
 # SOURCES
 # [1] https://superuser.com/questions/271986/execute-a-command-from-another-directory-in-bash#271992
