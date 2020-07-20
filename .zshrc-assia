@@ -34,7 +34,7 @@ function dbconn() {
 }
 
 # Currently working
-customer_info_file=$HOME/Documentos/Releases/.customers-info.csv
+customer_info_file=$HOME/Documentos/Releases/customers-info.csv
 export CUSTOMER='demo-b'
 export CUSTOMER_NAME="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')"
 export CUSTOMER_ENV=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')
