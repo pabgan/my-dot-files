@@ -124,7 +124,7 @@ export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 
 t (){
-	todo.sh -a $@
+	todo-txt -d $XDG_CONFIG_HOME/todo/config -a $@
 }
 compdef _todo.sh t
 
@@ -143,8 +143,14 @@ alias ma="m attach -t"
 # sshrc
 # Make sshrc autocomplete hosts like ssh does [2]
 compdef sshrc=ssh
+
+# YADM
+alias yadm='yadm --yadm-repo $XDG_CONFIG_HOME/yadm/repo.git'
 # Make yadm autocomplete like git does
 compdef yadm=git
+
+# irssi
+alias irssi='irssi --config="$XDG_CONFIG_HOME/irssi/config"'
 
 # less [1]
 export LESS='-R -C -M -I -j 10 -# 4'
@@ -197,7 +203,7 @@ pid2() {
 # Search a file with fzf and then open it in an editor
 #alias sc='fzf | xargs $EDITOR'
 open-file-widget() {
-	BUFFER="$EDITOR $BUFFER"
+	BUFFER="mimeopen $BUFFER"
 	zle accept-line
 }
 
@@ -295,6 +301,11 @@ source_personal() {
 	source $HOME/.zshrc-personal
 }
 
+source_maFalda() {
+	echo "+ sourcing .zshrc-maFalda"
+	source $HOME/.zshrc-maFalda
+}
+
 source_dumBo() {
 	echo "+ sourcing .zshrc-dumBo"
 	source $HOME/.zshrc-dumBo
@@ -311,6 +322,7 @@ elif [ "$hostname" = "pganuza-dev.assia-inc.com" ]; then
 elif [ "$hostname" = "maFalda" ]; then 
 	echo "sourcing configuration for maFalda"
 	source_personal
+	source_maFalda
 elif [ "$hostname" = "bagHeera" ]; then 
 	echo "sourcing configuration for bagHeera"
 	source_personal
@@ -327,7 +339,7 @@ fi
 ## FINALLY
 #
 # Activate fzf shortcuts
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 # Always start or attach to default Tmux session if connected through SSH
 if [[ -n $SSH_CONNECTION ]]; then
