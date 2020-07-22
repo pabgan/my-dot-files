@@ -236,6 +236,54 @@ cm(){
 }
 
 #########################################################
+## TASK MANAGEMENT
+#
+# TODO: Create one function only that starts task or resumes it
+#       depending on wether it finds a directory with that name
+task_get_name_from_path(){
+	# Extract current directory name
+	export TASK=$(basename $(cut -d' ' -f1 <(pwd)))
+}
+task_info(){
+	task_get_name_from_path
+	echo Notes
+	echo -----
+	jrnl @$TASK
+	echo Tasks
+	echo -----
+	t ls +$TASK
+}
+task_start(){
+	if [ -z $1 ];
+	then
+		echo "Usage: task_start task_name"
+		return 1;
+	fi
+	export TASK=$1
+	jrnl "Comenzando con @$TASK."
+	take $TASK
+	tmux rename-session $TASK
+	task_start_specifics
+}
+task_resume(){
+	task_get_name_from_path
+	jrnl "Continuando con @$TASK. $1"
+	if tmux ls | grep "$TASK" &> /dev/null ;
+	then
+		echo "task session found, attaching..."
+		ma $TASK
+		return 0;
+	else
+		echo "task session not found, opening one..."
+		tmux rename-session $TASK
+	fi
+}
+task_start_specifics(){
+	# Nothing to do by default.
+	# To be overriden by environment specific configurations
+}
+
+#########################################################
 ## SOURCE
 #
 # specific files depending on host
@@ -286,49 +334,6 @@ elif [ "$hostname" = "dumBo" ]; then
 	source_personal
 	source_dumBo
 fi
-
-#########################################################
-## TASK MANAGEMENT
-#
-# TODO: Create one function only that starts task or resumes it
-#       depending on wether it finds a directory with that name
-task_get_name_from_path(){
-	# Extract current directory name
-	export TASK=$(basename $(cut -d' ' -f1 <(pwd)))
-}
-task_info(){
-	task_get_name_from_path
-	echo Notes
-	echo -----
-	jrnl @$TASK
-	echo Tasks
-	echo -----
-	t ls +$TASK
-}
-task_start(){
-	if [ -z $1 ];
-	then
-		echo "Usage: task_start task_name"
-		return 1;
-	fi
-	export TASK=$1
-	jrnl "Comenzando con @$TASK."
-	take $TASK
-	tmux rename-session $TASK
-}
-task_resume(){
-	task_get_name_from_path
-	jrnl "Continuando con @$TASK."
-	if tmux ls | grep "$TASK" &> /dev/null ;
-	then
-		echo "task session found, attaching..."
-		ma $TASK
-		return 0;
-	else
-		echo "task session not found, opening one..."
-		tmux rename-session $TASK
-	fi
-}
 
 #########################################################
 ## FINALLY
