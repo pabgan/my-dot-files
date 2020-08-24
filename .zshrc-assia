@@ -18,10 +18,17 @@ alias se='sshrc user@$CUSTOMER_ENV.assia-inc.com'
 export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
 alias cvs-update='cvs update -PAd'
 alias cvs-discard_changes='cvs-update -C'
-alias cvs-checkout='cvs co -r'
+alias cvs-checkout='cvs co -r HEAD'
 
 # Download SQL files from a release
-alias wget_sqls='wget -r -np -l1 -R "index.html*" --no-directories '
+wget_sqls() {
+	# http://rc-build-01.assia-inc.com/releases/DEMO/DELIVERED/5.5.3/sql/
+	customer_clean=$(echo $CUSTOMER | cut -d'-' -f1 | tr '[:lower:]' '[:upper:]') # the cut is needed for demo-X _customers_
+	url_delivered="http://rc-build-01.assia-inc.com/releases/$customer_clean/DELIVERED/$CUSTOMER_VER/sql"
+	url_delivered_not="http://rc-build-01.assia-inc.com/releases/$customer_clean/TO_BE_DELIVERED/$CUSTOMER_VER/sql"
+	wget -r -np -l1 -R "index.html*" --no-directories $url_delivered
+	wget -r -np -l1 -R "index.html*" --no-directories $url_delivered_not
+}
 
 # Connect to a database
 function dbconn() {
@@ -35,14 +42,14 @@ function dbconn() {
 
 # Currently working
 customer_info_file=$HOME/Documentos/Releases/customers-info.csv
-export CUSTOMER='demo-b'
+export CUSTOMER='demo-c'
 export CUSTOMER_NAME="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')"
-export CUSTOMER_ENV=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')
-export CUSTOMER_DB=$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')
-export CUSTOMER_VER='5.5.1'
+export CUSTOMER_ENV="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')"
+export CUSTOMER_DB="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')"
+export CUSTOMER_VER="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'5')"
 export DBF='plain'
 export CUSTOMER_DIR="$HOME/Documentos/Releases/$CUSTOMER_NAME/$CUSTOMER_VER"
-export CUSTOMER_DIR_CVS="$HOME/Workspace/expresse/dsloExpresse/releases/$CUSTOMER_NAME/"
+export CUSTOMER_DIR_CVS="$HOME/Repositorios/ASSIA/expresse/dsloExpresse/releases/$CUSTOMER_NAME/"
 alias cdc='cd $CUSTOMER_DIR'
 
 task_ticket(){
