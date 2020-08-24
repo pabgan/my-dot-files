@@ -146,6 +146,12 @@ inoremap <TAB><Space> <ESC>/<++><Enter>"_c4l
 nnoremap \s<TAB> :read $HOME/Plantillas/snippets/<C-Z>
 "nnoremap \s<TAB> :read $HOME/Plantillas/snippets/<C-Z>:set nopaste<C-Z>i<TAB><Space>
 
+"" MarkDown
+" Insert image
+nnoremap \si diWa![<C-R>"](<C-R>")<ESC>
+" Insert link
+nnoremap \sl diWa[<C-R>"](<C-R>")<ESC>
+
 "" JIRA
 " Insert SCENARIO divider
 nnoremap \sS :read $HOME/Plantillas/snippets/jira-scenario.txt<CR>/<++><Enter>"_c4l
