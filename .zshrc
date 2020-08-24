@@ -246,12 +246,15 @@ task_get_name_from_path(){
 }
 task_info(){
 	task_get_name_from_path
-	echo Notes
-	echo -----
-	jrnl @$TASK
-	echo Tasks
-	echo -----
+	echo "~~~~~~~~~~~~~~~~~ $TASK info ~~~~~~~~~~~~~~~~~"
+	echo 'Tasks'
+	echo '-----'
 	t ls +$TASK
+	echo ''
+	echo 'Notes'
+	echo '-----'
+	jrnl +$TASK
+	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 }
 task_start(){
 	if [ -z $1 ];
@@ -260,27 +263,34 @@ task_start(){
 		return 1;
 	fi
 	export TASK=$1
-	jrnl "Comenzando con @$TASK."
 	take $TASK
 	tmux rename-session $TASK
 	task_start_specifics
-}
-task_resume(){
-	task_get_name_from_path
-	jrnl "Continuando con @$TASK. $1"
-	if tmux ls | grep "$TASK" &> /dev/null ;
-	then
-		echo "task session found, attaching..."
-		ma $TASK
-		return 0;
-	else
-		echo "task session not found, opening one..."
-		tmux rename-session $TASK
-	fi
+	jrnl "Comenzando con +$TASK. $(cat .title)"
+	echo ''
+	task_info
 }
 task_start_specifics(){
 	# Nothing to do by default.
 	# To be overriden by environment specific configurations
+}
+task_resume(){
+	task_get_name_from_path
+	jrnl "Continuando con +$TASK - $(cat .title). $1"
+	if tmux ls | grep "$TASK" &> /dev/null ;
+	then
+		echo "task session found, attaching..."
+		tmux switch-client -t $TASK
+	else
+		echo "task session not found, opening one..."
+		tmux rename-session $TASK
+	fi
+	echo ''
+	task_info
+}
+task_close(){
+	task_get_name_from_path
+	jrnl "+$TASK cerrado - $(cat .title). $1"
 }
 
 #########################################################
@@ -339,14 +349,13 @@ fi
 ## FINALLY
 #
 # Activate fzf shortcuts
-source /usr/share/doc/fzf/examples/key-bindings.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Always start or attach to default Tmux session if connected through SSH
 if [[ -n $SSH_CONNECTION ]]; then
 	tmuxstart
 fi
-task_get_name_from_path
-		
+
 #########################################################
 # SOURCES
 # [1]: https://opensource.com/article/18/5/advanced-use-less-text-file-viewer

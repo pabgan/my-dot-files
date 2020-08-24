@@ -55,7 +55,8 @@ alias query='sqlturbo.py -u $DB -f $DBF'
 ## TASK MANAGEMENT
 #
 task_start_specifics(){
-	jira-turbo.py query --issue $TASK --summary > .title
+	jira-turbo.py query --issue $TASK --field 'summary' > .title
+	jira-turbo.py assign --issue $TASK --value '5bd7a4938995b717bb1b86dd'
 }
 
 ################################################
