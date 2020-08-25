@@ -290,7 +290,8 @@ task_resume(){
 }
 task_close(){
 	task_get_name_from_path
-	jrnl "+$TASK cerrado - $(cat .title). $1"
+	jrnl "+$TASK cerrado - $(sed 's/:/,/g' .title). $1"
+#	task_info
 }
 
 #########################################################
