@@ -62,7 +62,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(history pass sudo zsh-navigation-tools extract zsh-syntax-highlighting fasd)
+plugins=(history pass sudo zsh-navigation-tools extract fasd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -351,6 +351,9 @@ fi
 #
 # Activate fzf shortcuts
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Activate syntax highlighting
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Always start or attach to default Tmux session if connected through SSH
 if [[ -n $SSH_CONNECTION ]]; then
