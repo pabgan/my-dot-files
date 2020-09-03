@@ -20,6 +20,12 @@ alias cvs-update='cvs update -PAd'
 alias cvs-discard_changes='cvs-update -C'
 alias cvs-checkout='cvs co -r HEAD'
 
+# Get version installed on a customer's support environment
+get_customer_versions(){
+	ssh $1 'ls install'
+}
+compdef get_customer_versions=ssh
+
 # Download SQL files from a release
 wget_sqls() {
 	# http://rc-build-01.assia-inc.com/releases/DEMO/DELIVERED/5.5.3/sql/
