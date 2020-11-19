@@ -28,8 +28,8 @@ colorscheme ron
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NETRW
 " [6]
-let g:netrw_winsize = 25
-let g:netrw_browse_split = 4
+"let g:netrw_winsize = 25
+"let g:netrw_browse_split = 4
 "let g:netrw_altv = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -143,8 +143,8 @@ nnoremap <C-I><C-C> vecClosed<ESC>
 inoremap <TAB><Space> <ESC>/<++><Enter>"_c4l
 
 " Let me decide between snippets (Insert Snippet)
-nnoremap \s<TAB> :read $HOME/Plantillas/snippets/<C-Z>
-"nnoremap \s<TAB> :read $HOME/Plantillas/snippets/<C-Z>:set nopaste<C-Z>i<TAB><Space>
+nnoremap \s<TAB> :read $HOME/Templates/snippets/<C-Z>
+"nnoremap \s<TAB> :read $HOME/Templates/snippets/<C-Z>:set nopaste<C-Z>i<TAB><Space>
 
 "" MarkDown
 " Insert image
@@ -154,35 +154,35 @@ nnoremap \sl diWa[<C-R>"](<C-R>")<ESC>
 
 "" JIRA
 " Insert SCENARIO divider
-nnoremap \sS :read $HOME/Plantillas/snippets/jira-scenario.txt<CR>/<++><Enter>"_c4l
+nnoremap \sS :read $HOME/Templates/snippets/jira-scenario.txt<CR>/<++><Enter>"_c4l
 " Insert test
-nnoremap \sT :read $HOME/Plantillas/snippets/jira-test.txt<CR>/<++><Enter>"_c4l
+nnoremap \sT :read $HOME/Templates/snippets/jira-test.txt<CR>/<++><Enter>"_c4l
 " Insert a {code:}{code} block
-nnoremap \sc :-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>/<++><Enter>"_c4l
-vnoremap \sc d:-1read $HOME/Plantillas/snippets/jira-code-block.txt<CR>pk/<++><Enter>"_c4l
+nnoremap \sc :-1read $HOME/Templates/snippets/jira-code-block.txt<CR>/<++><Enter>"_c4l
+vnoremap \sc d:-1read $HOME/Templates/snippets/jira-code-block.txt<CR>pk/<++><Enter>"_c4l
 " Insert a {noformat}{noformat} block
-nnoremap \sn :-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>o
-vnoremap \sn d:-1read $HOME/Plantillas/snippets/jira-noformat-block.txt<CR>p
+nnoremap \sn :-1read $HOME/Templates/snippets/jira-noformat-block.txt<CR>o
+vnoremap \sn d:-1read $HOME/Templates/snippets/jira-noformat-block.txt<CR>p
 " Make it no format
 nnoremap \s{ viw<ESC>Bi{{<ESC>Ea}}<ESC>
 " Insert thumbnail
-nnoremap \st WBdW:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>pjddk
-vnoremap \st d:-1read $HOME/Plantillas/snippets/jira-thumbnail-tag.txt<CR>p
+nnoremap \st WBdW:-1read $HOME/Templates/snippets/jira-thumbnail-tag.txt<CR>pjddk
+vnoremap \st d:-1read $HOME/Templates/snippets/jira-thumbnail-tag.txt<CR>p
 " Insert attachment
-nnoremap \sa WBdE:-1read $HOME/Plantillas/snippets/jira-attachment-tag.txt<CR>/<++><Enter>"_c4l<C-R>"<ESC>J
+nnoremap \sa WBdE:-1read $HOME/Templates/snippets/jira-attachment-tag.txt<CR>/<++><Enter>"_c4l<C-R>"<ESC>J
 " [5]
-inoremap \sa <C-R>=system('cat $HOME/Plantillas/snippets/jira-attachment-tag.txt')<CR><ESC>kJB/<++><Enter>"_c4l
-vnoremap \sa d<C-R>=system('cat $HOME/Plantillas/snippets/jira-attachment-tag.txt')<CR><ESC>kJB/<++><Enter>"_c4l
+inoremap \sa <C-R>=system('cat $HOME/Templates/snippets/jira-attachment-tag.txt')<CR><ESC>kJB/<++><Enter>"_c4l
+vnoremap \sa d<C-R>=system('cat $HOME/Templates/snippets/jira-attachment-tag.txt')<CR><ESC>kJB/<++><Enter>"_c4l
 " Insert result tag
-nnoremap \sp :read $HOME/Plantillas/snippets/jira-pass.txt<CR>
-nnoremap \sf :read $HOME/Plantillas/snippets/jira-fail.txt<CR>
-nnoremap \ss :read $HOME/Plantillas/snippets/jira-skipped.txt<CR>
+nnoremap \sp :read $HOME/Templates/snippets/jira-pass.txt<CR>
+nnoremap \sf :read $HOME/Templates/snippets/jira-fail.txt<CR>
+nnoremap \ss :read $HOME/Templates/snippets/jira-skipped.txt<CR>
 " Insert "verified" sentence
-nnoremap \sv :-1read $HOME/Plantillas/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=CUSTOMER_ENV<ENTER><ESC>n"_c4l<C-R>=CUSTOMER_VER<ENTER><ESC>
+nnoremap \sv :-1read $HOME/Templates/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=CUSTOMER_ENV<ENTER><ESC>n"_c4l<C-R>=CUSTOMER_VER<ENTER><ESC>
 
 "" CVS
 " Insert CVS header
-nnoremap \sh :read $HOME/Plantillas/snippets/cvs-header.txt<CR>
+nnoremap \sh :read $HOME/Templates/snippets/cvs-header.txt<CR>
 
 "" Markdown
 " Underline line with =
@@ -198,7 +198,7 @@ vnoremap \s** A**<ESC>`<i**<ESC>`>ll
 
 "" Templates
 " Let me decide between templates (Insert Template)
-nnoremap \t<TAB> :read $HOME/Plantillas/ASSIA/<C-Z>
+nnoremap \t<TAB> :read $HOME/Templates/ASSIA/<C-Z>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DEVELOPMENT TOOLS
@@ -220,6 +220,8 @@ let g:slime_target = "tmux"
 let g:slime_default_config = {"socket_name": "default", "target_pane": "{down-of}"}
 " vim-autotags
 let g:autotagTagsFile=".tags"
+" fzf
+set rtp+=~/Repositorios/fzf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VARIABLES
