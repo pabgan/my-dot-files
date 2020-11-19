@@ -10,15 +10,15 @@ bind-key H select-pane -L
 bind-key J select-pane -D
 bind-key K select-pane -U
 bind-key L select-pane -R
+# Resize pane
+bind-key < resize-pane -L 10
+bind-key > resize-pane -R 10
 # Make current directory default for new windows and panes
 bind-key C attach-session -c "#{pane_current_path}" \; display "Changed directory"
 # Lock session
 bind DC lock-session
 # Change prefix key for remote sessions so they can be accessed right away
 if-shell '[[ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]]' 'set -g prefix C-o'
-# Swap rename window and last pane key binds
-#bind-key -T prefix ; command-prompt -I "#W" "rename-window '%%'"
-#bind-key -T prefix , last-pane
 
 ##################################################################################
 ### LOCK [2]
