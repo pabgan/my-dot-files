@@ -5,7 +5,7 @@ encrypt: false
 highlight: true
 indent_character: '     '
 journals:
-  default: ~/Documentos/organizacion/journal.txt
+  default: ~/Documents/organizacion/journal.txt
 linewrap: 79
 tagsymbols: '@+'
 template: false
