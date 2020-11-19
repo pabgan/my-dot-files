@@ -2,9 +2,6 @@
 #########################################################
 # PGANUZA-E7470
 #
-# TODO.TXT stuff
-source $HOME/.local/bin/todo_completion
-alias tp='todo.sh -a -d ~/.todo/config##class.personal'
 alias rm='trash'
 
 #export JAVA_HOME="/usr/java/jdk1.8.0_73/"
@@ -35,28 +32,57 @@ addics() {
 	sed '/METHOD/d' $ics_file | python $HOME/.scripts/calendar-cli.py --caldav-url="https://guaranuzas.com/nextcloud/remote.php/" --calendar-url="dav/calendars/pablo/trabajo/" --caldav-user=pablo --caldav-pass="$passwd" calendar addics
 }
 
+#########################################################
+# CURRENTLY WORKING
+customer_info_file="$HOME/Documents/Releases/customers-info.csv"
+export CUSTOMER='telefonica_argentina'
+export CUSTOMER_NAME="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')"
+export CUSTOMER_ENV="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')"
+export CUSTOMER_DB="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')"
+export CUSTOMER_VER="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'5')"
+export DBF='plain'
+export CUSTOMER_DIR="$HOME/Documents/Releases/$CUSTOMER/$CUSTOMER_VER"
+export CUSTOMER_DIR_CVS="$HOME/Repositorios/ASSIA/expresse/dsloExpresse/releases/$CUSTOMER/"
+alias cdc='cd $CUSTOMER_DIR'
+
 # Add some useful paths to the hotlist for n-cd
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '=====================================pganuza-e7470rc====' )
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documentos/KnowHow/wiki/'
-                                        '~/Documentos/QA/'
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documents/KnowHow/wiki/'
+                                        '~/Documents/QA/'
                                         '~/Repositorios/ASSIA/expresse/dsloExpresse/releases/'
                                         '~/Repositorios/ASSIA/expresse-qa/naming_conventions_test/'
+                                        '~/Repositorios/ASSIA/expresse-qa/napi_functional_tests/'
                                         '~/Repositorios/ASSIA/expresse/dsloExpresseAdditional/tools/releaseTestingTools/'
                                         '~/Repositorios/ASSIA/expresse/dsloExpresseAdditional/tools/releaseTestingTools/system_level_test_plan/' )
 
-# Currently working
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR_CVS" "$CUSTOMER_DIR" )
 
+#########################################################
+# UTILS
 # Just throw a fast query 
 alias query='sqlturbo.py -u $DB -f $DBF'
+
+# Translate to Jira and copy to clipboard a comment written in Markdown
+cp_jira_comment(){
+	md2jira.sh <( cat README* ) | xclip
+}
+alias cpjc='cp_jira_comment'
 
 #########################################################
 ## TASK MANAGEMENT
 #
 task_start_specifics(){
-	jira-turbo.py query --issue $TASK --field 'summary' > .title
+	jira-turbo.py query --issue $TASK --fields 'summary' > .title
 	jira-turbo.py assign --issue $TASK --value '5bd7a4938995b717bb1b86dd'
+}
+
+task_resume_specifics(){
+	jira_ticket $TASK
+}
+
+jira_ticket(){
+	xdg-open "https://assia-inc.atlassian.net/browse/$1"
 }
 
 ################################################

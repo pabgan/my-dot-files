@@ -45,21 +45,3 @@ function dbconn() {
 		sqlcl $CUSTOMER_DB/assia@db-ref.assia-inc.com:1521:dslo2
 	fi
 }
-
-# Currently working
-customer_info_file=$HOME/Documentos/Releases/customers-info.csv
-export CUSTOMER='demo-c'
-export CUSTOMER_NAME="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')"
-export CUSTOMER_ENV="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')"
-export CUSTOMER_DB="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')"
-export CUSTOMER_VER="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'5')"
-export DBF='plain'
-export CUSTOMER_DIR="$HOME/Documentos/Releases/$CUSTOMER_NAME/$CUSTOMER_VER"
-export CUSTOMER_DIR_CVS="$HOME/Repositorios/ASSIA/expresse/dsloExpresse/releases/$CUSTOMER_NAME/"
-alias cdc='cd $CUSTOMER_DIR'
-
-task_ticket(){
-	task_get_name_from_path
-	jira open $TASK
-}
-

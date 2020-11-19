@@ -112,7 +112,7 @@ bindkey "^G" znt-cd-widget
 #zle -N znt-kill-widget
 #bindkey "^Y" znt-kill-widget
 # Add some useful paths to the hotlist for n-cd
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documentos/Manuales/Linux Knowledge Base/' )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documents/Manuales/Linux Knowledge Base/' )
 # Use ALT+L to lower-case a word and not to execute ls
 bindkey '^[l' down-case-word
 
@@ -231,9 +231,10 @@ tmuxstart() {
 }
 
 # (C)opy (m)ail written in Markdown to clipboard as HTML
-cm(){
+cp_mail(){
 	pandoc -t html $1 | xclip
 }
+alias cpma='cp_mail'
 
 #########################################################
 ## TASK MANAGEMENT
@@ -265,6 +266,8 @@ task_start(){
 	export TASK=$1
 	take $TASK
 	tmux rename-session $TASK
+	# next line does not work
+	#tmux attach-session -c "#{pane_current_path}"
 	task_start_specifics
 	jrnl "Comenzando con +$TASK. $(cat .title)"
 	echo ''
@@ -276,6 +279,7 @@ task_start_specifics(){
 }
 task_resume(){
 	task_get_name_from_path
+	task_resume_specifics
 	jrnl "Continuando con +$TASK - $(cat .title). $1"
 	if tmux ls | grep "$TASK" &> /dev/null ;
 	then
@@ -285,13 +289,19 @@ task_resume(){
 		echo "task session not found, opening one..."
 		tmux rename-session $TASK
 	fi
+	# next line does not work
+	#tmux attach-session -c "#{pane_current_path}"
 	echo ''
 	task_info
+}
+task_resume_specifics(){
+	# Nothing to do by default.
+	# To be overriden by environment specific configurations
 }
 task_close(){
 	task_get_name_from_path
 	jrnl "+$TASK cerrado - $(sed 's/:/,/g' .title). $1"
-#	task_info
+	task_info
 }
 
 #########################################################
