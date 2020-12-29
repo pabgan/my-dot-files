@@ -307,13 +307,13 @@ task_close(){
 #########################################################
 ## SOURCE
 #
-hostname=$(hostname)
-if [[ -f "$HOME/.zshrc-$hostname" ]]; then
-	"Sourcing $HOME/.zshrc-$hostname"
-	source "$HOME/.zshrc-$hostname" 
+HOSTNAME=$(hostname)
+if [[ -f "$HOME/.zshrc-$HOSTNAME" ]]; then
+	"Sourcing $HOME/.zshrc-$HOSTNAME"
+	source "$HOME/.zshrc-$HOSTNAME" 
 fi
 
-class=$(cat $HOME/.config/class)
+CLASS=$(cat $HOME/.config/class)
 if [[ -f "$HOME/.zshrc-$CLASS" ]]; then
 	"Sourcing $HOME/.zshrc-$CLASS"
 	source "$HOME/.zshrc-$CLASS" 
