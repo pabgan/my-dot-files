@@ -297,53 +297,16 @@ task_close(){
 #########################################################
 ## SOURCE
 #
-# specific files depending on host
-source_assiarc() {
-	echo "+ sourcing .zshrc-assia"
-	source $HOME/.zshrc-assia
-}
-source_pganuza-e7470rc() {
-	echo "+ sourcing .zshrc-pganuza-e7470"
-	source $HOME/.zshrc-pganuza-e7470
-}
-
-source_personal() {
-	echo "+ sourcing .zshrc-personal"
-	source $HOME/.zshrc-personal
-}
-
-source_maFalda() {
-	echo "+ sourcing .zshrc-maFalda"
-	source $HOME/.zshrc-maFalda
-}
-
-source_dumBo() {
-	echo "+ sourcing .zshrc-dumBo"
-	source $HOME/.zshrc-dumBo
-}
-
 hostname=$(hostname)
-if [ "$hostname" = "PGANUZA-E7470" ]; then
-	echo "sourcing configuration for PGANUZA-E7470"
-	source_assiarc
-	source_pganuza-e7470rc
-elif [ "$hostname" = "pganuza-dev.assia-inc.com" ]; then 
-	echo "sourcing configuration for pganuza-dev"
-	source_assiarc
-elif [ "$hostname" = "maFalda" ]; then 
-	echo "sourcing configuration for maFalda"
-	source_personal
-	source_maFalda
-elif [ "$hostname" = "bagHeera" ]; then 
-	echo "sourcing configuration for bagHeera"
-	source_personal
-elif [ "$hostname" = "baloO" ]; then 
-	echo "sourcing configuration for baloO"
-	source_personal
-elif [ "$hostname" = "dumBo" ]; then 
-	echo "sourcing configuration for dumBo"
-	source_personal
-	source_dumBo
+if [[ -f "$HOME/.zshrc-$hostname" ]]; then
+	"Sourcing $HOME/.zshrc-$hostname"
+	source "$HOME/.zshrc-$hostname" 
+fi
+
+class=$(cat $HOME/.config/class)
+if [[ -f "$HOME/.zshrc-$CLASS" ]]; then
+	"Sourcing $HOME/.zshrc-$CLASS"
+	source "$HOME/.zshrc-$CLASS" 
 fi
 
 #########################################################
