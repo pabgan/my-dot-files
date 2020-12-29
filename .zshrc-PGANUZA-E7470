@@ -35,7 +35,7 @@ addics() {
 #########################################################
 # CURRENTLY WORKING
 customer_info_file="$HOME/Documents/Releases/customers-info.csv"
-export CUSTOMER='telefonica_argentina'
+export CUSTOMER='pldt'
 export CUSTOMER_NAME="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')"
 export CUSTOMER_ENV="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')"
 export CUSTOMER_DB="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')"
@@ -49,6 +49,7 @@ alias cdc='cd $CUSTOMER_DIR'
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '=====================================pganuza-e7470rc====' )
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documents/KnowHow/wiki/'
                                         '~/Documents/QA/'
+                                        '~/Repositorios/scripts/work-specific'
                                         '~/Repositorios/ASSIA/expresse/dsloExpresse/releases/'
                                         '~/Repositorios/ASSIA/expresse-qa/naming_conventions_test/'
                                         '~/Repositorios/ASSIA/expresse-qa/napi_functional_tests/'
@@ -73,8 +74,9 @@ alias cpjc='cp_jira_comment'
 ## TASK MANAGEMENT
 #
 task_start_specifics(){
-	jira-turbo.py query --issue $TASK --fields 'summary' > .title
-	jira-turbo.py assign --issue $TASK --value '5bd7a4938995b717bb1b86dd'
+	jira_turbo.py query --issue $TASK --fields 'summary' | cut -d'=' -f2 > .title
+	jira_turbo.py query --issue $TASK --fields 'Unit Test' | cut -d'=' -f2 >> README.md
+	jira_turbo.py assign --issue $TASK --value '5bd7a4938995b717bb1b86dd'
 }
 
 task_resume_specifics(){
