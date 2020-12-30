@@ -309,13 +309,13 @@ task_close(){
 #
 HOSTNAME=$(hostname)
 if [[ -f "$HOME/.zshrc-$HOSTNAME" ]]; then
-	echo "Sourcing $HOME/.zshrc-$HOSTNAME"
+	echo "Sourcing ~/zshrc-$HOSTNAME..."
 	source "$HOME/.zshrc-$HOSTNAME" 
 fi
 
 CLASS=$(cat $HOME/.config/class)
 if [[ -f "$HOME/.zshrc-$CLASS" ]]; then
-	echo "Sourcing $HOME/.zshrc-$CLASS"
+	echo "Sourcing ~/zshrc-$CLASS..."
 	source "$HOME/.zshrc-$CLASS" 
 fi
 
