@@ -123,10 +123,7 @@ export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 
-t (){
-	todo-txt -d $XDG_CONFIG_HOME/todo/config -a $@
-}
-compdef _todo.sh t
+alias t='todo.sh'
 
 tdate () {
 	date --iso-8601 --date=$1
