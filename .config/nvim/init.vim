@@ -221,12 +221,12 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": "{down-of
 " vim-autotags
 let g:autotagTagsFile=".tags"
 " fzf
-set rtp+=~/Repositorios/fzf
+set rtp+=/srv/repos/fzf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VARIABLES
 "
-if $CLASS == "trabajo"
+if $CLASS == "work"
 	let CUSTOMER_ENV=$CUSTOMER_ENV
 	let CUSTOMER_VER=$CUSTOMER_VER
 	let CUSTOMER_NAME=$CUSTOMER_NAME
