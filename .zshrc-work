@@ -5,20 +5,66 @@ export CLASS='trabajo'
 export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
 export JIRA_URL='https://assia-inc.atlassian.net'
 
-# Alias for very frequent SSH connections
-#alias p='ssh pganuza@pganuza-dev.assia-inc.com'
-#alias q='sshrc user@qa-dev.assia-inc.com'
-#alias l='sshrc pganuza@lexus.assia-inc.com'
-alias se='sshrc user@$CUSTOMER_ENV.assia-inc.com'
-#alias a='sshrc user@demo-a.assia-inc.com'
-#alias b='sshrc user@demo-b.assia-inc.com'
-#alias c='sshrc user@demo-c.assia-inc.com'
+#export JAVA_HOME="/usr/java/jdk1.8.0_73/"
+export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib:$LD_LIBRARY_PATH
+export SQLPATH=$HOME/.local/share/sqlcl/
 
+# Corporate mounts
+alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/assianet-home"
+alias mount-corp="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/corp /mnt/assianet-corp"
+alias mount-onedrive='rclone mount $(basename $(pwd)): onedrive'
+
+# Backup important work info into external HDD
+alias backup-pganuza-e7470="rsync -avh --delete-after ~/.* ~/Plantillas ~/Software ~/Trabajo ~/Workspace/system-level_test_plan ~/Workspace/drafts  /run/media/pganuza/pganuza-backups/"
+
+# Alias for very frequent SSH connections
+alias se='sshrc user@$CUSTOMER_ENV.assia-inc.com'
+
+#########################################################
 # CVS configuration
 export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
 alias cvs-update='cvs update -PAd'
 alias cvs-discard_changes='cvs-update -C'
 alias cvs-checkout='cvs co -r HEAD'
+
+
+#########################################################
+# CURRENTLY WORKING
+customer_info_file="$HOME/Documents/Releases/customers-info.csv"
+export CUSTOMER='pldt'
+export CUSTOMER_NAME="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')"
+export CUSTOMER_ENV="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')"
+export CUSTOMER_DB="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')"
+export CUSTOMER_VER="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'5')"
+export DBF='plain'
+export CUSTOMER_DIR="$HOME/Documents/Releases/$CUSTOMER/$CUSTOMER_VER"
+export CUSTOMER_DIR_CVS="$HOME/Repositorios/ASSIA/expresse/dsloExpresse/releases/$CUSTOMER/"
+alias cdc='cd $CUSTOMER_DIR'
+
+# Add some useful paths to the hotlist for n-cd
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '=====================================pganuza-e7470rc====' )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documents/KnowHow/wiki/'
+                                        '~/Documents/QA/'
+                                        '~/Repositorios/scripts/work-specific'
+                                        '~/Repositorios/ASSIA/expresse/dsloExpresse/releases/'
+                                        '~/Repositorios/ASSIA/expresse-qa/naming_conventions_test/'
+                                        '~/Repositorios/ASSIA/expresse-qa/napi_functional_tests/'
+                                        '~/Repositorios/ASSIA/expresse/dsloExpresseAdditional/tools/releaseTestingTools/'
+                                        '~/Repositorios/ASSIA/expresse/dsloExpresseAdditional/tools/releaseTestingTools/system_level_test_plan/' )
+
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
+znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR_CVS" "$CUSTOMER_DIR" )
+
+#########################################################
+# UTILS
+# Just throw a fast query 
+alias query='sqlturbo.py -u $DB -f $DBF'
+
+# Translate to Jira and copy to clipboard a comment written in Markdown
+cp_jira_comment(){
+	md2jira.sh <( cat README* ) | xclip
+}
+alias cpjc='cp_jira_comment'
 
 # Get version installed on a customer's support environment
 get_customer_versions(){
@@ -45,3 +91,24 @@ function dbconn() {
 		sqlcl $CUSTOMER_DB/assia@db-ref.assia-inc.com:1521:dslo2
 	fi
 }
+
+#########################################################
+## TASK MANAGEMENT
+#
+task_start_specifics(){
+	jira_turbo.py query --issue $TASK --fields 'summary' | cut -d'=' -f2 > .title
+	jira_turbo.py query --issue $TASK --fields 'Unit Test' | cut -d'=' -f2 >> README.md
+	jira_turbo.py assign --issue $TASK --value '5bd7a4938995b717bb1b86dd'
+}
+
+task_resume_specifics(){
+	jira_ticket $TASK
+}
+
+jira_ticket(){
+	xdg-open "https://assia-inc.atlassian.net/browse/$1"
+}
+
+################################################
+# SOURCES
+# [1] https://superuser.com/questions/271986/execute-a-command-from-another-directory-in-bash#271992
