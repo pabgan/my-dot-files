@@ -1,1 +1,2 @@
 export CLASS='personal'
+alias ssh_reverse_ganuweb='ssh -D 8484 pi@ganuweb.ddns.net'
