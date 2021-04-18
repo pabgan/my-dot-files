@@ -62,7 +62,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(history pass sudo zsh-navigation-tools extract fasd)
+plugins=(history pass sudo zsh-navigation-tools extract)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -94,7 +94,7 @@ setopt nosharehistory
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="vim ~/.zshrc"
+alias zshconfig="$EDITOR ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias e=$EDITOR
 alias v=view
@@ -104,7 +104,7 @@ zle -N open-file-widget
 bindkey '^ ' open-file-widget
 
 #########################################################
-## PLUGINS CONFIGURATION
+## ZSH CONFIGURATION
 #
 # Enable n-cd and n-kill [5]
 zle -N znt-cd-widget
@@ -168,6 +168,16 @@ alias ipinternal='ipconfig getifaddr en0'
 
 # Change default permissions for new directories and files [9]
 umask 002
+
+# fasd
+# This will setup a command hook that executes on every command and advanced tab completion for zsh and bash.
+eval "$(fasd --init auto)"
+# Open file in editor
+alias fe="fasd -e $EDITOR -if"
+# yank file or directory path
+fy() {
+	fasd -ia $1 | xclip
+}
 
 #########################################################
 ## USEFUL FUNCTIONS
@@ -263,8 +273,9 @@ task_start(){
 	export TASK=$1
 	take $TASK
 	tmux rename-session $TASK
-	# next line does not work
+	# next line does not work, but it tries to set the working directory for new panes
 	#tmux attach-session -c "#{pane_current_path}"
+	#tmux attach-session -c "$pwd"
 	task_start_specifics
 	jrnl "Comenzando con +$TASK. $(cat .title)"
 	echo ''

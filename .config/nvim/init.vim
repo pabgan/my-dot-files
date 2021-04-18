@@ -15,6 +15,11 @@ set undofile		" Maintain the undo history even after the file is saved [1]
 set nowrapscan		" Search stops at the end of the buffer (or beginning).
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VARIABLES
+"
+let TASK=$TASK
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " APPEARANCE
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
@@ -52,7 +57,7 @@ set wildmenu
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STYLE SETTINGS
 set noexpandtab
-if $CLASS == "trabajo"
+if $CLASS == "work"
 	autocmd FileType python setlocal expandtab smarttab shiftwidth=4
 	autocmd FileType java setlocal expandtab smarttab shiftwidth=4
 	autocmd FileType shell setlocal expandtab smarttab shiftwidth=4
@@ -101,12 +106,12 @@ nmap <C-S><C-P> :set paste!<CR>
 
 " ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
-nnoremap <C-X><C-Q> yap}pvip:s/%/\\\%/ge<CR>vipd:-1read !~/.local/bin/sqlturbo.py -u <C-R>=CUSTOMER_DB<CR> -f <C-R>=DBF<CR> "<C-R>""<CR>
+nnoremap <C-X><C-Q> yap}pvip:s/%/\\\%/ge<CR>vipd:-1read !~/.local/bin/sqlturbo.py -u <C-R>=$CUSTOMER_DB<CR> -f <C-R>=$DBF<CR> "<C-R>""<CR>
 " desc(ribe) table or view
 nnoremap <C-X><C-D> viw<ESC>b<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
 nnoremap <C-X><C-V> viwyo<CR>select text from user_views where view_name='<C-R>"';<ESC>o<ESC>kvip:call slime#send_op(visualmode(), 1)<cr>u
 
-if $CLASS == "trabajo"
+if $CLASS == "work"
 	let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
 endif
 
@@ -131,9 +136,8 @@ nnoremap \ya gg"+yG''
 " CD into current file's directory
 nnoremap <C-C><C-D> :cd %:p:h<CR>
 
-" Copy just this line in vimdiff
-nnoremap <C-I><C-Y> <C-W>pyy<C-W>pPjdd
-nnoremap <C-I><C-C> vecClosed<ESC>
+" Copy just this line between the two windows
+nnoremap <C-I><C-Y> yy<C-W>pp
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SNIPPETS and TEMPLATES and FORMAT automations [2]
@@ -178,7 +182,7 @@ nnoremap \sp :read $HOME/Templates/snippets/jira-pass.txt<CR>
 nnoremap \sf :read $HOME/Templates/snippets/jira-fail.txt<CR>
 nnoremap \ss :read $HOME/Templates/snippets/jira-skipped.txt<CR>
 " Insert "verified" sentence
-nnoremap \sv :-1read $HOME/Templates/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=CUSTOMER_ENV<ENTER><ESC>n"_c4l<C-R>=CUSTOMER_VER<ENTER><ESC>
+nnoremap \sv :-1read $HOME/Templates/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=$CUSTOMER_ENV<ENTER><ESC>n"_c4l<C-R>=$CUSTOMER_VER<ENTER><ESC>
 
 "" CVS
 " Insert CVS header
@@ -221,20 +225,7 @@ let g:slime_default_config = {"socket_name": "default", "target_pane": "{down-of
 " vim-autotags
 let g:autotagTagsFile=".tags"
 " fzf
-set rtp+=~/Repositorios/fzf
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VARIABLES
-"
-if $CLASS == "trabajo"
-	let CUSTOMER_ENV=$CUSTOMER_ENV
-	let CUSTOMER_VER=$CUSTOMER_VER
-	let CUSTOMER_NAME=$CUSTOMER_NAME
-	let CUSTOMER_DB=$CUSTOMER_DB
-	let DBF=$DBF
-endif
-
-let TASK=$TASK
+set rtp+=/srv/repos/fzf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SOURCES

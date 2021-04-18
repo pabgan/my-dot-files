@@ -1,7 +1,6 @@
 #!/bin/zsh
 #########################################################
 # ASSIA
-export CLASS='trabajo'
 export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
 export JIRA_URL='https://assia-inc.atlassian.net'
 
@@ -68,7 +67,7 @@ alias cpjc='cp_jira_comment'
 
 # Get version installed on a customer's support environment
 get_customer_versions(){
-	ssh $1 'ls install'
+	ssh $1 'ls -d install/*-*' | sed 's/install\///'
 }
 compdef get_customer_versions=ssh
 
@@ -78,8 +77,8 @@ wget_sqls() {
 	customer_clean=$(echo $CUSTOMER | cut -d'-' -f1 | tr '[:lower:]' '[:upper:]') # the cut is needed for demo-X _customers_
 	url_delivered="http://rc-build-01.assia-inc.com/releases/$customer_clean/DELIVERED/$CUSTOMER_VER/sql"
 	url_delivered_not="http://rc-build-01.assia-inc.com/releases/$customer_clean/TO_BE_DELIVERED/$CUSTOMER_VER/sql"
-	wget -r -np -l1 -R "index.html*" --no-directories $url_delivered
-	wget -r -np -l1 -R "index.html*" --no-directories $url_delivered_not
+	wget -r -np -l1 -A ".sql" --no-directories $url_delivered
+	wget -r -np -l1 -A ".sql" --no-directories $url_delivered_not
 }
 
 # Connect to a database
