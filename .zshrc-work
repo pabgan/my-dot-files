@@ -30,7 +30,7 @@ alias cvs-checkout='cvs co -r HEAD'
 #########################################################
 # CURRENTLY WORKING
 customer_info_file="$HOME/Documents/Releases/customers-info.csv"
-export CUSTOMER='pldt'
+export CUSTOMER='telefonica_argentina'
 export CUSTOMER_NAME="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')"
 export CUSTOMER_ENV="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')"
 export CUSTOMER_DB="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')"
@@ -44,12 +44,7 @@ alias cdc='cd $CUSTOMER_DIR'
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '=====================================pganuza-e7470rc====' )
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documents/KnowHow/wiki/'
                                         '~/Documents/QA/'
-                                        '~/Repositorios/scripts/work-specific'
-                                        '~/Repositorios/ASSIA/expresse/dsloExpresse/releases/'
-                                        '~/Repositorios/ASSIA/expresse-qa/naming_conventions_test/'
-                                        '~/Repositorios/ASSIA/expresse-qa/napi_functional_tests/'
-                                        '~/Repositorios/ASSIA/expresse/dsloExpresseAdditional/tools/releaseTestingTools/'
-                                        '~/Repositorios/ASSIA/expresse/dsloExpresseAdditional/tools/releaseTestingTools/system_level_test_plan/' )
+                                        '~/Repositorios/bookmarks/' )
 
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR_CVS" "$CUSTOMER_DIR" )
