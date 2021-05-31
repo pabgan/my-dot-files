@@ -82,6 +82,11 @@ function toggle_history_timestamps () {
 }
 alias th='toggle_history_timestamps'
 
+# Copy log
+log() {
+	tail -f $1 | tee ${1##*/}
+}
+
 #########################################################
 # SOURCES
 # [1] https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
