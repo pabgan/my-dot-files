@@ -270,6 +270,7 @@ task_start(){
 	fi
 	export TASK=$1
 	take $TASK
+	TASK_DIR=$(pwd)
 	tmux rename-session $TASK
 	# next line does not work, but it tries to set the working directory for new panes
 	#tmux attach-session -c "#{pane_current_path}"
@@ -298,6 +299,7 @@ task_resume(){
 	# next line does not work
 	#tmux attach-session -c "#{pane_current_path}"
 	echo ''
+	TASK_DIR=$(pwd)
 	task_info
 }
 task_resume_specifics(){
