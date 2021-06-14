@@ -103,11 +103,26 @@ function dbconn() {
 task_start_specifics(){
 	jira_turbo.py query --issue $TASK --fields 'summary' > .title
 
-	echo -e "Verified in **$CUSTOMER_ENV $CUSTOMER_VER**." >> README.md
-	jira_turbo.py query --issue $TASK --fields 'fixVersions' >> README.md
-	echo -e '\n( ) Check modules versions.\n```sh\nfind install/ -name ' >> README.md
-	jira_turbo.py query --issue $TASK --fields 'module_fix_for_version' >> README.md
-	jira_turbo.py query --issue $TASK --fields '```' >> README.md
+	# About where to check it
+	echo -e "To be verified in:" >> README.md
+	jira_turbo.py query --issue $TASK --fields 'fixVersions' | grep -oE "name='[^']+'" | cut -d= -f2 | sed 's/^/- [ ] /' >> README.md
+	echo -e "\nVerified in **$CUSTOMER_ENV $CUSTOMER_VER**." >> README.md
+
+	# Rutinary checks
+	echo -e '\n##### Modules versions' >> README.md
+	## Get every module with its version in one line
+	module_fix_for_version=$(jira_turbo.py query --issue $TASK --fields 'module_fix_for_version' | grep -oE "[^ ]+ [0-9|.]+")
+	echo $module_fix_for_version | sed -E 's/([^ ]+) ([0-9|.]+)/- [ ] \1 \2/' >> README.md
+
+	modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+) ([0-9|.]+)/find install\/ -name "*\1*" ; /' | tr -d \\n)
+	#modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+) ([0-9|.]+)/find install\/ -name "*\1*" ; /' )
+	echo -e '\n```sh' >> README.md
+	echo -e "\nssh $CUSTOMER_ENV '$modules_check'" >> README.md
+	#ssh $CUSTOMER_ENV "'$(echo $modules_check | tr -d \\n)'" >> README.md
+	echo -e "\n\n\`\`\`\n" >> README.md
+
+	# Typical layout
+	echo -e '### Test' >> README.md
 	jira_turbo.py query --issue $TASK --fields 'unit_test' >> README.md
 
 	jira_turbo.py assign --issue $TASK --value '5bd7a4938995b717bb1b86dd'
