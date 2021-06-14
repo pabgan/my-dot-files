@@ -87,22 +87,22 @@ alias th='toggle_history_timestamps'
 # Copy log
 log() {
 	case $1 in
-		"dcpc") tail -f ~/install/dcpc/log/assia_dcpc.log | tee assia_dcpc.log ;;
-		"dcpc2") tail -f ~/install2/dcpc/log/assia_dcpc.log | tee assia_dcpc2.log ;;
-		"gui") tail -f ~/install/tomcat/logs/expresseGuiNapi.log | tee expresseGuiNapi.log ;;
-		"oldgui") tail -f ~/install/tomcat/logs/assia_gui.log | tee assia_gui.log ;;
-		"dbloader") tail -f ~/install/server/log/assia_dbloader.log | tee assia_dbloader.log ;;
-		"pe") tail -f ~/install/server/log/assia_pe.log | tee assia_pe.log ;;
-		"po") tail -f ~/install/server/log/assia_po.log | tee assia_po.log ;;
-		"prov") tail -f ~/install/server/log/assia_prov.log | tee assia_prov.log ;;
-		"reqgen") tail -f ~/install/server/log/assia_reqgen.log | tee assia_reqgen.log ;;
+		"dcpc") tail -f ~/install/dcpc/log/assia_dcpc.log | tee "${2}"assia_dcpc.log ;;
+		"dcpc2") tail -f ~/install2/dcpc/log/assia_dcpc.log | tee  "${2}"assia_dcpc2.log ;;
+		"gui") tail -f ~/install/tomcat/logs/expresseGuiNapi.log | tee  "${2}"expresseGuiNapi.log ;;
+		"oldgui") tail -f ~/install/tomcat/logs/assia_gui.log | tee  "${2}"assia_gui.log ;;
+		"dbloader") tail -f ~/install/server/log/assia_dbloader.log | tee  "${2}"assia_dbloader.log ;;
+		"pe") tail -f ~/install/server/log/assia_pe.log | tee  "${2}"assia_pe.log ;;
+		"po") tail -f ~/install/server/log/assia_po.log | tee  "${2}"assia_po.log ;;
+		"prov") tail -f ~/install/server/log/assia_prov.log | tee  "${2}"assia_prov.log ;;
+		"reqgen") tail -f ~/install/server/log/assia_reqgen.log | tee  "${2}"assia_reqgen.log ;;
 		*) tail -f $1 | tee ${1##*/} ;;
 	esac
 }
 
 # Make backup of file
 cpp() {
-	cp --parent "$1" "${2:-.}"
+	cp -r --parent "$1" "${2:-.}"
 }
 
 push_config() {
