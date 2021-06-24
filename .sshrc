@@ -105,16 +105,46 @@ cpp() {
 	cp -r --parent "$1" "${2:-.}"
 }
 
+# Place configured files in their places
 push_config() {
-	rsync -Krvh "${1:-./}" /
+	rsync -Krvh "${1:-./}" / --exclude='*.swp' --exclude='*~*'
 }
 
-alias ant_dcpc='ant -f ~/install/dcpc/build.xml'
-alias ant_dcpc2='ant -f ~/install2/dcpc/build.xml'
-alias ant_tomcat='ant -f ~/install/tomcat/build.xml'
-alias ant_server='ant -f ~/install/server/build.xml'
-alias ant_sim='ant -f ~/simulator/build.xml'
-alias ant_simcli='ant -f ~/cli_simulator/build.xml'
+test_template() {
+	tname="$1"
+	conf="${2:-backup/}"
+
+	take $tname
+	cp -r ../$conf config
+
+	echo -e "#!/bin/bash\npush_config config/" > setup.sh
+	chmod +x setup.sh
+}
+
+# Modules management
+ant_dcpc() {
+	ant -f ~/install/dcpc/build.xml $1
+}
+
+ant_dcpc2() {
+	ant -f ~/install2/dcpc/build.xml $1
+}
+
+ant_tomcat() {
+	ant -f ~/install/tomcat/build.xml $1
+}
+
+ant_server() {
+	ant -f ~/install/server/build.xml $1
+}
+
+ant_sim() {
+	ant -f ~/simulator/build.xml $1
+}
+
+ant_simcli() {
+	ant -f ~/cli_simulator/build.xml $1
+}
 
 #########################################################
 # SOURCES
