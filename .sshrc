@@ -114,13 +114,16 @@ push_config() {
 	rsync -Krvh "${1:-./}" / --exclude='*.swp' --exclude='*~*'
 }
 
-test_template() {
-	tname="$1"
-	conf="${2:-backup/}"
+template_test() {
+	template="$1"
+	tname="$2"
 
 	take $tname
-	cp -r ../$conf config
+	cp ../$template/setup.sh .
+	cp -r ../$template/config .
+}
 
+template_setup() {
 	echo -e "#!/bin/bash\nsource /tmp/.pganuza.sshrc.*/sshrc.bashrc\npush_config config/" > setup.sh
 	chmod +x setup.sh
 }
