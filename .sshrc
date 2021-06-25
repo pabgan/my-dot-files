@@ -86,18 +86,22 @@ alias th='toggle_history_timestamps'
 # USEFUL FUNCTIONS for tickets
 # Copy log
 log() {
-	case $1 in
-		"dcpc") tail -f ~/install/dcpc/log/assia_dcpc.log | tee "${2}"assia_dcpc.log ;;
-		"dcpc2") tail -f ~/install2/dcpc/log/assia_dcpc.log | tee  "${2}"assia_dcpc2.log ;;
-		"gui") tail -f ~/install/tomcat/logs/expresseGuiNapi.log | tee  "${2}"expresseGuiNapi.log ;;
-		"oldgui") tail -f ~/install/tomcat/logs/assia_gui.log | tee  "${2}"assia_gui.log ;;
-		"dbloader") tail -f ~/install/server/log/assia_dbloader.log | tee  "${2}"assia_dbloader.log ;;
-		"pe") tail -f ~/install/server/log/assia_pe.log | tee  "${2}"assia_pe.log ;;
-		"po") tail -f ~/install/server/log/assia_po.log | tee  "${2}"assia_po.log ;;
-		"prov") tail -f ~/install/server/log/assia_prov.log | tee  "${2}"assia_prov.log ;;
-		"reqgen") tail -f ~/install/server/log/assia_reqgen.log | tee  "${2}"assia_reqgen.log ;;
-		*) tail -f $1 | tee ${1##*/} ;;
-	esac
+	if [[ $# < 1 ]]; then
+		>&2 echo "Usage: log dcpc|dcpc2|gui|oldgui|dbloader|pe|po|prov|reqgen|/path/to/file.log"
+	else
+		case $1 in
+			"dcpc") tail -f ~/install/dcpc/log/assia_dcpc.log | tee "${2}"assia_dcpc.log ;;
+			"dcpc2") tail -f ~/install2/dcpc/log/assia_dcpc.log | tee  "${2}"assia_dcpc2.log ;;
+			"gui") tail -f ~/install/tomcat/logs/expresseGuiNapi.log | tee  "${2}"expresseGuiNapi.log ;;
+			"oldgui") tail -f ~/install/tomcat/logs/assia_gui.log | tee  "${2}"assia_gui.log ;;
+			"dbloader") tail -f ~/install/server/log/assia_dbloader.log | tee  "${2}"assia_dbloader.log ;;
+			"pe") tail -f ~/install/server/log/assia_pe.log | tee  "${2}"assia_pe.log ;;
+			"po") tail -f ~/install/server/log/assia_po.log | tee  "${2}"assia_po.log ;;
+			"prov") tail -f ~/install/server/log/assia_prov.log | tee  "${2}"assia_prov.log ;;
+			"reqgen") tail -f ~/install/server/log/assia_reqgen.log | tee  "${2}"assia_reqgen.log ;;
+			*) tail -f $1 | tee ${1##*/} ;;
+		esac
+	fi
 }
 
 # Make backup of file
@@ -117,7 +121,7 @@ test_template() {
 	take $tname
 	cp -r ../$conf config
 
-	echo -e "#!/bin/bash\npush_config config/" > setup.sh
+	echo -e "#!/bin/bash\nsource /tmp/.pganuza.sshrc.*/sshrc.bashrc\npush_config config/" > setup.sh
 	chmod +x setup.sh
 }
 
