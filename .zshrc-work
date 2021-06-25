@@ -56,7 +56,9 @@ alias query='sqlturbo.py -u $DB -f $DBF'
 
 # Send a request to DcPc
 dcpc_request() {
-	if [[ -a ${1} ]]; then
+	if [[ $# < 1 ]]; then
+		>&2 echo "Usage: dcpc_request 'REQUEST,IN,LINE'|req.dat (env.addr.es)"
+	elif [[ -a ${1} ]]; then
 		scp $1 ${2:-$CUSTOMER_ENV}:install/dcpc/data/input/
 	else
 		tmp_file='/tmp/dcpc_req.dat'
@@ -106,15 +108,16 @@ task_start_specifics(){
 	# About where to check it
 	echo -e "To be verified in:" >> README.md
 	jira_turbo.py query --issue $TASK --fields 'fixVersions' | grep -oE "name='[^']+'" | cut -d= -f2 | sed 's/^/- [ ] /' >> README.md
+	echo -e "\n------------------------------------" >> README.md
 	echo -e "\nVerified in **$CUSTOMER_ENV $CUSTOMER_VER**." >> README.md
 
 	# Rutinary checks
 	echo -e '\n##### Modules versions' >> README.md
 	## Get every module with its version in one line
-	module_fix_for_version=$(jira_turbo.py query --issue $TASK --fields 'module_fix_for_version' | grep -oE "[^ ]+ [0-9|.]+")
-	echo $module_fix_for_version | sed -E 's/([^ ]+) ([0-9|.]+)/- [ ] \1 \2/' >> README.md
+	module_fix_for_version=$(jira_turbo.py query --issue $TASK --fields 'module_fix_for_version' | grep -oE "[^ ]+[ |-][0-9|.]+")
+	echo $module_fix_for_version | sed -E 's/([^ ]+)[ |-]([0-9|.]+)/- [ ] \1 \2/' >> README.md
 
-	modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+) ([0-9|.]+)/find install\/ -name "*\1*" ; /' | tr -d \\n)
+	modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+)[ |-]([0-9|.]+)/find install\/ -name "*\1*" ; /' | tr -d \\n)
 	#modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+) ([0-9|.]+)/find install\/ -name "*\1*" ; /' )
 	echo -e '\n```sh' >> README.md
 	echo -e "\nssh $CUSTOMER_ENV '$modules_check'" >> README.md
@@ -129,7 +132,7 @@ task_start_specifics(){
 }
 
 task_resume_specifics(){
-	jira_ticket $TASK
+	#jira_ticket $TASK
 }
 
 jira_ticket(){
@@ -137,6 +140,14 @@ jira_ticket(){
 }
 
 alias task_download_results='rsync -rvzh $CUSTOMER_ENV:pganuza/${$(pwd)#/home/pganuza/Documents/}/ .'
+
+task_download_data() {
+	rsync -rvzh ${1:-CUSTOMER_ENV}:pganuza/${$(pwd)#/home/pganuza/Documents/}/ .
+}
+
+task_upload_data() {
+	rsync -rvzh ./ ${1:-CUSTOMER_ENV}:pganuza/${$(pwd)#/home/pganuza/Documents/}/
+}
 
 ################################################
 # SOURCES
