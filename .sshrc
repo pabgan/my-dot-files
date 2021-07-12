@@ -104,6 +104,9 @@ log() {
 	fi
 }
 
+# Watch for DcPc output files
+alias dcpc_watch='watch find /home/user/install/dcpc/data/out_temp/ -type f'
+
 # Make backup of file
 cpp() {
 	cp -r --parent "$1" "${2:-.}"
@@ -142,7 +145,7 @@ ant_tomcat() {
 }
 
 ant_server() {
-	ant -f ~/install/server/build.xml $1
+	ant -f ~/install/server/build.xml $1 $2
 }
 
 ant_sim() {
