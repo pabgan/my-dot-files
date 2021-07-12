@@ -87,6 +87,13 @@ set number relativenumber
 "
 " Make wildchar work within keybindings
 set wcm=<C-Z>
+" Open FZF find
+nmap \of :FZF <CR>
+" Open a wiki page
+nmap \ow :FZF ~/Documents/KnowHow/wiki<CR>
+" Navigate buffers
+nnoremap \bp :bp<CR>
+nnoremap \bn :bn<CR>
 
 " ------ CONFIG ------------------------------------------------------------
 " Toggle showing line numbers
@@ -106,25 +113,30 @@ nmap <C-S><C-P> :set paste!<CR>
 
 " ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
-nnoremap <C-X><C-Q> yap}pvip:s/%/\\\%/ge<CR>vip:s/!/\\\!/ge<CR>vipd:-1read !~/.local/bin/sqlturbo.py -u <C-R>=$CUSTOMER_DB<CR> -f <C-R>=$DBF<CR> "<C-R>""<CR>
+nnoremap \xq yap}pvip:s/%/\\\%/ge<CR>vip:s/!/\\\!/ge<CR>vipd:-1read !~/.local/bin/sqlturbo.py -u <C-R>=$CUSTOMER_DB<CR> -f <C-R>=$DBF<CR> "<C-R>""<CR>
 " desc(ribe) table or view
-nnoremap <C-X><C-D> viw<ESC>b<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
-nnoremap <C-X><C-V> viwyo<CR>select text from user_views where view_name='<C-R>"';<ESC>o<ESC>kvip:call slime#send_op(visualmode(), 1)<cr>u
+nnoremap \xd viw<ESC>b<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
+nnoremap \xv viwyo<CR>select text from user_views where view_name='<C-R>"';<ESC>o<ESC>kvip:call slime#send_op(visualmode(), 1)<cr>u
 
 if $CLASS == "work"
 	let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
 endif
 
 " Execute command
-vnoremap <C-X><C-S> y:read !<C-R>"<CR><CR>
-nnoremap <C-X><C-S> 0y$:read !<C-R>"<CR><CR>
+vnoremap \xs y:read !sh -c '<C-R>"<CR>'<CR>
+"nnoremap <C-X><C-S> 0y$:read !sh -c '<C-R>"<CR>'<CR>
+nnoremap \xs yap}pvip:s/'/\\'/ge<CR>vipd:read !sh -c '<C-R>"<CR>'<CR>
 
 " ------ USUAL FORMAT CHANGES ---------------------------------------------
 " Flatten
-nnoremap <C-C><C-F> vipJV:s/\s\+/, /g<CR>
-nnoremap <C-C><C-U> :s/,\s*/\r/g<CR>
+nnoremap \cf vipJV:s/\s\+/, /g<CR>
+nnoremap \cu :s/,\s*/\r/g<CR>
 " Format in columns
-vnoremap <C-C><C-L> :!column -t -s','
+vnoremap \cc :!column -t -s','
+" Format XML
+vnoremap \cx :!xmllint --format -
+" Format Json
+vnoremap \cj :!python -m json.tool
 
 " ------ OTHERS -----------------------------------------------------------
 " Search for what it is selected pressing / twice
@@ -134,10 +146,10 @@ vnoremap // y/<C-R>"<CR>
 nnoremap \ya gg"+yG''
 
 " CD into current file's directory
-nnoremap <C-C><C-D> :cd %:p:h<CR>
+nnoremap \cD :cd %:p:h<CR>
 
 " Copy just this line between the two windows
-nnoremap <C-I><C-Y> yy<C-W>pp
+nnoremap \iy yy<C-W>pp
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SNIPPETS and TEMPLATES and FORMAT automations [2]
@@ -154,16 +166,17 @@ nnoremap \s<TAB> :read $HOME/Templates/snippets/<C-Z>
 " Insert image
 nnoremap \si diWa![<C-R>"](<C-R>")<ESC>
 " Insert link
-nnoremap \sl diWa[<C-R>"](<C-R>")<ESC>
+nnoremap \sl viW<ESC>Bi[<ESC>Ea]<ESC>yi[Ea(<C-R>")<ESC>T[
+vnoremap \sl c[<C-R>"](<C-R>")<ESC>T[
 
 "" JIRA
 " Insert SCENARIO divider
 nnoremap \sS :read $HOME/Templates/snippets/jira-scenario.txt<CR>/<++><Enter>"_c4l
 " Insert test
 nnoremap \sT :read $HOME/Templates/snippets/jira-test.txt<CR>/<++><Enter>"_c4l
-" Insert a {code:}{code} block
-nnoremap \sc :-1read $HOME/Templates/snippets/jira-code-block.txt<CR>/<++><Enter>"_c4l
-vnoremap \sc d:-1read $HOME/Templates/snippets/jira-code-block.txt<CR>pk/<++><Enter>"_c4l
+" Insert a ``` block
+nnoremap \sc :read $HOME/Templates/snippets/markdown-code-block.txt<CR>/<++><Enter>"_c4l
+vnoremap \sc dk:read $HOME/Templates/snippets/markdown-code-block.txt<CR>p?<++><Enter>"_c4l
 " Insert a {noformat}{noformat} block
 nnoremap \sn :-1read $HOME/Templates/snippets/jira-noformat-block.txt<CR>o
 vnoremap \sn d:-1read $HOME/Templates/snippets/jira-noformat-block.txt<CR>p
@@ -199,6 +212,9 @@ vnoremap \s* A*<ESC>`<i*<ESC>`>l
 " Emphasize it more
 nnoremap \s** wbi**<ESC>Ea**<ESC>
 vnoremap \s** A**<ESC>`<i**<ESC>`>ll
+" Make it CODE like
+nnoremap \s` wbi`<ESC>Ea`<ESC>
+vnoremap \s` A`<ESC>`<i`<ESC>`>ll
 
 "" Templates
 " Let me decide between templates (Insert Template)
