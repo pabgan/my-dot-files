@@ -52,7 +52,7 @@ znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR_CVS" "$CUSTOMER_DIR" )
 #########################################################
 # UTILS
 # Just throw a fast query 
-alias query='sqlturbo.py -u $DB -f $DBF'
+alias query='sqlturbo.py -u $CUSTOMER_DB -f $DBF'
 
 # Send a request to DcPc
 dcpc_request() {
@@ -104,10 +104,11 @@ function dbconn() {
 #
 task_start_specifics(){
 	jira_turbo.py query --issue $TASK --fields 'summary' > .title
+	jira_turbo.py query --issue $TASK --fields 'description' > .description
 
 	# About where to check it
 	echo -e "To be verified in:" >> README.md
-	jira_turbo.py query --issue $TASK --fields 'fixVersions' | grep -oE "name='[^']+'" | cut -d= -f2 | sed 's/^/- [ ] /' >> README.md
+	jira_turbo.py query --issue $TASK --fields 'fixVersions' | grep -oE "name='[^']+'" | cut -d= -f2 | sed 's/^/- [<++>] /' >> README.md
 	echo -e "\n------------------------------------" >> README.md
 	echo -e "\nVerified in **$CUSTOMER_ENV $CUSTOMER_VER**." >> README.md
 
@@ -115,7 +116,7 @@ task_start_specifics(){
 	echo -e '\n##### Modules versions' >> README.md
 	## Get every module with its version in one line
 	module_fix_for_version=$(jira_turbo.py query --issue $TASK --fields 'module_fix_for_version' | grep -oE "[^ ]+[ |-][0-9|.]+")
-	echo $module_fix_for_version | sed -E 's/([^ ]+)[ |-]([0-9|.]+)/- [ ] \1 \2/' >> README.md
+	echo $module_fix_for_version | sed -E 's/([^ ]+)[ |-]([0-9|.]+)/- [<++>] \1 \2/' >> README.md
 
 	modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+)[ |-]([0-9|.]+)/find install\/ -name "*\1*" ; /' | tr -d \\n)
 	#modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+) ([0-9|.]+)/find install\/ -name "*\1*" ; /' )
@@ -139,15 +140,23 @@ jira_ticket(){
 	xdg-open "https://assia-inc.atlassian.net/browse/$1"
 }
 
-alias task_download_results='rsync -rvzh $CUSTOMER_ENV:pganuza/${$(pwd)#/home/pganuza/Documents/}/ .'
-
 task_download_data() {
-	rsync -rvzh ${1:-CUSTOMER_ENV}:pganuza/${$(pwd)#/home/pganuza/Documents/}/ .
+	rsync -rvzh ${1:-$CUSTOMER_ENV}:pganuza/${$(pwd)#/home/pganuza/Documents/}/ .
 }
 
 task_upload_data() {
-	rsync -rvzh ./ ${1:-CUSTOMER_ENV}:pganuza/${$(pwd)#/home/pganuza/Documents/}/
+	rsync -rvzh ./ ${1:-$CUSTOMER_ENV}:pganuza/${$(pwd)#/home/pganuza/Documents/}/
 }
+
+#########################################################
+## TASK MANAGEMENT
+#
+echo '#########################################################'
+echo '# TODO priorities'
+t
+echo -e '\n#########################################################'
+echo      "# TODO for $CUSTOMER"
+t ls +$CUSTOMER
 
 ################################################
 # SOURCES
