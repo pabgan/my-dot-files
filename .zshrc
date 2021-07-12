@@ -280,6 +280,7 @@ task_start(){
 	echo ''
 	task_info
 }
+alias ts='task_start'
 task_start_specifics(){
 	# Nothing to do by default.
 	# To be overriden by environment specific configurations
@@ -311,6 +312,13 @@ task_close(){
 	jrnl "+$TASK cerrado - $(sed 's/:/,/g' .title). $1"
 	task_info
 }
+
+jrnl_task() {
+	task_get_name_from_path
+	jrnl "$TASK - "
+	jrnl -1 --edit
+}
+alias jt='jrnl_task'
 
 #########################################################
 ## SOURCE
