@@ -90,22 +90,23 @@ log() {
 		>&2 echo "Usage: log dcpc|dcpc2|gui|oldgui|dbloader|pe|po|prov|reqgen|/path/to/file.log"
 	else
 		case $1 in
-			"dcpc") tail -f ~/install/dcpc/log/assia_dcpc.log | tee "${2}"assia_dcpc.log ;;
-			"dcpc2") tail -f ~/install2/dcpc/log/assia_dcpc.log | tee  "${2}"assia_dcpc2.log ;;
-			"gui") tail -f ~/install/tomcat/logs/expresseGuiNapi.log | tee  "${2}"expresseGuiNapi.log ;;
-			"oldgui") tail -f ~/install/tomcat/logs/assia_gui.log | tee  "${2}"assia_gui.log ;;
-			"dbloader") tail -f ~/install/server/log/assia_dbloader.log | tee  "${2}"assia_dbloader.log ;;
-			"pe") tail -f ~/install/server/log/assia_pe.log | tee  "${2}"assia_pe.log ;;
-			"po") tail -f ~/install/server/log/assia_po.log | tee  "${2}"assia_po.log ;;
-			"prov") tail -f ~/install/server/log/assia_prov.log | tee  "${2}"assia_prov.log ;;
-			"reqgen") tail -f ~/install/server/log/assia_reqgen.log | tee  "${2}"assia_reqgen.log ;;
-			*) tail -f $1 | tee ${1##*/} ;;
+			"dcpc") tail -n0 -f ~/install/dcpc/log/assia_dcpc.log | tee "${2}"assia_dcpc.log ;;
+			"dcpc2") tail -n0 -f ~/install2/dcpc/log/assia_dcpc.log | tee  "${2}"assia_dcpc2.log ;;
+			"gui") tail -n0 -f ~/install/tomcat/logs/expresseGuiNapi.log | tee  "${2}"expresseGuiNapi.log ;;
+			"oldgui") tail -n0 -f ~/install/tomcat/logs/assia_gui.log | tee  "${2}"assia_gui.log ;;
+			"dbloader") tail -n0 -f ~/install/server/log/assia_dbloader.log | tee  "${2}"assia_dbloader.log ;;
+			"pe") tail -n0 -f ~/install/server/log/assia_pe.log | tee  "${2}"assia_pe.log ;;
+			"po") tail -n0 -f ~/install/server/log/assia_po.log | tee  "${2}"assia_po.log ;;
+			"prov") tail -n0 -f ~/install/server/log/assia_prov.log | tee  "${2}"assia_prov.log ;;
+			"reqgen") tail -n0 -f ~/install/server/log/assia_reqgen.log | tee  "${2}"assia_reqgen.log ;;
+			"audit") tail -n0 -f ~/install/tomcat/logs/expresseAudit.log | tee  "${2}"expresseAudit.log ;;
+			*) tail -n0 -f $1 | tee ${1##*/} ;;
 		esac
 	fi
 }
 
 # Watch for DcPc output files
-alias dcpc_watch='watch find /home/user/install/dcpc/data/out_temp/ -type f'
+alias dcpc_watch='while true; do         find ~/install{,2}/dcpc/data/out_temp/ -type f -exec cp {} . \;;         sleep 1;        ls;     sleep 1;  done'
 
 # Make backup of file
 cpp() {
@@ -121,9 +122,7 @@ template_test() {
 	template="$1"
 	tname="$2"
 
-	take $tname
-	cp ../$template/setup.sh .
-	cp -r ../$template/config .
+	mkdir $tname && cd $tname && cp ../$template/setup.sh . && cp -r ../$template/config .
 }
 
 template_setup() {
@@ -154,6 +153,11 @@ ant_sim() {
 
 ant_simcli() {
 	ant -f ~/cli_simulator/build.xml $1
+}
+
+mock_server_restart() {
+	~/installAdditional/mock_server/tomcat/bin/shutdown.sh
+	~/installAdditional/mock_server/tomcat/bin/startup.sh
 }
 
 #########################################################
