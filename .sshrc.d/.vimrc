@@ -56,7 +56,7 @@ filetype indent plugin on
 set laststatus=2
 
 " Underline current line
-nmap <C-S><C-H> :set cursorline!<CR>
+nmap \sh :set cursorline!<CR>
 " Highlight current line
 highlight CursorLine cterm=NONE ctermbg=DarkGrey
 
@@ -71,34 +71,34 @@ endif
 " KEYBINDINGS
 "
 " Toggle showing line numbers
-nmap <C-S><C-N> :set invnumber invrelativenumber<CR>
+nmap \sn :set invnumber invrelativenumber<CR>
 
 " Toggle showing a line to know where to wrap the text [3]
-nnoremap <C-S><C-C> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
+nnoremap \sc :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 
 " Toggle showing metacharacters
-nmap <C-S><C-L> :set list!<CR>
+nmap \sl :set list!<CR>
 
 " Toggle wrapping lines
-nmap <C-S><C-W> :set wrap!<CR>
+nmap \sw :set wrap!<CR>
 
 " Toggle paste
-nmap <C-S><C-P> :set paste!<CR>
+nmap \sp :set paste!<CR>
 
 if $CLASS == "trabajo"
 	let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
 endif
 
 " Execute command
-vnoremap <C-X><C-S> y:read !<C-R>"<CR><CR>
-nnoremap <C-X><C-S> 0y$:read !<C-R>"<CR><CR>
+vnoremap \xs y:read !<C-R>"<CR><CR>
+nnoremap \xs 0y$:read !<C-R>"<CR><CR>
 
 " ------ USUAL FORMAT CHANGES ---------------------------------------------
 " Flatten
-nnoremap <C-C><C-F> vipJV:s/\s\+/, /g<CR>
-nnoremap <C-C><C-U> :s/,\s*/\r/g<CR>
+nnoremap \cf vipJV:s/\s\+/, /g<CR>
+nnoremap \cu :s/,\s*/\r/g<CR>
 " Format in columns
-vnoremap <C-C><C-L> :!column -t -s','
+vnoremap \cl :!column -t -s','
 
 " ------ OTHERS -----------------------------------------------------------
 " Search for what it is selected pressing / twice
@@ -108,11 +108,11 @@ vnoremap // y/<C-R>"<CR>
 nnoremap \ya gg"+yG''
 
 " CD into current file's directory
-nnoremap <C-C><C-D> :cd %:p:h<CR>
+nnoremap \cd :cd %:p:h<CR>
 
 " Copy just this line in vimdiff
-nnoremap <C-I><C-Y> <C-W>pyy<C-W>pPjdd
-nnoremap <C-I><C-C> vecClosed<ESC>
+nnoremap \ciy <C-W>pyy<C-W>pPjdd
+nnoremap \ic vecClosed<ESC>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS
