@@ -73,8 +73,6 @@ filetype indent plugin on
 " Display a permanent status bar at the bottom of the vi screen showing the filename, row number, column number, etc. [1]
 set laststatus=2
 
-" Underline current line
-nmap <C-S><C-H> :set cursorline!<CR>
 " Highlight current line
 highlight CursorLine cterm=NONE ctermbg=DarkGrey
 
@@ -87,50 +85,72 @@ set number relativenumber
 "
 " Make wildchar work within keybindings
 set wcm=<C-Z>
+
 " Open FZF find
 nmap \of :FZF <CR>
+
 " Open a wiki page
 nmap \ow :FZF ~/Documents/KnowHow/wiki<CR>
+
+" Open terminal in another tab
+nmap \ot :term:b#
+
 " Navigate buffers
-nnoremap \bp :bp<CR>
-nnoremap \bn :bn<CR>
+nmap \bp :bp<CR>
+nmap \bn :bn<CR>
+nmap \bl :b#<CR>
+nmap \bd :bd<CR>
 
 " ------ CONFIG ------------------------------------------------------------
+" Underline current line
+nmap \sh :set cursorline!<CR>
+
 " Toggle showing line numbers
-nmap <C-S><C-N> :set invnumber invrelativenumber<CR>
+nmap \sn :set invnumber invrelativenumber<CR>
 
 " Toggle showing a line to know where to wrap the text [3]
-nnoremap <C-S><C-C> :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
+nmap \sc :execute "set colorcolumn=" . (&colorcolumn == "" ? "80" : "")<CR>
 
 " Toggle showing metacharacters
-nmap <C-S><C-L> :set list!<CR>
+nmap \sl :set list!<CR>
 
 " Toggle wrapping lines
-nmap <C-S><C-W> :set wrap!<CR>
+nmap \sw :set wrap!<CR>
 
 " Toggle paste
-nmap <C-S><C-P> :set paste!<CR>
+nmap \sp :set paste!<CR>
 
 " ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
-nnoremap \xq yap}pvip:s/%/\\\%/ge<CR>vip:s/!/\\\!/ge<CR>vipd:-1read !~/.local/bin/sqlturbo.py -u <C-R>=$CUSTOMER_DB<CR> -f <C-R>=$DBF<CR> "<C-R>""<CR>
+nmap \xq yap}pvip:s/%/\\\%/ge<CR>vip:s/!/\\\!/ge<CR>vipd:-1read !~/.local/bin/sqlturbo.py -u <C-R>=$CUSTOMER_DB<CR> -f <C-R>=$DBF<CR> "<C-R>""<CR>
 " desc(ribe) table or view
-nnoremap \xd viw<ESC>b<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
-nnoremap \xv viwyo<CR>select text from user_views where view_name='<C-R>"';<ESC>o<ESC>kvip:call slime#send_op(visualmode(), 1)<cr>u
+nmap \xd viw<ESC>b<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
+nmap \xv viwyo<CR>select text from user_views where view_name='<C-R>"';<ESC>o<ESC>kvip:call slime#send_op(visualmode(), 1)<cr>u
 
 if $CLASS == "work"
 	let $LD_LIBRARY_PATH="/usr/lib/oracle/12.2/client64/lib:"
 endif
 
 " Execute command
-vnoremap \xs y:read !sh -c '<C-R>"<CR>'<CR>
-"nnoremap <C-X><C-S> 0y$:read !sh -c '<C-R>"<CR>'<CR>
-nnoremap \xs yap}pvip:s/'/\\'/ge<CR>vipd:read !sh -c '<C-R>"<CR>'<CR>
+"vnoremap \xs y:read !sh -c '<C-R>"<CR>'<CR>
+"nmap <C-X><C-S> 0y$:read !sh -c '<C-R>"<CR>'<CR>
+"nmap \xs yip}pvip:s/'/\\'/ge<CR>vipd:read !<C-R>"<CR>
+nmap \xs yip:read !<C-R>"<CR>
+
+" Execute command in environment
+nmap \xe yip:read !ssh $CUSTOMER_ENV '<C-R>"'<CR>
+"nmap \xe yip}pvip:s/'/\\'/ge<CR>vipd:read !ssh $CUSTOMER_ENV '<C-R>"'<CR>
+
+" Execute command on open terminal below (not working... too fast?)
+nmap \xx vipy:b term:ApA
+" ... and copy results
+nmap \xy yG:b#vip"_dP
+
 
 " ------ USUAL FORMAT CHANGES ---------------------------------------------
 " Flatten
-nnoremap \cf vipJV:s/\s\+/, /g<CR>
-nnoremap \cu :s/,\s*/\r/g<CR>
+nmap \cf vipJV:s/\s\+/, /g<CR>:noh<CR>
+nmap \cu :s/,\s*/\r/g<CR>:noh<CR>
 " Format in columns
 vnoremap \cc :!column -t -s','
 " Format XML
@@ -143,13 +163,13 @@ vnoremap \cj :!python -m json.tool
 vnoremap // y/<C-R>"<CR>
 
 " Copy the whole file into the system clipboard
-nnoremap \ya gg"+yG''
+nmap \ya gg"+yG''
 
 " CD into current file's directory
-nnoremap \cD :cd %:p:h<CR>
+nmap \cD :cd %:p:h<CR>
 
 " Copy just this line between the two windows
-nnoremap \iy yy<C-W>pp
+nmap \iy yy<C-W>pp
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SNIPPETS and TEMPLATES and FORMAT automations [2]
@@ -159,66 +179,68 @@ nnoremap \iy yy<C-W>pp
 inoremap <TAB><Space> <ESC>/<++><Enter>"_c4l
 
 " Let me decide between snippets (Insert Snippet)
-nnoremap \s<TAB> :read $HOME/Templates/snippets/<C-Z>
-"nnoremap \s<TAB> :read $HOME/Templates/snippets/<C-Z>:set nopaste<C-Z>i<TAB><Space>
+nmap \i<TAB> :read $HOME/Templates/snippets/<C-Z>
+"nmap \i<TAB> :read $HOME/Templates/snippets/<C-Z>:set nopaste<C-Z>i<TAB><Space>
 
 "" MarkDown
 " Insert image
-nnoremap \si diWa![<C-R>"](<C-R>")<ESC>
+nmap \ii diWa![<C-R>"](<C-R>")<ESC>
 " Insert link
-nnoremap \sl viW<ESC>Bi[<ESC>Ea]<ESC>yi[Ea(<C-R>")<ESC>T[
-vnoremap \sl c[<C-R>"](<C-R>")<ESC>T[
+nmap \il viW<ESC>Bi[<ESC>Ea]<ESC>yi[Ea(<C-R>")<ESC>T[
+vnoremap \il c[<C-R>"](<C-R>")<ESC>T[
 
 "" JIRA
 " Insert SCENARIO divider
-nnoremap \sS :read $HOME/Templates/snippets/jira-scenario.txt<CR>/<++><Enter>"_c4l
+nmap \iS :read $HOME/Templates/snippets/jira-scenario.txt<CR>/<++><Enter>"_c4l
 " Insert test
-nnoremap \sT :read $HOME/Templates/snippets/jira-test.txt<CR>/<++><Enter>"_c4l
+nmap \iT :read $HOME/Templates/snippets/jira-test.txt<CR>/<++><Enter>"_c4l
 " Insert a ``` block
-nnoremap \sc :read $HOME/Templates/snippets/markdown-code-block.txt<CR>/<++><Enter>"_c4l
-vnoremap \sc dk:read $HOME/Templates/snippets/markdown-code-block.txt<CR>p?<++><Enter>"_c4l
+nmap \ic :read $HOME/Templates/snippets/markdown-code-block.txt<CR>/<++><Enter>"_c4l
+vnoremap \ic dk:read $HOME/Templates/snippets/markdown-code-block.txt<CR>p?<++><Enter>"_c4l
 " Insert a {noformat}{noformat} block
-nnoremap \sn :-1read $HOME/Templates/snippets/jira-noformat-block.txt<CR>o
-vnoremap \sn d:-1read $HOME/Templates/snippets/jira-noformat-block.txt<CR>p
+nmap \in :-1read $HOME/Templates/snippets/jira-noformat-block.txt<CR>o
+vnoremap \in d:-1read $HOME/Templates/snippets/jira-noformat-block.txt<CR>p
 " Make it no format
-nnoremap \s{ viw<ESC>Bi{{<ESC>Ea}}<ESC>
+nmap \i{ viw<ESC>Bi{{<ESC>Ea}}<ESC>
 " Insert thumbnail
-nnoremap \st WBdW:-1read $HOME/Templates/snippets/jira-thumbnail-tag.txt<CR>pjddk
-vnoremap \st d:-1read $HOME/Templates/snippets/jira-thumbnail-tag.txt<CR>p
+nmap \it WBdW:-1read $HOME/Templates/snippets/jira-thumbnail-tag.txt<CR>pjddk
+vnoremap \it d:-1read $HOME/Templates/snippets/jira-thumbnail-tag.txt<CR>p
 " Insert attachment
-nnoremap \sa WBdE:-1read $HOME/Templates/snippets/jira-attachment-tag.txt<CR>/<++><Enter>"_c4l<C-R>"<ESC>J
+nmap \ia WBdE:-1read $HOME/Templates/snippets/jira-attachment-tag.txt<CR>/<++><Enter>"_c4l<C-R>"<ESC>J
 " [5]
-inoremap \sa <C-R>=system('cat $HOME/Templates/snippets/jira-attachment-tag.txt')<CR><ESC>kJB/<++><Enter>"_c4l
-vnoremap \sa d<C-R>=system('cat $HOME/Templates/snippets/jira-attachment-tag.txt')<CR><ESC>kJB/<++><Enter>"_c4l
+inoremap \ia <C-R>=system('cat $HOME/Templates/snippets/jira-attachment-tag.txt')<CR><ESC>kJB/<++><Enter>"_c4l
+vnoremap \ia d<C-R>=system('cat $HOME/Templates/snippets/jira-attachment-tag.txt')<CR><ESC>kJB/<++><Enter>"_c4l
 " Insert result tag
-nnoremap \sp :read $HOME/Templates/snippets/jira-pass.txt<CR>
-nnoremap \sf :read $HOME/Templates/snippets/jira-fail.txt<CR>
-nnoremap \ss :read $HOME/Templates/snippets/jira-skipped.txt<CR>
+nmap \ip :read $HOME/Templates/snippets/jira-pass.txt<CR>
+nmap \if :read $HOME/Templates/snippets/jira-fail.txt<CR>
+nmap \is :read $HOME/Templates/snippets/jira-skipped.txt<CR>
 " Insert "verified" sentence
-nnoremap \sv :-1read $HOME/Templates/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=$CUSTOMER_ENV<ENTER><ESC>n"_c4l<C-R>=$CUSTOMER_VER<ENTER><ESC>
+nmap \iv :-1read $HOME/Templates/snippets/jira-verified-in.txt<CR>/<++><Enter>"_c4l<C-R>=$CUSTOMER_ENV<ENTER><ESC>n"_c4l<C-R>=$CUSTOMER_VER<ENTER><ESC>
+" Inser user
+nmap \iu :r ~/Templates/ASSIA/jira-users/
 
 "" CVS
 " Insert CVS header
-nnoremap \sh :read $HOME/Templates/snippets/cvs-header.txt<CR>
+nmap \ih :read $HOME/Templates/snippets/cvs-header.txt<CR>
 
 "" Markdown
 " Underline line with =
-nnoremap \s= yypv$r=
+nmap \i= yypv$r=
 " Underline line with -
-nnoremap \s- yypv$r-
+nmap \i- yypv$r-
 " Emphasize it
-nnoremap \s* wbi*<ESC>Ea*<ESC>
-vnoremap \s* A*<ESC>`<i*<ESC>`>l
+nmap \i* wbi*<ESC>Ea*<ESC>
+vnoremap \i* A*<ESC>`<i*<ESC>`>l
 " Emphasize it more
-nnoremap \s** wbi**<ESC>Ea**<ESC>
-vnoremap \s** A**<ESC>`<i**<ESC>`>ll
+nmap \i** wbi**<ESC>Ea**<ESC>
+vnoremap \i** A**<ESC>`<i**<ESC>`>ll
 " Make it CODE like
-nnoremap \s` wbi`<ESC>Ea`<ESC>
-vnoremap \s` A`<ESC>`<i`<ESC>`>ll
+nmap \i` wbi`<ESC>Ea`<ESC>
+vnoremap \i` A`<ESC>`<i`<ESC>`>ll
 
 "" Templates
 " Let me decide between templates (Insert Template)
-nnoremap \t<TAB> :read $HOME/Templates/ASSIA/<C-Z>
+nmap \t<TAB> :read $HOME/Templates/ASSIA/<C-Z>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " DEVELOPMENT TOOLS
