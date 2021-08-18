@@ -7,6 +7,9 @@ stty ixoff -ixon
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:$HOME/.local/bin
+for d in $HOME/.local/bin/*/; do
+	    PATH+=":$d"
+done
 export XDG_CONFIG_HOME=$HOME/.config
 
 # Path to your oh-my-zsh installation.
@@ -235,11 +238,14 @@ tmuxstart() {
 	fi
 }
 
-# (C)opy (m)ail written in Markdown to clipboard as HTML
-cp_mail(){
-	pandoc -t html $1 | xclip
+# Convert Markdown to HTML
+m2h() {
+	pandoc -t html $1
 }
-alias cpma='cp_mail'
+# (C)opy (m)ail written in Markdown to clipboard as HTML
+m2hc() {
+	m2h $1 | xclip
+}
 
 #########################################################
 ## TASK MANAGEMENT
@@ -315,7 +321,7 @@ task_close(){
 
 jrnl_task() {
 	task_get_name_from_path
-	jrnl "$TASK - "
+	jrnl "+$TASK - "
 	jrnl -1 --edit
 }
 alias jt='jrnl_task'
