@@ -160,6 +160,8 @@ mock_server_restart() {
 	~/installAdditional/mock_server/tomcat/bin/startup.sh
 }
 
+alias collect_all_true="sed -E 's/([^=]=\s+)false/\1true/'"
+
 #########################################################
 # SOURCES
 # [1] https://opensource.com/article/18/5/advanced-use-less-text-file-viewer
