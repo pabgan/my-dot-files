@@ -4,9 +4,11 @@
 export MAVEN_OPTS="-Xms1024m -Xmx4096m -XX:PermSize=1024m"
 export JIRA_URL='https://assia-inc.atlassian.net'
 
-#export JAVA_HOME="/usr/java/jdk1.8.0_73/"
+export JAVA_HOME="/usr/java/jdk1.8.0_201/jre/"
+export PATH=$JAVA_HOME:$PATH
 export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib:$LD_LIBRARY_PATH
 export SQLPATH=$HOME/.local/share/sqlcl/
+export PYTHONPATH='/home/pganuza/Repositorios/ASSIA/utils'
 
 # Corporate mounts
 alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/assianet-home"
@@ -26,28 +28,33 @@ alias cvs-update='cvs update -PAd'
 alias cvs-discard_changes='cvs-update -C'
 alias cvs-checkout='cvs co -r HEAD'
 
+alias rsync-lexus='rsync -rvzh $CUSTOMER_DIR_CVS lexus:$CUSTOMER_DIR_CVS --exclude "*/target/"'
 
 #########################################################
 # CURRENTLY WORKING
-customer_info_file="$HOME/Documents/Releases/customers-info.csv"
-export CUSTOMER='demo-a'
-export CUSTOMER_NAME="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')"
-export CUSTOMER_ENV="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')"
-export CUSTOMER_DB="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')"
-export CUSTOMER_VER="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'5')"
-export DBF='plain'
-export CUSTOMER_DIR="$HOME/Documents/Releases/$CUSTOMER/$CUSTOMER_VER"
-export CUSTOMER_DIR_CVS="$HOME/Repositorios/ASSIA/expresse/dsloExpresse/releases/$CUSTOMER/"
-alias cdc='cd $CUSTOMER_DIR'
-
 # Add some useful paths to the hotlist for n-cd
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '=====================================pganuza-e7470rc====' )
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documents/KnowHow/wiki/'
                                         '~/Documents/QA/'
                                         '~/Repositorios/bookmarks/' )
 
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
-znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR_CVS" "$CUSTOMER_DIR" )
+customer_info_file="$HOME/Documents/Releases/customers-info.csv"
+populate_customer_variables() {
+	export CUSTOMER=$1
+	export CUSTOMER_NAME="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')"
+	export CUSTOMER_ENV="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')"
+	export CUSTOMER_DB="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')"
+	export CUSTOMER_VER="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'5')"
+	export DBF='plain'
+	export CUSTOMER_DIR="$HOME/Documents/Releases/$CUSTOMER/$CUSTOMER_VER"
+	export CUSTOMER_DIR_CVS="$HOME/Repositorios/bookmarks/releases/$CUSTOMER/"
+
+	znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
+	znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR_CVS" "$CUSTOMER_DIR" )
+}
+populate_customer_variables demo-c
+alias cdc='cd $CUSTOMER_DIR'
+
 
 #########################################################
 # UTILS
@@ -69,7 +76,7 @@ dcpc_request() {
 
 # Translate to Jira and copy to clipboard a comment written in Markdown
 cp_jira_comment(){
-	md2jira.sh <( cat README* ) | xclip
+	cat **/README.md | md2jira.sh | xclip
 }
 alias cpjc='cp_jira_comment'
 
@@ -103,33 +110,36 @@ function dbconn() {
 ## TASK MANAGEMENT
 #
 task_start_specifics(){
-	jira_turbo.py query --issue $TASK --fields 'summary' > .title
-	jira_turbo.py query --issue $TASK --fields 'description' > .description
+	ji.py query --issue $TASK --fields 'summary' > .title
+	ji.py query --issue $TASK --fields 'description' > .description
 
 	# About where to check it
 	echo -e "To be verified in:" >> README.md
-	jira_turbo.py query --issue $TASK --fields 'fixVersions' | grep -oE "name='[^']+'" | cut -d= -f2 | sed 's/^/- [<++>] /' >> README.md
+	ji.py query --issue $TASK --fields 'fixVersions' | grep -oE "name='[^']+'" | cut -d= -f2 | sed -E 's/^/- [pending] /' >> README.md 
+	# The line below would strip the quotes, but it messes VIMs syntax highlighting in this file
+	# ji.py query --issue DSLE-22740 --fields 'fixVersions' | grep -oE "name='[^']+'" | cut -d= -f2 | sed 's/^/- [<++>] /' |sed "s/'//g" > README.md
+
 	echo -e "\n------------------------------------" >> README.md
 	echo -e "\nVerified in **$CUSTOMER_ENV $CUSTOMER_VER**." >> README.md
 
 	# Rutinary checks
 	echo -e '\n##### Modules versions' >> README.md
 	## Get every module with its version in one line
-	module_fix_for_version=$(jira_turbo.py query --issue $TASK --fields 'module_fix_for_version' | grep -oE "[^ ]+[ |-][0-9|.]+")
+	module_fix_for_version=$(ji.py query --issue $TASK --fields 'module_fix_for_version' | grep -oE "[^ ]+[ |-][0-9|.]+")
 	echo $module_fix_for_version | sed -E 's/([^ ]+)[ |-]([0-9|.]+)/- [<++>] \1 \2/' >> README.md
 
-	modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+)[ |-]([0-9|.]+)/find install\/ -name "*\1*" ; /' | tr -d \\n)
+	modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+)[ |-]([0-9|.]+)/find install\/ *simulator*\/ -name "*\1*" ; /' | tr -d \\n)
 	#modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+) ([0-9|.]+)/find install\/ -name "*\1*" ; /' )
 	echo -e '\n```sh' >> README.md
-	echo -e "\nssh $CUSTOMER_ENV '$modules_check'" >> README.md
+	echo -e "\n$modules_check" >> README.md
 	#ssh $CUSTOMER_ENV "'$(echo $modules_check | tr -d \\n)'" >> README.md
 	echo -e "\n\n\`\`\`\n" >> README.md
 
 	# Typical layout
 	echo -e '### Test' >> README.md
-	jira_turbo.py query --issue $TASK --fields 'unit_test' >> README.md
+	ji.py query --issue $TASK --fields 'unit_test' >> README.md
 
-	jira_turbo.py assign --issue $TASK --value '5bd7a4938995b717bb1b86dd'
+	ji.py assign --issue $TASK --value '5bd7a4938995b717bb1b86dd'
 }
 
 task_resume_specifics(){
@@ -147,6 +157,26 @@ task_download_data() {
 task_upload_data() {
 	rsync -rvzh ./ ${1:-$CUSTOMER_ENV}:pganuza/${$(pwd)#/home/pganuza/Documents/}/
 }
+
+# Make backup of file
+cpp() {
+	cp -r --parent "$1" "${2:-.}"
+}
+
+template_test() {
+	template="$1"
+	tname="$2"
+
+	take $tname
+	cp ../$template/setup.sh .
+	cp -r ../$template/config .
+}
+
+template_setup() {
+	echo -e "#!/bin/bash\nsource /tmp/.pganuza.sshrc.*/sshrc.bashrc\npush_config config/" > setup.sh
+	chmod +x setup.sh
+}
+
 
 #########################################################
 ## TASK MANAGEMENT
