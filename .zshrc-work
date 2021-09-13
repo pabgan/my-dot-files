@@ -8,7 +8,7 @@ export JAVA_HOME="/usr/java/jdk1.8.0_201/jre/"
 export PATH=$JAVA_HOME:$PATH
 export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib:$LD_LIBRARY_PATH
 export SQLPATH=$HOME/.local/share/sqlcl/
-export PYTHONPATH='/home/pganuza/Repositorios/ASSIA/utils'
+export PYTHONPATH='/home/pganuza/Repositorios/ASSIA/pyhelpers'
 
 # Corporate mounts
 alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/assianet-home"
@@ -20,6 +20,9 @@ alias backup-pganuza-e7470="rsync -avh --delete-after ~/.* ~/Plantillas ~/Softwa
 
 # Alias for very frequent SSH connections
 alias se='sshrc user@$CUSTOMER_ENV.assia-inc.com'
+
+# Alias to allow... to long to explain
+alias _#=''
 
 #########################################################
 # CVS configuration
@@ -41,10 +44,10 @@ znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documents/KnowHow/wiki/'
 customer_info_file="$HOME/Documents/Releases/customers-info.csv"
 populate_customer_variables() {
 	export CUSTOMER=$1
-	export CUSTOMER_NAME="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'2')"
-	export CUSTOMER_ENV="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'3')"
-	export CUSTOMER_DB="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'4')"
-	export CUSTOMER_VER="$(grep $CUSTOMER $customer_info_file | cut -d';' -f'5')"
+	export CUSTOMER_NAME="$(grep -E "^$CUSTOMER" $customer_info_file | cut -d';' -f'2')"
+	export CUSTOMER_ENV="$(grep -E "^$CUSTOMER" $customer_info_file | cut -d';' -f'3')"
+	export CUSTOMER_DB="$(grep -E "^$CUSTOMER" $customer_info_file | cut -d';' -f'4')"
+	export CUSTOMER_VER="$(grep -E "^$CUSTOMER" $customer_info_file | cut -d';' -f'5')"
 	export DBF='plain'
 	export CUSTOMER_DIR="$HOME/Documents/Releases/$CUSTOMER/$CUSTOMER_VER"
 	export CUSTOMER_DIR_CVS="$HOME/Repositorios/bookmarks/releases/$CUSTOMER/"
@@ -60,19 +63,6 @@ alias cdc='cd $CUSTOMER_DIR'
 # UTILS
 # Just throw a fast query 
 alias query='sqlturbo.py -u $CUSTOMER_DB -f $DBF'
-
-# Send a request to DcPc
-dcpc_request() {
-	if [[ $# < 1 ]]; then
-		>&2 echo "Usage: dcpc_request 'REQUEST,IN,LINE'|req.dat (env.addr.es)"
-	elif [[ -a ${1} ]]; then
-		scp $1 ${2:-$CUSTOMER_ENV}:install/dcpc/data/input/
-	else
-		tmp_file='/tmp/dcpc_req.dat'
-		echo "$1" > $tmp_file
-		scp $tmp_file ${2:-$CUSTOMER_ENV}:install/dcpc/data/input/
-	fi
-}
 
 # Translate to Jira and copy to clipboard a comment written in Markdown
 cp_jira_comment(){
@@ -112,6 +102,7 @@ function dbconn() {
 task_start_specifics(){
 	ji.py query --issue $TASK --fields 'summary' > .title
 	ji.py query --issue $TASK --fields 'description' > .description
+	ji.py query --issue $TASK --fields 'unit_test' > .unit_test
 
 	# About where to check it
 	echo -e "To be verified in:" >> README.md
@@ -133,11 +124,7 @@ task_start_specifics(){
 	echo -e '\n```sh' >> README.md
 	echo -e "\n$modules_check" >> README.md
 	#ssh $CUSTOMER_ENV "'$(echo $modules_check | tr -d \\n)'" >> README.md
-	echo -e "\n\n\`\`\`\n" >> README.md
-
-	# Typical layout
-	echo -e '### Test' >> README.md
-	ji.py query --issue $TASK --fields 'unit_test' >> README.md
+	echo -e "\n\`\`\`\n" >> README.md
 
 	ji.py assign --issue $TASK --value '5bd7a4938995b717bb1b86dd'
 }
@@ -158,28 +145,98 @@ task_upload_data() {
 	rsync -rvzh ./ ${1:-$CUSTOMER_ENV}:pganuza/${$(pwd)#/home/pganuza/Documents/}/
 }
 
-# Make backup of file
-cpp() {
-	cp -r --parent "$1" "${2:-.}"
+task_package_for_jira() {
+	package_name=$(basename $(cut -d' ' -f1 <(pwd)))
+	tar  -cvzf $package_name.tar.gz --exclude='*.md' --exclude='.*' --exclude='*.sql' --exclude='*.sh' --exclude='config' --exclude='backup' *
 }
 
+#########################################################
+# USEFUL FUNCTIONS for tickets
+# Handle configurations for tests
 template_test() {
 	template="$1"
 	tname="$2"
 
-	take $tname
-	cp ../$template/setup.sh .
-	cp -r ../$template/config .
+	mkdir $tname && cd $tname && cp ../$template/setup.sh . && cp -r ../$template/config .
 }
 
 template_setup() {
-	echo -e "#!/bin/bash\nsource /tmp/.pganuza.sshrc.*/sshrc.bashrc\npush_config config/" > setup.sh
+	echo -e "#!/bin/zsh\nsource ~/.zshrc > /dev/null\npush_config config/" > setup.sh
 	chmod +x setup.sh
+}
+
+# Place configured files in their places
+push_config() {
+	rsync -Krvh "${1:-./}" --exclude='*.swp' --exclude='*~*' $CUSTOMER_ENV:
+}
+
+alias backup='rsync -Rrvzh'
+
+# Modules management
+module_management() {
+	if [[ $# < 2 ]]; then
+		>&2 echo "Usage: $(basename 0) dcpc|dcpc2|tomcat|server|sim|simcli action"
+	else
+		case $1 in
+			'dcpc') se "ant -f ~/install/dcpc/build.xml $2" ;;
+			'dcpc2') se "ant -f ~/install2/dcpc/build.xml $2" ;;
+			'tomcat') se "ant -f ~/install/tomcat/build.xml $2" ;;
+			'server') se "ant -f ~/install/server/build.xml $2 $3" ;;
+			'pe') se "ant -f ~/install/server/build.xml pe $2" ;;
+			'po') se "ant -f ~/install/server/build.xml po $2" ;;
+			'dbloader') se "ant -f ~/install/server/build.xml dbloader $2" ;;
+			'reqgen') se "ant -f ~/install/server/build.xml reqgen $2" ;;
+			'sim') se "ant -f ~/simulator/build.xml $2" ;;
+			'simcli') se "ant -f ~/cli_simulator/build.xml $2" ;;
+			*) echo 'ERROR';;
+		esac
+	fi
+}
+alias mm='module_management'
+
+mock_server_restart() {
+	se '~/installAdditional/mock_server/tomcat/bin/shutdown.sh && ~/installAdditional/mock_server/tomcat/bin/startup.sh'
+}
+
+# Copy log
+log() {
+	if [[ $# < 1 ]]; then
+		>&2 echo "Usage: log dcpc|dcpc2|gui|oldgui|dbloader|pe|po|prov|reqgen|/path/to/file.log"
+	else
+		case $1 in
+			"dcpc") se 'tail -n0 -f ~/install/dcpc/log/assia_dcpc.log' | tee "${2}"assia_dcpc.log ;;
+			"dcpc2") se 'tail -n0 -f ~/install2/dcpc/log/assia_dcpc.log' | tee  "${2}"assia_dcpc2.log ;;
+			"gui") se 'tail -n0 -f ~/install/tomcat/logs/expresseGuiNapi.log' | tee  "${2}"expresseGuiNapi.log ;;
+			"oldgui") se 'tail -n0 -f ~/install/tomcat/logs/assia_gui.log' | tee  "${2}"assia_gui.log ;;
+			"dbloader") se 'tail -n0 -f ~/install/server/log/assia_dbloader.log' | tee  "${2}"assia_dbloader.log ;;
+			"pe") se 'tail -n0 -f ~/install/server/log/assia_pe.log' | tee  "${2}"assia_pe.log ;;
+			"po") se 'tail -n0 -f ~/install/server/log/assia_po.log' | tee  "${2}"assia_po.log ;;
+			"prov") se 'tail -n0 -f ~/install/server/log/assia_prov.log' | tee  "${2}"assia_prov.log ;;
+			"reqgen") se 'tail -n0 -f ~/install/server/log/assia_reqgen.log' | tee  "${2}"assia_reqgen.log ;;
+			"audit") se 'tail -n0 -f ~/install/tomcat/logs/expresseAudit.log' | tee  "${2}"expresseAudit.log ;;
+			*) se "tail -n0 -f $1" | tee ${1##*/} ;;
+		esac
+	fi
+}
+
+dcpc_watch() {
+	env_mounted=$(mount | grep $CUSTOMER_ENV)
+
+	if [[ -z $env_mounted ]]; then
+		mkdir -p /mnt/assia-envs/$CUSTOMER_ENV
+		sshfs -o allow_other $CUSTOMER_ENV:. /mnt/assia-envs/$CUSTOMER_ENV
+	fi
+	while true; do
+		clear;
+		find /mnt/assia-envs/$CUSTOMER/install{,2}/dcpc/data/out_temp/ -type f -exec cp {} . \;;
+		ls -1;
+		sleep 1;
+	done
 }
 
 
 #########################################################
-## TASK MANAGEMENT
+## SHOW STATUS
 #
 echo '#########################################################'
 echo '# TODO priorities'

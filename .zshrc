@@ -106,6 +106,9 @@ alias mv='mv -b' # create a backup if file exists
 zle -N open-file-widget
 bindkey '^ ' open-file-widget
 
+# copy Template Here
+alias th='cp $( find ~/Templates/ -not -path "*/.git/*"| fzf --multi --preview="bat {}" ) .'
+
 #########################################################
 ## ZSH CONFIGURATION
 #
