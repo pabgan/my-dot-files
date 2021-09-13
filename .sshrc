@@ -106,7 +106,7 @@ log() {
 }
 
 # Watch for DcPc output files
-alias dcpc_watch='while true; do         find ~/install{,2}/dcpc/data/out_temp/ -type f -exec cp {} . \;;         sleep 1;        ls;     sleep 1;  done'
+alias dcpc_watch='while true; do         clear; find ~/install{,2}/dcpc/data/out_temp/ -type f -exec cp {} . \;;         sleep 1;        ls;     sleep 1;  done'
 
 # Make backup of file
 cpp() {
@@ -131,29 +131,22 @@ template_setup() {
 }
 
 # Modules management
-ant_dcpc() {
-	ant -f ~/install/dcpc/build.xml $1
+module_management() {
+	if [[ $# < 2 ]]; then
+		>&2 echo "Usage: $(basename 0) dcpc|dcpc2|tomcat|server|sim|simcli action"
+	else
+		case $1 in
+			'dcpc') ant -f ~/install/dcpc/build.xml $2 ;;
+			'dcpc2') ant -f ~/install2/dcpc/build.xml $2 ;;
+			'tomcat') ant -f ~/install/tomcat/build.xml $2 ;;
+			'server') ant -f ~/install/server/build.xml $1 $2 ;;
+			'sim') ant -f ~/simulator/build.xml $2 ;;
+			'simcli') ant -f ~/cli_simulator/build.xml $2 ;;
+			*) echo 'ERROR';;
+		esac
+	fi
 }
-
-ant_dcpc2() {
-	ant -f ~/install2/dcpc/build.xml $1
-}
-
-ant_tomcat() {
-	ant -f ~/install/tomcat/build.xml $1
-}
-
-ant_server() {
-	ant -f ~/install/server/build.xml $1 $2
-}
-
-ant_sim() {
-	ant -f ~/simulator/build.xml $1
-}
-
-ant_simcli() {
-	ant -f ~/cli_simulator/build.xml $1
-}
+alias mm='module_management'
 
 mock_server_restart() {
 	~/installAdditional/mock_server/tomcat/bin/shutdown.sh
