@@ -142,9 +142,9 @@ nmap \xe yip:read !ssh $CUSTOMER_ENV '<C-R>"'<CR>
 "nmap \xe yip}pvip:s/'/\\'/ge<CR>vipd:read !ssh $CUSTOMER_ENV '<C-R>"'<CR>
 
 " Execute command on open terminal below (not working... too fast?)
-nmap \xx vipy:b term:ApA
+nmap \xt vipy:b term:ApA
 " ... and copy results
-nmap \xy yG:b#vip"_dP
+nmap \yt yG:b#vip"_dP
 
 
 " ------ USUAL FORMAT CHANGES ---------------------------------------------
@@ -179,7 +179,7 @@ nmap \iy yy<C-W>pp
 inoremap <TAB><Space> <ESC>/<++><Enter>"_c4l
 
 " Let me decide between snippets (Insert Snippet)
-nmap \i<TAB> :read $HOME/Templates/snippets/<C-Z>
+nmap \i<TAB> :read $HOME/Templates/snippets/*
 "nmap \i<TAB> :read $HOME/Templates/snippets/<C-Z>:set nopaste<C-Z>i<TAB><Space>
 
 "" MarkDown
