@@ -8,7 +8,7 @@ export JAVA_HOME="/usr/java/jdk1.8.0_201/jre/"
 export PATH=$JAVA_HOME:$PATH
 export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib:$LD_LIBRARY_PATH
 export SQLPATH=$HOME/.local/share/sqlcl/
-export PYTHONPATH='/home/pganuza/Repositorios/ASSIA/pyhelpers'
+export PYTHONPATH='/home/pganuza/Repositorios/work/pyhelpers'
 
 # Corporate mounts
 alias mount-home="sudo mount.cifs -o user=pganuza,domain=ASSIA-INC,uid=1000,gid=1000,vers=1.0 //rc-netapp02a.assia-inc.com/home/pganuza /mnt/assianet-home"
@@ -19,7 +19,7 @@ alias mount-onedrive='rclone mount $(basename $(pwd)): onedrive'
 alias backup-pganuza-e7470="rsync -avh --delete-after ~/.* ~/Plantillas ~/Software ~/Trabajo ~/Workspace/system-level_test_plan ~/Workspace/drafts  /run/media/pganuza/pganuza-backups/"
 
 # Alias for very frequent SSH connections
-alias se='sshrc user@$CUSTOMER_ENV.assia-inc.com'
+alias se='sshrc $CUSTOMER_ENV'
 
 # Alias to allow... to long to explain
 alias _#=''
@@ -39,7 +39,7 @@ alias rsync-lexus='rsync -rvzh $CUSTOMER_DIR_CVS lexus:$CUSTOMER_DIR_CVS --exclu
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '=====================================pganuza-e7470rc====' )
 znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '~/Documents/KnowHow/wiki/'
                                         '~/Documents/QA/'
-                                        '~/Repositorios/bookmarks/' )
+                                        '~/Repositorios/ASSIA/bookmarks/' )
 
 customer_info_file="$HOME/Documents/Releases/customers-info.csv"
 populate_customer_variables() {
@@ -50,7 +50,7 @@ populate_customer_variables() {
 	export CUSTOMER_VER="$(grep -E "^$CUSTOMER" $customer_info_file | cut -d';' -f'5')"
 	export DBF='plain'
 	export CUSTOMER_DIR="$HOME/Documents/Releases/$CUSTOMER/$CUSTOMER_VER"
-	export CUSTOMER_DIR_CVS="$HOME/Repositorios/bookmarks/releases/$CUSTOMER/"
+	export CUSTOMER_DIR_CVS="$HOME/Repositorios/ASSIA/releases/$CUSTOMER/"
 
 	znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
 	znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR_CVS" "$CUSTOMER_DIR" )
@@ -171,28 +171,7 @@ push_config() {
 }
 
 alias backup='rsync -Rrvzh'
-
-# Modules management
-module_management() {
-	if [[ $# < 2 ]]; then
-		>&2 echo "Usage: $(basename 0) dcpc|dcpc2|tomcat|server|sim|simcli action"
-	else
-		case $1 in
-			'dcpc') se "ant -f ~/install/dcpc/build.xml $2" ;;
-			'dcpc2') se "ant -f ~/install2/dcpc/build.xml $2" ;;
-			'tomcat') se "ant -f ~/install/tomcat/build.xml $2" ;;
-			'server') se "ant -f ~/install/server/build.xml $2 $3" ;;
-			'pe') se "ant -f ~/install/server/build.xml pe $2" ;;
-			'po') se "ant -f ~/install/server/build.xml po $2" ;;
-			'dbloader') se "ant -f ~/install/server/build.xml dbloader $2" ;;
-			'reqgen') se "ant -f ~/install/server/build.xml reqgen $2" ;;
-			'sim') se "ant -f ~/simulator/build.xml $2" ;;
-			'simcli') se "ant -f ~/cli_simulator/build.xml $2" ;;
-			*) echo 'ERROR';;
-		esac
-	fi
-}
-alias mm='module_management'
+alias mm='module_manager.sh'
 
 mock_server_restart() {
 	se '~/installAdditional/mock_server/tomcat/bin/shutdown.sh && ~/installAdditional/mock_server/tomcat/bin/startup.sh'
