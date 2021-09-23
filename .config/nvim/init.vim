@@ -122,7 +122,7 @@ nmap \sp :set paste!<CR>
 
 " ------ EXECUTE ----------------------------------------------------------
 " Execute query and bring results
-nmap \xq yap}pvip:s/%/\\\%/ge<CR>vip:s/!/\\\!/ge<CR>vipd:-1read !~/.local/bin/sqlturbo.py -u <C-R>=$CUSTOMER_DB<CR> -f <C-R>=$DBF<CR> "<C-R>""<CR>
+nmap \xq yap}pvip:s/%/\\\%/ge<CR>vip:s/!/\\\!/ge<CR>vipd:-1read !sqlturbo.py -u <C-R>=$CUSTOMER_DB<CR> -f <C-R>=$DBF<CR> "<C-R>""<CR>
 " desc(ribe) table or view
 nmap \xd viw<ESC>b<ESC>idesc <ESC>bvee:call slime#send_op(visualmode(), 1)<cr>u
 nmap \xv viwyo<CR>select text from user_views where view_name='<C-R>"';<ESC>o<ESC>kvip:call slime#send_op(visualmode(), 1)<cr>u
@@ -206,7 +206,7 @@ nmap \i{ viw<ESC>Bi{{<ESC>Ea}}<ESC>
 nmap \it WBdW:-1read $HOME/Templates/snippets/jira-thumbnail-tag.txt<CR>pjddk
 vnoremap \it d:-1read $HOME/Templates/snippets/jira-thumbnail-tag.txt<CR>p
 " Insert attachment
-nmap \ia WBdE:-1read $HOME/Templates/snippets/jira-attachment-tag.txt<CR>/<++><Enter>"_c4l<C-R>"<ESC>J
+nmap \ia diW:read $HOME/Templates/snippets/jira-attachment-tag.txt<CR>/<++><Enter>"_c4l<C-R>"<ESC>kJ
 " [5]
 inoremap \ia <C-R>=system('cat $HOME/Templates/snippets/jira-attachment-tag.txt')<CR><ESC>kJB/<++><Enter>"_c4l
 vnoremap \ia d<C-R>=system('cat $HOME/Templates/snippets/jira-attachment-tag.txt')<CR><ESC>kJB/<++><Enter>"_c4l
