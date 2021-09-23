@@ -126,7 +126,7 @@ template_test() {
 }
 
 template_setup() {
-	echo -e "#!/bin/bash\nsource /tmp/.pganuza.sshrc.*/sshrc.bashrc\npush_config config/" > setup.sh
+	echo -e "#!/bin/bash\nsource /tmp/.pganuza.sshrc.*/sshrc.bashrc 2> /dev/null\npush_config config/" > setup.sh
 	chmod +x setup.sh
 }
 
