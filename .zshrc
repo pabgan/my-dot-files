@@ -121,6 +121,11 @@ bindkey "^G" znt-cd-widget
 bindkey '^[l' down-case-word
 
 #########################################################
+## FZF CONFIGURATION
+#
+export FZF_DEFAULT_OPTS="--preview='bat --color=always {}'"
+
+#########################################################
 ## TODO.TXT-CLI CONFIGURATION
 #
 export TODOTXT_DEFAULT_ACTION=lsp
@@ -260,15 +265,15 @@ task_get_name_from_path(){
 	export TASK=$(basename $(cut -d' ' -f1 <(pwd)))
 }
 task_info(){
-	task_get_name_from_path
-	echo "~~~~~~~~~~~~~~~~~ $TASK info ~~~~~~~~~~~~~~~~~"
+	task=$1
+	echo "~~~~~~~~~~~~~~~~~ $task info ~~~~~~~~~~~~~~~~~"
 	echo 'Tasks'
 	echo '-----'
-	t ls +$TASK
+	t ls +$task
 	echo ''
 	echo 'Notes'
 	echo '-----'
-	jrnl +$TASK
+	jrnl +$task
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 }
 task_start(){
@@ -287,7 +292,7 @@ task_start(){
 	task_start_specifics
 	jrnl "Comenzando con +$TASK. $(cat .title)"
 	echo ''
-	task_info
+	task_info $TASK
 }
 alias ts='task_start'
 task_start_specifics(){
