@@ -126,7 +126,11 @@ task_start_specifics(){
 	#ssh $CUSTOMER_ENV "'$(echo $modules_check | tr -d \\n)'" >> README.md
 	echo -e "\n\`\`\`\n" >> README.md
 
+	# Update Jira
 	ji.py assign --issue $TASK --value '5bd7a4938995b717bb1b86dd'
+
+	# Add a task to follow up on what is it that I am doing
+	t add pri a "@comprobar +$TASK"
 }
 
 task_resume_specifics(){
@@ -158,11 +162,6 @@ template_test() {
 	tname="$2"
 
 	mkdir $tname && cd $tname && cp ../$template/setup.sh . && cp -r ../$template/config .
-}
-
-template_setup() {
-	echo -e "#!/bin/zsh\nsource ~/.zshrc > /dev/null\npush_config config/" > setup.sh
-	chmod +x setup.sh
 }
 
 # Place configured files in their places
