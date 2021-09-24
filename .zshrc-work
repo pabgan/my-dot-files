@@ -176,43 +176,6 @@ mock_server_restart() {
 	se '~/installAdditional/mock_server/tomcat/bin/shutdown.sh && ~/installAdditional/mock_server/tomcat/bin/startup.sh'
 }
 
-# Copy log
-log() {
-	if [[ $# < 1 ]]; then
-		>&2 echo "Usage: log dcpc|dcpc2|gui|oldgui|dbloader|pe|po|prov|reqgen|/path/to/file.log"
-	else
-		case $1 in
-			"dcpc") se 'tail -n0 -f ~/install/dcpc/log/assia_dcpc.log' | tee "${2}"assia_dcpc.log ;;
-			"dcpc2") se 'tail -n0 -f ~/install2/dcpc/log/assia_dcpc.log' | tee  "${2}"assia_dcpc2.log ;;
-			"gui") se 'tail -n0 -f ~/install/tomcat/logs/expresseGuiNapi.log' | tee  "${2}"expresseGuiNapi.log ;;
-			"oldgui") se 'tail -n0 -f ~/install/tomcat/logs/assia_gui.log' | tee  "${2}"assia_gui.log ;;
-			"dbloader") se 'tail -n0 -f ~/install/server/log/assia_dbloader.log' | tee  "${2}"assia_dbloader.log ;;
-			"pe") se 'tail -n0 -f ~/install/server/log/assia_pe.log' | tee  "${2}"assia_pe.log ;;
-			"po") se 'tail -n0 -f ~/install/server/log/assia_po.log' | tee  "${2}"assia_po.log ;;
-			"prov") se 'tail -n0 -f ~/install/server/log/assia_prov.log' | tee  "${2}"assia_prov.log ;;
-			"reqgen") se 'tail -n0 -f ~/install/server/log/assia_reqgen.log' | tee  "${2}"assia_reqgen.log ;;
-			"audit") se 'tail -n0 -f ~/install/tomcat/logs/expresseAudit.log' | tee  "${2}"expresseAudit.log ;;
-			*) se "tail -n0 -f $1" | tee ${1##*/} ;;
-		esac
-	fi
-}
-
-dcpc_watch() {
-	env_mounted=$(mount | grep $CUSTOMER_ENV)
-
-	if [[ -z $env_mounted ]]; then
-		mkdir -p /mnt/assia-envs/$CUSTOMER_ENV
-		sshfs -o allow_other $CUSTOMER_ENV:. /mnt/assia-envs/$CUSTOMER_ENV
-	fi
-	while true; do
-		clear;
-		find /mnt/assia-envs/$CUSTOMER/install{,2}/dcpc/data/out_temp/ -type f -exec cp {} . \;;
-		ls -1;
-		sleep 1;
-	done
-}
-
-
 #########################################################
 ## SHOW STATUS
 #
