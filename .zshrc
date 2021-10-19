@@ -123,7 +123,7 @@ bindkey '^[l' down-case-word
 #########################################################
 ## FZF CONFIGURATION
 #
-export FZF_DEFAULT_OPTS="--preview='bat --color=always {}'"
+export FZF_DEFAULT_OPTS="--preview='bat --color=always {}' --preview-window=down"
 
 #########################################################
 ## TODO.TXT-CLI CONFIGURATION
@@ -132,11 +132,17 @@ export TODOTXT_DEFAULT_ACTION=lsp
 export TODOTXT_PRESERVE_LINE_NUMBERS=1
 export TODOTXT_DATE_ON_ADD=1
 
-alias t='todo.sh'
+alias t='todo.sh -a'
 
 tdate () {
 	date --iso-8601 --date=$1
 }
+
+#########################################################
+## DIARIO CONFIGURATION
+#
+export DIARIO_DIR=$HOME/Documents/organizacion/diario
+alias fd="fm $DIARIO_DIR"
 
 #########################################################
 ## VARIOUS CONFIGURATIONS
@@ -260,12 +266,24 @@ m2hc() {
 #
 # TODO: Create one function only that starts task or resumes it
 #       depending on wether it finds a directory with that name
+export_task_variable_if_need_be() {
+	if [ -z $TASK ]; then
+		export TASK=$(task_get_name_from_path)
+	fi
+}
+
 task_get_name_from_path(){
 	# Extract current directory name
-	export TASK=$(basename $(cut -d' ' -f1 <(pwd)))
+	basename $(cut -d' ' -f1 <(pwd))
 }
 task_info(){
-	task=$1
+	task=${1:-$TASK}
+
+	if [ -z $task ]; then
+		export_task_variable_if_need_be
+		task=$TASK
+	fi
+
 	echo "~~~~~~~~~~~~~~~~~ $task info ~~~~~~~~~~~~~~~~~"
 	echo 'Tasks'
 	echo '-----'
@@ -273,7 +291,7 @@ task_info(){
 	echo ''
 	echo 'Notes'
 	echo '-----'
-	jrnl +$task
+	diario.sh show +$task
 	echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 }
 task_start(){
@@ -290,7 +308,7 @@ task_start(){
 	#tmux attach-session -c "#{pane_current_path}"
 	#tmux attach-session -c "$pwd"
 	task_start_specifics
-	jrnl "Comenzando con +$TASK. $(cat .title)"
+	diario.sh log "Comenzando con +$TASK. $(cat .title)"
 	echo ''
 	task_info $TASK
 }
@@ -300,9 +318,9 @@ task_start_specifics(){
 	# To be overriden by environment specific configurations
 }
 task_resume(){
-	task_get_name_from_path
+	export TASK=$(task_get_name_from_path)
 	task_resume_specifics
-	jrnl "Continuando con +$TASK - $(cat .title). $1"
+	diario.sh log "Continuando con +$TASK - $(cat .title). $1"
 	if tmux ls | grep "$TASK" &> /dev/null ;
 	then
 		echo "task session found, attaching..."
@@ -315,31 +333,43 @@ task_resume(){
 	#tmux attach-session -c "#{pane_current_path}"
 	echo ''
 	TASK_DIR=$(pwd)
-	task_info
+	task_info $TASK
 }
 task_resume_specifics(){
 	# Nothing to do by default.
 	# To be overriden by environment specific configurations
 }
 task_close(){
-	task_get_name_from_path
-	jrnl "+$TASK cerrado - $(sed 's/:/,/g' .title). $1"
-	task_info
+	export_task_variable_if_need_be
+	diario.sh log "+$TASK cerrado - $(sed 's/:/,/g' .title).\n$1"
+	task_info $TASK
 }
 
-jrnl_task() {
-	task_get_name_from_path
-	jrnl "+$TASK - "
-	jrnl -1 --edit
+diario_task() {
+	export_task_variable_if_need_be
+	file=$(diario.sh log "+$TASK - $(cat .title)\n$1")
+	$EDITOR $file
+
+	# If file is left empty, user probably regreted
+	# logging anything so let's just delete the file
+	# and pretend nothing happend
+	if [[ ! -s $file ]]; then
+		rm $file
+	else
+		echo $file
+	fi
 }
-alias jt='jrnl_task'
+alias dt='diario_task'
+alias ds='diario.sh show'
+alias de='diario.sh edit'
+alias dl='diario.sh log'
 
 #########################################################
 ## SOURCE
 #
 HOSTNAME=$(hostname)
 if [[ -f "$HOME/.zshrc-$HOSTNAME" ]]; then
-	echo "Sourcing ~/zshrc-$HOSTNAME..."
+	echo "Sourcing ~/.zshrc-$HOSTNAME..."
 	source "$HOME/.zshrc-$HOSTNAME" 
 fi
 
