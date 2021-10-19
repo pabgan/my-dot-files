@@ -25,11 +25,19 @@ alias se='sshrc $CUSTOMER_ENV'
 alias _#=''
 
 #########################################################
-# CVS configuration
-export CVSROOT=:ext:pganuza@rc-cvs-01.assia-inc.com:/cvs
-alias cvs-update='cvs update -PAd'
-alias cvs-discard_changes='cvs-update -C'
-alias cvs-checkout='cvs co -r HEAD'
+# GIT configuration
+git_diff_ticket() {
+	ticket=$1
+
+	# The commit that appears on top which message contains the ticket ID
+	after=$(git log --grep="$ticket"| grep commit | head -n1 | cut -d' ' -f2)
+	# The commit previous to the first commit that contains the ticket ID
+	first_commit=$(git log --grep="$ticket" | grep commit | tail -n1 | cut -d' ' -f2)
+	before=$(git log $first_commit~1 | head -n1 | cut -d' ' -f2)
+
+	echo "git diff --unified=9999 $before $after"
+	git diff --unified=9999 $before $after
+}
 
 alias rsync-lexus='rsync -rvzh $CUSTOMER_DIR_CVS lexus:$CUSTOMER_DIR_CVS --exclude "*/target/"'
 
@@ -55,7 +63,7 @@ populate_customer_variables() {
 	znt_cd_hotlist=( "${znt_cd_hotlist[@]}" '------------------------------------=currently working=-' )
 	znt_cd_hotlist=( "${znt_cd_hotlist[@]}" "$CUSTOMER_DIR_CVS" "$CUSTOMER_DIR" )
 }
-populate_customer_variables demo-c
+populate_customer_variables demo-b
 alias cdc='cd $CUSTOMER_DIR'
 
 
@@ -75,16 +83,6 @@ get_customer_versions(){
 	ssh $1 'ls -d install/*-*' | sed 's/install\///'
 }
 compdef get_customer_versions=ssh
-
-# Download SQL files from a release
-wget_sqls() {
-	# http://rc-build-01.assia-inc.com/releases/DEMO/DELIVERED/5.5.3/sql/
-	customer_clean=$(echo $CUSTOMER | cut -d'-' -f1 | tr '[:lower:]' '[:upper:]') # the cut is needed for demo-X _customers_
-	url_delivered="http://rc-build-01.assia-inc.com/releases/$customer_clean/DELIVERED/$CUSTOMER_VER/sql"
-	url_delivered_not="http://rc-build-01.assia-inc.com/releases/$customer_clean/TO_BE_DELIVERED/$CUSTOMER_VER/sql"
-	wget -r -np -l1 -A ".sql" --no-directories $url_delivered
-	wget -r -np -l1 -A ".sql" --no-directories $url_delivered_not
-}
 
 # Connect to a database
 function dbconn() {
@@ -114,23 +112,25 @@ task_start_specifics(){
 	echo -e "\nVerified in **$CUSTOMER_ENV $CUSTOMER_VER**." >> README.md
 
 	# Rutinary checks
-	echo -e '\n##### Modules versions' >> README.md
-	## Get every module with its version in one line
 	module_fix_for_version=$(ji.py query --issue $TASK --fields 'module_fix_for_version' | grep -oE "[^ ]+[ |-][0-9|.]+")
-	echo $module_fix_for_version | sed -E 's/([^ ]+)[ |-]([0-9|.]+)/- [<++>] \1 \2/' >> README.md
+	if [ ! -z $module_fix_for_version ]; then
+		echo -e '\n##### Modules versions' >> README.md
+		## Get every module with its version in one line
+		echo $module_fix_for_version | sed -E 's/([^ ]+)[ |-]([0-9|.]+)/- [<++>] \1 \2/' >> README.md
 
-	modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+)[ |-]([0-9|.]+)/find install\/ *simulator*\/ -name "*\1*" ; /' | tr -d \\n)
-	#modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+) ([0-9|.]+)/find install\/ -name "*\1*" ; /' )
-	echo -e '\n```sh' >> README.md
-	echo -e "\n$modules_check" >> README.md
-	#ssh $CUSTOMER_ENV "'$(echo $modules_check | tr -d \\n)'" >> README.md
-	echo -e "\n\`\`\`\n" >> README.md
+		modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+)[ |-]([0-9|.]+)/find install\/ *simulator*\/ -name "*\1*" ; /' | tr -d \\n)
+		#modules_check=$( echo $module_fix_for_version | sed -E 's/([^ ]+) ([0-9|.]+)/find install\/ -name "*\1*" ; /' )
+		echo -e '\n```sh' >> README.md
+		echo -e "\n$modules_check" >> README.md
+		#ssh $CUSTOMER_ENV "'$(echo $modules_check | tr -d \\n)'" >> README.md
+		echo -e "\n\`\`\`\n" >> README.md
+	fi
 
 	# Update Jira
 	ji.py assign --issue $TASK --value '5bd7a4938995b717bb1b86dd'
 
 	# Add a task to follow up on what is it that I am doing
-	t add pri a "@comprobar +$TASK"
+	t add pri a "@comprobar +$TASK '$(cat .title)'"
 }
 
 task_resume_specifics(){
@@ -151,7 +151,7 @@ task_upload_data() {
 
 task_package_for_jira() {
 	package_name=$(basename $(cut -d' ' -f1 <(pwd)))
-	tar  -cvzf $package_name.tar.gz --exclude='*.md' --exclude='.*' --exclude='*.sql' --exclude='*.sh' --exclude='config' --exclude='backup' *
+	tar  -cvzf $package_name.tar.gz --exclude='*.md' --exclude='.*' --exclude='*.sql' --exclude='*.sh' --exclude='config' --exclude='backup' --exclude='scrappbook*' *
 }
 
 #########################################################
@@ -163,6 +163,7 @@ template_test() {
 
 	mkdir $tname && cd $tname && cp ../$template/setup.sh . && cp -r ../$template/config .
 }
+alias tt='template_test'
 
 # Place configured files in their places
 push_config() {
@@ -179,12 +180,14 @@ mock_server_restart() {
 #########################################################
 ## SHOW STATUS
 #
-echo '#########################################################'
-echo '# TODO priorities'
-t
-echo -e '\n#########################################################'
-echo      "# TODO for $CUSTOMER"
-t ls +$CUSTOMER
+if [[ $HOSTNAME == 'PGANUZA-E7470' ]]; then
+	echo '#########################################################'
+	echo '# TODO priorities'
+	t
+	echo -e '\n#########################################################'
+	echo      "# TODO for $CUSTOMER"
+	t ls +$CUSTOMER
+fi
 
 ################################################
 # SOURCES
