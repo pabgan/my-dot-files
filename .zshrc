@@ -7,7 +7,7 @@ stty ixoff -ixon
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=$PATH:$HOME/.local/bin
-for d in $HOME/.local/bin/*/; do
+for d in $( ls -d $HOME/.local/bin/* ); do
 	    PATH+=":$d"
 done
 export XDG_CONFIG_HOME=$HOME/.config
@@ -137,6 +137,8 @@ alias t='todo.sh -a'
 tdate () {
 	date --iso-8601 --date=$1
 }
+
+alias t_ls_backlog="ls $HOME/Documents/organizacion/todo/todo.txt | entr sh -c 'clear; todo.sh ls -@ -+'"
 
 #########################################################
 ## DIARIO CONFIGURATION
